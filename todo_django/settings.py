@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'invitations',
+    'django_extensions',
     # my apps
     'todo.apps.TodoConfig'
 ]

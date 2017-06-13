@@ -1,25 +1,29 @@
 <html>
 <title>Todo</title>
-
-<head>
+<header>
     {% include 'css.html'%}
-</head>
+</header>
+<main>
 
-<body ng-app="TodoApp">
-    <nav>
-        <div class="nav-wrapper">
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                {% if user.is_authenticated%}
-                <li><a href="#!">{{user.get_full_name}}</a></li>
-                <li><a href="{% url 'account_logout' %}">Logout</a></li>
-                {% else%}
-                <li><a href="{% url 'home' %}">Todo App</a></li>
-                <li><a href="{% url 'account_signup' %}">Signup</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-    {% block content%} {% endblock%} {%include 'js.html'%} {% block extra_js %} {% endblock %}
-</body>
+    <body ng-app="TodoApp">
+        <nav>
+            <div class="nav-wrapper">
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    {% if user.is_authenticated%}
+                    <li><a href="#!">{{user.get_full_name}}</a></li>
+                    <li><a href="#!">{{user.company.name}}</a></li>
+                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                    {% else%}
+                    <li><a href="{% url 'home' %}">Todo App</a></li>
+                    <li><a href="{% url 'account_signup' %}">Signup</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        {% block content%} {% endblock%} {%include 'js.html'%} {% block extra_js %} {% endblock %}
+    </body>
+</main>
+<footer>
+</footer>
 
 </html>

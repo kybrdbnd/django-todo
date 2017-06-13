@@ -28,7 +28,7 @@ def home(request):
 
 
 def project(request):
-    company = get_object_or_404(Company, owner=request.user)
+    projects = request.user.project_set.all()
     d1 = datetime.now()
     date_range = []
     for i in range(7):
@@ -38,7 +38,7 @@ def project(request):
     # print(set(date_range))
     date_range = sorted(set(date_range))
     context = {
-        'company': company,
+        'projects': projects,
         'date_range': date_range
     }
     return render(request, 'project.html', context)
