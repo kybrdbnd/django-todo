@@ -1,8 +1,30 @@
 {% extends 'base.html' %} {% block content %}
 <h1>{{company.name}}</h1>
-<h1>{{company.owner}}</h1> 
-{% for date in date_range%}
-    {{date|date:'d/M'}}
-{% endfor %}
-
- {% endblock %}
+<h1>{{company.owner}}</h1>
+<div class="owl-carousel owl-theme">
+    {% for date in date_range%}
+    <div>
+        {{date|date:'d/M'}}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} {% block extra_js%}
+<script>
+$('.owl-carousel').owlCarousel({
+    loop: true,
+    margin: 3,
+    nav: true,
+    responsive: {
+        0: {
+            items: 3
+        },
+        600: {
+            items: 5
+        },
+        1000: {
+            items: 7
+        }
+    }
+})
+</script>
+{% endblock%}
