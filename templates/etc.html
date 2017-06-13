@@ -1,0 +1,19 @@
+{% extends 'base.html'%} {% block content %}
+<div ng-controller="projectController" layout="column" ng-cloak class="md-inline-form">
+    <form action="{% url 'todo:home' %}" name="sampleForm" method='POST'>
+        {% csrf_token %}
+        <md-content layout-gt-sm="row" layout-padding>
+            <div>
+                <md-input-container>
+                    {{form.name.label_tag}}
+                    <input name="name" required md-no-asterisk ng-model="name">
+                    <div ng-messages="sampleForm.name.$error">
+                        <div ng-message="required">This is required</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </md-content>
+        <md-button class="md-raised md-primary" ng-click='submit($event)' ng-disabled="!sampleForm.$valid">Save</md-button>
+    </form>
+</div>
+{% endblock %}

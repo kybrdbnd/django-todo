@@ -1,0 +1,16 @@
+{% extends 'base.html'%} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col m7">
+            Login
+        </div>
+        <div class="col m5">
+            <h5>Currently Running Projects in Your Organization</h5> {% for project in projects%}
+            <div class="chip">
+                <!-- <img src="images/yuna.jpg" alt="Contact Person">  -->{{project.name}}
+            </div>
+            {% endfor%}
+        </div>
+    </div>
+</div>
+{% endblock %}

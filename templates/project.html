@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{company.name}}</h1>
+<h1>{{company.owner}}</h1> 
+{% for date in date_range%}
+    {{date|date:'d/M'}}
+{% endfor %}
+
+ {% endblock %}
