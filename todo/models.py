@@ -32,7 +32,7 @@ class Company(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     name = models.CharField(max_length=100)
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    projects = models.ManyToManyField(Project)
+    projects = models.ManyToManyField(Project, blank=True)
 
     def __str__(self):
         return self.name

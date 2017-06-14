@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<ul id="slide-out" class="side-nav fixed">
-    {% for project in projects %}
-    <a href="#!">
+<div class="row">
+    <div class="col m3">
+        {% for project in projects %}
         <div class="row">
             <div class="col m12">
                 <div class="card blue-grey darken-1">
@@ -12,36 +12,52 @@
                 </div>
             </div>
         </div>
-    </a>
-    {% endfor %}
-</ul>
-<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-<div class="owl-carousel owl-theme">
-    {% for date in date_range%}
-    <div>
-        {{date|date:'d/M'}}
+        {% endfor %}
     </div>
-    {% endfor %}
+    <div class="col m9">
+        <div class="row">
+            <div class="col m6">
+                <div class="owl-carousel owl-theme">
+                    {% for date in date_range%}
+                    <div> {{date|date:'d/M'}}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col m6">
+                Members
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m9">
+                Project Details
+            </div>
+            <div class="col m3">
+                Queues/Messages
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %} {% block extra_js%}
 <script>
-$('.owl-carousel').owlCarousel({
-    loop: true,
-    margin: 3,
-    nav: true,
-    responsive: {
-        0: {
-            items: 3
-        },
-        600: {
-            items: 5
-        },
-        1000: {
-            items: 7
-        }
-    }
-})
 $(document).ready(function() {
+
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 3,
+        nav: true,
+        responsive: {
+            0: {
+                items: 3
+            },
+            600: {
+                items: 5
+            },
+            1000: {
+                items: 7
+            }
+        }
+    });
     $(".button-collapse").sideNav();
 })
 </script>

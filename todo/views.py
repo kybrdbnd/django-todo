@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.core import serializers
 import json
 from .forms import (ProjectForm)
 from .models import (Project, Company, Task)
@@ -37,6 +38,7 @@ def project(request):
         date_range.append(d1 - timedelta(days=i))
     # print(set(date_range))
     date_range = sorted(set(date_range))
+
     context = {
         'projects': projects,
         'date_range': date_range
