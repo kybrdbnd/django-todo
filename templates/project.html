@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% block content %}
-<div class="row">
+<div class="row" ng-controller="projectController">
+    {% verbatim %}
     <div class="col m3">
-        {% for project in projects %}
-        <div class="row">
+        <div class="row" ng-repeat="project in projects">
             <div class="col m12">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
@@ -12,8 +12,8 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endverbatim %}
     <div class="col m9">
         <div class="row">
             <div class="col m6">

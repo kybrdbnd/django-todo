@@ -1,1 +1,1 @@
-var angular_module = angular.module('TodoApp', ['ngMessages', 'ngCookies']);
+var angular_module = angular.module('TodoApp', ['ngCookies']);

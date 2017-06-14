@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'invitations',
     'django_extensions',
+    'rest_framework',
     # my apps
     'todo.apps.TodoConfig'
 ]

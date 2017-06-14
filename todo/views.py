@@ -29,18 +29,18 @@ def home(request):
 
 
 def project(request):
-    projects = request.user.project_set.all()
-    d1 = datetime.now()
-    date_range = []
-    for i in range(7):
-        date_range.append(d1 + timedelta(days=i))
-    for i in range(7):
-        date_range.append(d1 - timedelta(days=i))
-    # print(set(date_range))
-    date_range = sorted(set(date_range))
+    # projects = request.user.project_set.all()
+    # d1 = datetime.now()
+    # date_range = []
+    # for i in range(7):
+    #     date_range.append(d1 + timedelta(days=i))
+    # for i in range(7):
+    #     date_range.append(d1 - timedelta(days=i))
+    # # print(set(date_range))
+    # date_range = sorted(set(date_range))
 
-    context = {
-        'projects': projects,
-        'date_range': date_range
-    }
-    return render(request, 'project.html', context)
+    # context = {
+    #     'projects': projects,
+    #     'date_range': date_range
+    # }
+    return render(request, 'project.html', {})

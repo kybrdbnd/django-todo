@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^invitations/', include('invitations.urls', namespace='invitations')),
     url(r'^todo/', include('todo.urls', namespace='todo')),
+    url(r'^api/', include('todo.api.urls')),
     url(r'^$', home, name='home')
 ]
 
