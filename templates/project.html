@@ -7,7 +7,8 @@
                 <div class="card blue-grey darken-1" ng-click="current_project('all_projects')">
                     <div class="card-content white-text">
                         <span class="card-title">{{summary_project.name}}</span>
-                        <p></p>
+                        <p>Total Projects: {{summary_project.project_count}}</p>
+                        <p>Total Tasks: {{summary_project.task_count}}</p>
                     </div>
                 </div>
             </div>
@@ -51,6 +52,12 @@
         <div class="row">
             <div class="col m9" ng-show="selected_project=='all_projects'">
                 <h3>{{selected_project}}</h3>
+                <ul ng-repeat="project in summary_project.projects">
+                    <li>{{project.name}}</li>
+                    <ul ng-repeat="task in project.tasks">
+                        <li>{{task.name}}</li>
+                    </ul>
+                </ul>
             </div>
             <div class="col m9" ng-show="selected_project!='all_projects'">
                 <h3>{{selected_project}}</h3>
@@ -72,18 +79,23 @@
 $('.owl-carousel').owlCarousel({
     loop: true,
     margin: 3,
-    nav: true,
+    rewind: false,
+    autoWidth: true,
     responsive: {
         0: {
             items: 3
         },
         600: {
-            items: 5
+            items: 6
         },
         1000: {
-            items: 7
+            items: 7,
+            nav: true
         }
     }
 });
+$(document).ready(function() {
+    $('.collapsible').collapsible();
+})
 </script>
 {% endblock%}

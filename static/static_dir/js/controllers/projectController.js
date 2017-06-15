@@ -10,6 +10,12 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
         projects = $scope.projects
             // console.log($scope.projects)
         $scope.summary_project['projects'] = response.data
+        $scope.summary_project['project_count'] = $scope.projects.length
+        $scope.summary_project['task_count'] = 0
+        angular.forEach($scope.projects, function(project) {
+            $scope.summary_project['task_count'] += project.tasks.length
+        })
+        console.log($scope.summary_project)
     })
     $scope.current_project = function(selected_project) {
         $scope.selected_project = selected_project
