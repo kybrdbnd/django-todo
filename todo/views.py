@@ -1,27 +1,12 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.core import serializers
-import json
-from .forms import (ProjectForm)
-from .models import (Project, Company, Task)
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import (ProjectForm, ProfileForm)
+from .models import (Project, Company, Task, Profile)
 from datetime import datetime, timedelta
 # Create your views here.
 
 
 def home(request):
     projects = Project.objects.all()
-    # data = {}
-    # if request.method == 'POST':
-    #     form = ProjectForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         data = {
-    #             'success': 'Successfully Added'
-    #         }
-    # return HttpResponse(json.dumps(data), content_type='application/json')
-
-    # else:
-    #     form = ProjectForm()
     context = {
         'projects': projects
     }
@@ -44,3 +29,30 @@ def project(request):
     #     'date_range': date_range
     # }
     return render(request, 'project.html', {})
+
+
+def profile(request):
+    if request.method == 'POST':
+        try:
+            instance = Profile.objects.get(user=request.user)
+            form = ProfileForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('todo:project')
+        except Profile.DoesNotExist:
+            form = ProfileForm(request.POST)
+            if form.is_valid():
+                form_instance = form.save(commit=False)
+                form_instance.user = request.user
+                form_instance.save()
+                return redirect('todo:project')
+    else:
+        try:
+            instance = Profile.objects.get(user=request.user)
+            form = ProfileForm(instance=instance)
+        except Profile.DoesNotExist:
+            form = ProfileForm()
+        context = {
+            'form': form
+        }
+    return render(request, 'profile.html', context)

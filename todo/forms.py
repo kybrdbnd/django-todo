@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import TextInput
 from django.utils.translation import ugettext_lazy as _
-from .models import (Project, Company)
+from .models import (Project, Company, Profile)
 
 
 class SignUpForm(forms.ModelForm):
@@ -29,3 +29,17 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ('name',)
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('first_name', 'last_name',)
+        widgets = {
+            'first_name': TextInput(attrs={
+                'placeholder': 'Enter Your First Name'
+            }),
+            'last_name': TextInput(attrs={
+                'placeholder': 'Enter Your Last Name'
+            })
+        }

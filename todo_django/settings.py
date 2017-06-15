@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'invitations',
     'django_extensions',
     'rest_framework',
+    'imagekit',
     # my apps
     'todo.apps.TodoConfig'
 ]
@@ -143,6 +144,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static', 'static_dir'), ]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # all auth settings

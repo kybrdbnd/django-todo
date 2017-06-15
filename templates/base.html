@@ -10,9 +10,12 @@
             <div class="nav-wrapper">
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     {% if user.is_authenticated%}
-                    <li><a href="#!">{{user.get_full_name}}</a></li>
-                    <li><a href="#!">{{user.company.name}}</a></li>
+                    <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates='profile'>{{user.profile.full_name}}</a></li>
                     <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                    <ul id='profile' class='dropdown-content'>
+                        <li><a href="{% url 'profile' %}">Manage Profile</a></li>
+                        <li><a href="#!">Manage Projects</a></li>
+                    </ul>
                     {% else%}
                     <li><a href="{% url 'home' %}">Todo App</a></li>
                     <li><a href="{% url 'account_signup' %}">Signup</a></li>

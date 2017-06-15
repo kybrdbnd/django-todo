@@ -1,6 +1,25 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 from django.contrib.auth.models import User
 # Create your models here.
+
+
+class Profile(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
+    avatar_thumbnail = ImageSpecField(source='avatar',
+                                      processors=[ResizeToFill(200, 300)],
+                                      format='JPEG',
+                                      options={'quality': 60})
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def full_name(self):
+        return self.first_name + " " + self.last_name
+
+    def __str__(self):
+        return self.user.username
 
 
 class Task(models.Model):

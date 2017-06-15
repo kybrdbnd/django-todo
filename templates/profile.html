@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+    <form action="" method="POST">
+        {% csrf_token %} {{form.as_p}}
+        <button action="submit">Save</button>
+    </form>
+    <!-- <a href="{% url 'account_set_password' %}">click here!!</a> -->
+</div>
+{% endblock %}
