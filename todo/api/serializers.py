@@ -35,7 +35,7 @@ class ProjectCreateSerializer(ModelSerializer):
         model = Project
         fields = [
             'name',
-            'task',
+            'tasks',
             'members'
         ]
 
@@ -46,7 +46,7 @@ class ProjectDetailSerializer(ModelSerializer):
         fields = [
             'id',
             'name',
-            'task',
+            'tasks',
             'members'
         ]
 
@@ -67,7 +67,7 @@ class TaskListSerializer(ModelSerializer):
 
 
 class ProjectListSerializer(ModelSerializer):
-    task = TaskListSerializer(many=True)
+    tasks = TaskListSerializer(many=True)
     members = UserListSerializer(many=True)
 
     class Meta:
@@ -75,7 +75,7 @@ class ProjectListSerializer(ModelSerializer):
         fields = [
             'id',
             'name',
-            'task',
+            'tasks',
             'members'
         ]
 

@@ -18,7 +18,7 @@ class Task(models.Model):
 class Project(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     name = models.CharField(max_length=100)
-    task = models.ManyToManyField(Task, blank=True)
+    tasks = models.ManyToManyField(Task, blank=True)
     members = models.ManyToManyField(User, blank=True)
 
     class Meta:
