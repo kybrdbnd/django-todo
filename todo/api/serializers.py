@@ -19,7 +19,7 @@ class ProfileListSerializer(ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'user']
+        fields = ['first_name', 'last_name', 'user', 'full_name']
 
 
 class EmployeeListSerializer(ModelSerializer):
@@ -28,42 +28,6 @@ class EmployeeListSerializer(ModelSerializer):
     class Meta:
         model = Employee
         fields = ['profile', ]
-
-
-# company
-
-
-class CompanyListSerializer(ModelSerializer):
-    class Meta:
-        model = Company
-        fields = [
-            'name',
-            'owner',
-            'projects'
-        ]
-
-# project
-
-
-class ProjectCreateSerializer(ModelSerializer):
-    class Meta:
-        model = Project
-        fields = [
-            'name',
-            'tasks',
-            'members'
-        ]
-
-
-class ProjectDetailSerializer(ModelSerializer):
-    class Meta:
-        model = Project
-        fields = [
-            'id',
-            'name',
-            'tasks',
-            'members'
-        ]
 
 
 class TaskListSerializer(ModelSerializer):
@@ -85,6 +49,44 @@ class ProjectListSerializer(ModelSerializer):
     tasks = TaskListSerializer(many=True)
     members = EmployeeListSerializer(many=True)
 
+    class Meta:
+        model = Project
+        fields = [
+            'id',
+            'name',
+            'tasks',
+            'members'
+        ]
+
+
+class CompanyListSerializer(ModelSerializer):
+    owner = UserListSerializer()
+    projects = ProjectListSerializer(many=True)
+    employees = EmployeeListSerializer(many=True)
+
+    class Meta:
+        model = Company
+        fields = [
+            'name',
+            'owner',
+            'projects',
+            'employees'
+        ]
+
+# project
+
+
+class ProjectCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Project
+        fields = [
+            'name',
+            'tasks',
+            'members'
+        ]
+
+
+class ProjectDetailSerializer(ModelSerializer):
     class Meta:
         model = Project
         fields = [

@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
-<br><br>
+<div class="container" ng-controller='manageController'>
+    <br>
+    <br>
     <div class="row">
         <div class="col m4">
             <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Add Project</a>
@@ -10,42 +11,38 @@
         </div>
         <div class="clearfix"></div>
     </div>
+    {% verbatim %}
     <div class="row">
         <div class="col m8">
             <div class="row">
                 <div class="col m12">
-                    <h4>Company Name: {{company.name}}</h2>
+                    <h4>Company Name: {{company.name}}</h4>
+                    <div class="col m12">
+                        Members:
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col m3" ng-repeat="employee in company.employees">
+                        {{employee.profile.full_name}}
+                    </div>
                 </div>
-                <div class="col m12">
-                	Members:
-                </div>
-                <div class="clearfix"></div>
-                {% for employee in company.employees.all %}
-                <div class="col m3">
-                    {{employee.profile.full_name}}
-                </div>
-                {% endfor %}
             </div>
             <div class="row">
-            	{% for project in projects %}
-            	<div class="col m12">
-            		<h5>Project Name: {{project.name}}</h5>
-            	</div>
-            	<div class="col m3">
-            		Members:
-            	</div>
-            	<div class="clearfix"></div>
-            	{% for member in project.members.all%}
-            	<div class="col m3">
-            		{{member.profile.full_name}}
-            	</div>
-            	{% endfor %}
-            	{% endfor %}
+                <div class="col m12" ng-repeat="project in projects">
+                    <h4>Project Name: {{project.name}}</h4>
+                    <div class="col m12">
+                        Members:
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col m3" ng-repeat="member in project.members">
+                        {{member.profile.full_name}}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col m4">
             New project space
         </div>
     </div>
+    {% endverbatim %}
 </div>
 {% endblock %}

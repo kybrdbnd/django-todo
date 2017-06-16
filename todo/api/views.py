@@ -15,9 +15,9 @@ from todo.models import (Project, Task, Employee)
 class CompanyListView(ListAPIView):
     serializer_class = CompanyListSerializer
 
-    def get_queryset(self, *args, **kargs):
+    def get_queryset(self, *args, **kwargs):
         employee = Employee.objects.get(profile=self.request.user.profile)
-        company = employee.company_set.all()[0]
+        company = employee.company_set.all()
         return company
 
 

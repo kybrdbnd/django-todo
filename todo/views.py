@@ -59,11 +59,11 @@ def profile(request):
 
 
 def manage_profile(request):
-    employee = Employee.objects.get(profile=request.user.profile)
-    company = employee.company_set.all()[0]
-    projects = employee.project_set.all()
-    context = {
-        'company': company,
-        'projects': projects
-    }
-    return render(request, 'manage.html', context)
+    # employee = Employee.objects.get(profile=request.user.profile)
+    # company = employee.company_set.all()[0]
+    # projects = employee.project_set.all()
+    # context = {
+    #     'company': company,
+    #     'projects': projects
+    # }
+    return render(request, 'manage.html', {})

@@ -2,7 +2,7 @@ from django.conf.urls import url
 from .views import (ProjectCreateView, ProjectListView, ProjectDetailView,
                     ProjectDeleteView, ProjectUpdateView,
                     TaskCreateView, TaskListView, TaskDetailView,
-                    TaskDeleteView, TaskUpdateView)
+                    TaskDeleteView, TaskUpdateView, CompanyListView)
 
 urlpatterns = [
 
@@ -27,4 +27,9 @@ urlpatterns = [
     url(r'^task/(?P<pk>\d+)/delete$',
         TaskDeleteView.as_view(), name='task_delete'),
     url(r'^task/', TaskListView.as_view(), name='task_list'),
+
+
+    url(r'^company/', CompanyListView.as_view(), name='company'),
+
+
 ]
