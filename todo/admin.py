@@ -25,11 +25,14 @@ class CompanyAdmin(admin.ModelAdmin):
         return obj.owner.username
 
     def get_employees(self, obj):
-        return ', '.join([employee.name for employee in obj.employees.all()])
+        return ', '.join([employee.profile.user.username for employee in obj.employees.all()])
 
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'joined_at')
+    list_display = ('get_profile', 'joined_at')
+
+    def get_profile(self, obj):
+        return obj.profile.full_name()
 
 
 admin.site.register(Profile, ProfileAdmin)

@@ -24,11 +24,11 @@ class Profile(models.Model):
 
 class Employee(models.Model):
     joined_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    name = models.CharField(max_length=100)
-    profile = models.OneToOneField(Profile, blank=True, null=True)
+    profile = models.OneToOneField(Profile, blank=True, null=True,
+                                   on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.profile.full_name()
 
 
 class Task(models.Model):
