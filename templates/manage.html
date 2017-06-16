@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+<br><br>
+    <div class="row">
+        <div class="col m4">
+            <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Add Project</a>
+        </div>
+        <div class="col m4">
+            <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Send Invite</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <div class="col m8">
+            <div class="row">
+                <div class="col m12">
+                    <h4>Company Name: {{company.name}}</h2>
+                </div>
+                <div class="col m12">
+                	Members:
+                </div>
+                <div class="clearfix"></div>
+                {% for employee in company.employees.all %}
+                <div class="col m3">
+                    {{employee.profile.full_name}}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+            	{% for project in projects %}
+            	<div class="col m12">
+            		<h5>Project Name: {{project.name}}</h5>
+            	</div>
+            	<div class="col m3">
+            		Members:
+            	</div>
+            	<div class="clearfix"></div>
+            	{% for member in project.members.all%}
+            	<div class="col m3">
+            		{{member.profile.full_name}}
+            	</div>
+            	{% endfor %}
+            	{% endfor %}
+            </div>
+        </div>
+        <div class="col m4">
+            New project space
+        </div>
+    </div>
+</div>
+{% endblock %}

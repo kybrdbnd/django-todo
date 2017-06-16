@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from todo.models import (Company, Project, Task)
+from todo.models import (Company, Project, Task, Employee, Profile)
 from django.contrib.auth.models import User
 
 
@@ -8,12 +8,27 @@ class UserListSerializer(ModelSerializer):
         model = User
         fields = [
             'id',
-            'first_name',
-            'last_name',
             'email',
             'username'
 
         ]
+
+
+class ProfileListSerializer(ModelSerializer):
+    user = UserListSerializer()
+
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'user']
+
+
+class EmployeeListSerializer(ModelSerializer):
+    profile = ProfileListSerializer()
+
+    class Meta:
+        model = Employee
+        fields = ['profile', ]
+
 
 # company
 
@@ -52,8 +67,8 @@ class ProjectDetailSerializer(ModelSerializer):
 
 
 class TaskListSerializer(ModelSerializer):
-    created_by = UserListSerializer()
-    assigned_to = UserListSerializer()
+    created_by = EmployeeListSerializer()
+    assigned_to = EmployeeListSerializer()
 
     class Meta:
         model = Task
@@ -68,7 +83,7 @@ class TaskListSerializer(ModelSerializer):
 
 class ProjectListSerializer(ModelSerializer):
     tasks = TaskListSerializer(many=True)
-    members = UserListSerializer(many=True)
+    members = EmployeeListSerializer(many=True)
 
     class Meta:
         model = Project

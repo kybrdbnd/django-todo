@@ -7,14 +7,18 @@ from .serializers import (CompanyListSerializer, ProjectCreateSerializer,
                           ProjectListSerializer, ProjectDetailSerializer,
                           TaskCreateSerializer,
                           TaskListSerializer, TaskDetailSerializer)
-from todo.models import (Company, Project, Task)
+from todo.models import (Project, Task, Employee)
 
 
 # company
 
 class CompanyListView(ListAPIView):
-    queryset = Company.objects.all()
     serializer_class = CompanyListSerializer
+
+    def get_queryset(self, *args, **kargs):
+        employee = Employee.objects.get(profile=self.request.user.profile)
+        company = employee.company_set.all()[0]
+        return company
 
 
 # project
@@ -38,8 +42,9 @@ class ProjectListView(ListAPIView):
     serializer_class = ProjectListSerializer
 
     def get_queryset(self, *args, **kwargs):
-        queryset = self.request.user.project_set.all()
-        return queryset
+        employee = Employee.objects.get(profile=self.request.user.profile)
+        projects = employee.project_set.all()
+        return projects
 
 
 class ProjectUpdateView(RetrieveUpdateAPIView):

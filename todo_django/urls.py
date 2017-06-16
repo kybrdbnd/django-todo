@@ -17,12 +17,13 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from todo_django import settings
-from todo.views import home, profile
+from todo.views import home, profile, manage_profile
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/profile', profile, name="profile"),
+    url(r'^accounts/manage_profile', manage_profile, name="manage_profile"),
     url(r'^invitations/', include('invitations.urls', namespace='invitations')),
     url(r'^todo/', include('todo.urls', namespace='todo')),
     url(r'^api/', include('todo.api.urls')),

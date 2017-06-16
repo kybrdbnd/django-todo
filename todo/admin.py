@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Profile, Project, Task, Company)
+from .models import (Profile, Project, Task, Company, Employee)
 # Register your models here.
 
 
@@ -19,10 +19,21 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at')
+    list_display = ('name', 'get_owner', 'created_at', 'get_employees')
+
+    def get_owner(self, obj):
+        return obj.owner.username
+
+    def get_employees(self, obj):
+        return ', '.join([employee.name for employee in obj.employees.all()])
+
+
+class EmployeeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'joined_at')
 
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Company, CompanyAdmin)
+admin.site.register(Employee, EmployeeAdmin)

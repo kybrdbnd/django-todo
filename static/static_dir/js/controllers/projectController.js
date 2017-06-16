@@ -8,7 +8,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     $http.get('/api/').then(function(response) {
         $scope.projects = response.data
         projects = $scope.projects
-            // console.log($scope.projects)
+            console.log($scope.projects)
         $scope.summary_project['projects'] = response.data
         $scope.summary_project['project_count'] = $scope.projects.length
         $scope.summary_project['task_count'] = 0

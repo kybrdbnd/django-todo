@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import (ProjectForm, ProfileForm)
-from .models import (Project, Company, Task, Profile)
+from .models import (Project, Company, Task, Profile, Employee)
 from datetime import datetime, timedelta
 # Create your views here.
 
@@ -56,3 +56,14 @@ def profile(request):
             'form': form
         }
     return render(request, 'profile.html', context)
+
+
+def manage_profile(request):
+    employee = Employee.objects.get(profile=request.user.profile)
+    company = employee.company_set.all()[0]
+    projects = employee.project_set.all()
+    context = {
+        'company': company,
+        'projects': projects
+    }
+    return render(request, 'manage.html', context)

@@ -22,11 +22,20 @@ class Profile(models.Model):
         return self.user.username
 
 
+class Employee(models.Model):
+    joined_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    name = models.CharField(max_length=100)
+    profile = models.OneToOneField(Profile, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     name = models.CharField(max_length=100)
-    created_by = models.ForeignKey(User, related_name='created_by')
-    assigned_to = models.ForeignKey(User, null=True,
+    created_by = models.ForeignKey(Employee, related_name='created_by')
+    assigned_to = models.ForeignKey(Employee, null=True,
                                     blank=True,
                                     related_name='assigned_to')
 
@@ -38,7 +47,7 @@ class Project(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     name = models.CharField(max_length=100)
     tasks = models.ManyToManyField(Task, blank=True)
-    members = models.ManyToManyField(User, blank=True)
+    members = models.ManyToManyField(Employee, blank=True)
 
     class Meta:
         ordering = ['-created_at']
@@ -52,6 +61,7 @@ class Company(models.Model):
     name = models.CharField(max_length=100)
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     projects = models.ManyToManyField(Project, blank=True)
+    employees = models.ManyToManyField(Employee, blank=True)
 
     def __str__(self):
         return self.name

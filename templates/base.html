@@ -20,7 +20,7 @@
                     <li><a href="{% url 'account_logout' %}">Logout</a></li>
                     <ul id='profile' class='dropdown-content'>
                         <li><a href="{% url 'profile' %}">Manage Profile</a></li>
-                        <li><a href="#!">Manage Projects</a></li>
+                        <li><a href="{% url 'manage_profile' %}">Manage Projects</a></li>
                     </ul>
                     {% else%}
                     <li><a href="{% url 'home' %}">Todo App</a></li>
