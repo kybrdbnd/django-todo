@@ -7,7 +7,24 @@
             <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Add Project</a>
         </div>
         <div class="col m4">
-            <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Send Invite</a>
+            <a class="waves-effect waves-light btn" href="#send_invitaton_modal"><i class="material-icons left">cloud</i>Send Invite</a>
+        </div>
+        <!-- Modal Structure -->
+        <div id="send_invitaton_modal" class="modal">
+            <form>
+                <div class="modal-content">
+                    <div class="input-field col m8">
+                        <input type="email" name="email" ng-model="email"> 
+                        <label for="email">Enter Inviter Email Id</label>
+                    </div>
+                    <div class="col m4">
+                         <button ng-click="sendInvite(email)" class="modal-action waves-effect waves-green btn-flat">Send</button>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -45,4 +62,11 @@
     </div>
     {% endverbatim %}
 </div>
+{% endblock %} {% block extra_js %}
+<script>
+$(document).ready(function() {
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+});
+</script>
 {% endblock %}

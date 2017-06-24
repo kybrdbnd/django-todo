@@ -10,4 +10,14 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
         $scope.company = values[0].data[0];
         $scope.projects = values[1].data;
     })
+    $scope.sendInvite = function(email) {
+        if (email != undefined) {
+            url = '/todo/send_invite/'
+            data = $.param({ email: email })
+            $http.post(url, data).then(function(response) {
+                $('.modal').modal('close');
+                Materialize.toast('Mail Send Successfully', 2000, 'rounded')
+            })
+        }
+    }
 }]);

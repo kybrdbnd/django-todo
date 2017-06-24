@@ -2,12 +2,15 @@ from rest_framework.generics import (CreateAPIView,
                                      ListAPIView,
                                      RetrieveAPIView,
                                      DestroyAPIView,
-                                     RetrieveUpdateAPIView)
+                                     RetrieveUpdateAPIView
+                                     )
 from .serializers import (CompanyListSerializer, ProjectCreateSerializer,
                           ProjectListSerializer, ProjectDetailSerializer,
                           TaskCreateSerializer,
-                          TaskListSerializer, TaskDetailSerializer)
+                          TaskListSerializer, TaskDetailSerializer,
+                          InivitationSerializer)
 from todo.models import (Project, Task, Employee)
+from invitations.models import Invitation
 
 
 # company
@@ -76,3 +79,8 @@ class TaskListView(ListAPIView):
 class TaskUpdateView(RetrieveUpdateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskDetailSerializer
+
+
+class InvitationListView(ListAPIView):
+    queryset = Invitation.objects.all()
+    serializer_class = InivitationSerializer

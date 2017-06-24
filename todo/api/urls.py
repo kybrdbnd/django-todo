@@ -2,7 +2,8 @@ from django.conf.urls import url
 from .views import (ProjectCreateView, ProjectListView, ProjectDetailView,
                     ProjectDeleteView, ProjectUpdateView,
                     TaskCreateView, TaskListView, TaskDetailView,
-                    TaskDeleteView, TaskUpdateView, CompanyListView)
+                    TaskDeleteView, TaskUpdateView, CompanyListView,
+                    InvitationListView)
 
 urlpatterns = [
 
@@ -30,6 +31,8 @@ urlpatterns = [
 
 
     url(r'^company/', CompanyListView.as_view(), name='company'),
+    url(r'^invitations/', InvitationListView.as_view(), name='invitations'),
+
 
 
 ]

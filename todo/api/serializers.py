@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from todo.models import (Company, Project, Task, Employee, Profile)
 from django.contrib.auth.models import User
+from invitations.models import Invitation
 
 
 class UserListSerializer(ModelSerializer):
@@ -119,3 +120,12 @@ class TaskDetailSerializer(ModelSerializer):
             'assigned_to'
 
         ]
+
+
+class InivitationSerializer(ModelSerializer):
+    inviter = UserListSerializer()
+
+    class Meta:
+        model = Invitation
+        fields = ['email',
+                  'inviter']

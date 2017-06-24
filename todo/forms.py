@@ -43,3 +43,17 @@ class ProfileForm(forms.ModelForm):
                 'placeholder': 'Enter Your Last Name'
             })
         }
+
+
+class AcceptInvitationForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('first_name', 'last_name',)
+        widgets = {
+            'first_name': TextInput(attrs={
+                'placeholder': 'Enter Your First Name'
+            }),
+            'last_name': TextInput(attrs={
+                'placeholder': 'Enter Your Last Name'
+            })
+        }

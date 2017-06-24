@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import (ProjectForm, ProfileForm)
-from .models import (Project, Company, Task, Profile, Employee)
-from datetime import datetime, timedelta
+from django.shortcuts import render, redirect
+from .forms import (ProfileForm)
+from .models import (Project, Profile)
+# from datetime import datetime, timedelta
+from django.http import JsonResponse
+from invitations.models import Invitation
 # Create your views here.
 
 
@@ -59,11 +61,14 @@ def profile(request):
 
 
 def manage_profile(request):
-    # employee = Employee.objects.get(profile=request.user.profile)
-    # company = employee.company_set.all()[0]
-    # projects = employee.project_set.all()
-    # context = {
-    #     'company': company,
-    #     'projects': projects
-    # }
     return render(request, 'manage.html', {})
+
+
+def send_invite(request):
+    inviter_email = request.POST.get('email')
+    invite = Invitation.create(inviter_email, inviter=request.user)
+    invite.send_invitation(request)
+    data = {
+        'status': True
+    }
+    return JsonResponse(data)
