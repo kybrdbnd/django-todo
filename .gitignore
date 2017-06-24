@@ -4,6 +4,9 @@
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
+todo_django/__pycache__/
+todo/__pycache__/
+todo/migrations
 *.py[cod]
 *$py.class
 
