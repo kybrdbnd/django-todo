@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import (ProfileForm)
+from .forms import (ProfileForm, AcceptInvitationForm)
 from .models import (Project, Profile)
 # from datetime import datetime, timedelta
 from django.http import JsonResponse
@@ -72,3 +72,16 @@ def send_invite(request):
         'status': True
     }
     return JsonResponse(data)
+
+
+def accept_invitation(request):
+    if request.method == 'POST':
+        form = AcceptInvitationForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = AcceptInvitationForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'accept_invitation.html', context)

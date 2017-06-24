@@ -15,6 +15,7 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
             url = '/todo/send_invite/'
             data = $.param({ email: email })
             $http.post(url, data).then(function(response) {
+                $scope.email = ""
                 $('.modal').modal('close');
                 Materialize.toast('Mail Send Successfully', 2000, 'rounded')
             })

@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import TextInput
+from django.forms import TextInput, PasswordInput
 from django.utils.translation import ugettext_lazy as _
 from .models import (Project, Company, Profile)
 
@@ -46,6 +46,9 @@ class ProfileForm(forms.ModelForm):
 
 
 class AcceptInvitationForm(forms.ModelForm):
+    password = forms.CharField()
+    confirm_password = forms.CharField()
+
     class Meta:
         model = Profile
         fields = ('first_name', 'last_name',)
@@ -55,5 +58,7 @@ class AcceptInvitationForm(forms.ModelForm):
             }),
             'last_name': TextInput(attrs={
                 'placeholder': 'Enter Your Last Name'
-            })
+            }),
+            'password': PasswordInput(),
+            'confirm_password': PasswordInput()
         }
