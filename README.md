@@ -1,7 +1,6 @@
 <h1>
 	Welcome to Project Colaborar
 </h1>
-<hr>
 <p>
 Project Colaborar is the project mamagement web application for your organization. This web application will help the project managers to manage the engineers for the project. The project manager can create as many projects as he wants and invite as many engineers, same engineer can also work in different projects. The engineer or project manager can make queues(task to be done) which can be picked by any other engineer or by themselves. Stay Tuned for more info..... 
 </p>
