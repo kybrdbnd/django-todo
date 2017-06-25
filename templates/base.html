@@ -11,11 +11,7 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     {% if user.is_authenticated%}
                     <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates='profile'>
-                    {% if user.profile.full_name%}
-                        {{user.profile.full_name}}
-                    {% else %}
                     {{user.username}}
-                    {% endif %}
                     </a></li>
                     <li><a href="{% url 'account_logout' %}">Logout</a></li>
                     <ul id='profile' class='dropdown-content'>

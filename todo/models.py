@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    first_name = models.CharField(max_length=100, null=True)
-    last_name = models.CharField(max_length=100, null=True)
+    first_name = models.CharField(max_length=100, blank="")
+    last_name = models.CharField(max_length=100, blank="")
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
     avatar_thumbnail = ImageSpecField(source='avatar',
                                       processors=[ResizeToFill(200, 300)],

@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import TextInput, PasswordInput
 from django.utils.translation import ugettext_lazy as _
-from .models import (Project, Company, Profile)
+from .models import (Project, Company, Profile, Employee)
 
 
 class SignUpForm(forms.ModelForm):
@@ -23,6 +23,11 @@ class SignUpForm(forms.ModelForm):
         company.owner = user
         company.name = company_name
         company.save()
+        profile = Profile.objects.create(user=user)
+        profile.save()
+        employee = Employee.objects.create(profile=profile)
+        employee.save()
+        company.employees.add(employee)
 
 
 class ProjectForm(forms.ModelForm):
