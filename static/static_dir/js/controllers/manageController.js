@@ -10,6 +10,20 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
         $scope.company = values[0].data[0];
         $scope.projects = values[1].data;
     })
+    $scope.addProject = function(projectName) {
+        if (projectName != undefined) {
+            url = '/todo/add_project/'
+            data = $.param({ project_name: projectName })
+            $http.post(url, data).then(function(response) {
+                $scope.name = "";
+                $('.modal').modal('close');
+                Materialize.toast('Project Added Successfully', 2000, 'rounded')
+                $http.get('/api').then(function(project) {
+                    $scope.projects = project.data
+                });
+            })
+        }
+    }
     $scope.sendInvite = function(email) {
         if (email != undefined) {
             url = '/todo/send_invite/'
@@ -21,4 +35,5 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
             })
         }
     }
+
 }]);

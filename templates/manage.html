@@ -4,21 +4,38 @@
     <br>
     <div class="row">
         <div class="col m4">
-            <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Add Project</a>
+            <a class="waves-effect waves-light btn" href="#project_modal"><i class="material-icons left">cloud</i>Add Project</a>
         </div>
         <div class="col m4">
             <a class="waves-effect waves-light btn" href="#send_invitaton_modal"><i class="material-icons left">cloud</i>Send Invite</a>
         </div>
-        <!-- Modal Structure -->
+        <!-- Project Modal Structure -->
+        <div id="project_modal" class="modal">
+            <form>
+                <div class="modal-content">
+                    <div class="input-field col m8">
+                        <input type="text" name="name" ng-model="name">
+                        {{project_form.name.label_tag}}
+                    </div>
+                    <div class="col m4">
+                        <button ng-click="addProject(name)" class="modal-action waves-effect waves-green btn-flat">Add</button>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
+        <!-- Invitation Modal Structure -->
         <div id="send_invitaton_modal" class="modal">
             <form>
                 <div class="modal-content">
                     <div class="input-field col m8">
-                        <input type="email" name="email" ng-model="email"> 
+                        <input type="email" name="email" ng-model="email">
                         <label for="email">Enter Inviter Email Id</label>
                     </div>
                     <div class="col m4">
-                         <button ng-click="sendInvite(email)" class="modal-action waves-effect waves-green btn-flat">Send</button>
+                        <button ng-click="sendInvite(email)" class="modal-action waves-effect waves-green btn-flat">Send</button>
                     </div>
                 </div>
             </form>
@@ -39,7 +56,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="col m3" ng-repeat="employee in company.employees">
-                        {{employee.profile.full_name}}
+                        {{employee.profile.user.username}}
                     </div>
                 </div>
             </div>
@@ -51,7 +68,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="col m3" ng-repeat="member in project.members">
-                        {{member.profile.full_name}}
+                        {{member.profile.user.username}}
                     </div>
                 </div>
             </div>

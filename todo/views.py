@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import (ProfileForm)
+from django.shortcuts import render, get_object_or_404
+from .forms import (ProfileForm, ProjectForm)
 from .models import (Project, Profile, Employee, Company)
 # from datetime import datetime, timedelta
 from django.http import JsonResponse
@@ -45,34 +45,40 @@ def project(request):
 
 
 def profile(request):
+    instance = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
-        try:
-            instance = Profile.objects.get(user=request.user)
-            form = ProfileForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('todo:project')
-        except Profile.DoesNotExist:
-            form = ProfileForm(request.POST)
-            if form.is_valid():
-                form_instance = form.save(commit=False)
-                form_instance.user = request.user
-                form_instance.save()
-                return redirect('todo:project')
+        form = ProfileForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
     else:
-        try:
-            instance = Profile.objects.get(user=request.user)
-            form = ProfileForm(instance=instance)
-        except Profile.DoesNotExist:
-            form = ProfileForm()
-        context = {
-            'form': form
-        }
+        form = ProfileForm(instance=instance)
+    context = {
+        'form': form
+    }
     return render(request, 'profile.html', context)
 
 
 def manage_profile(request):
-    return render(request, 'manage.html', {})
+    project_form = ProjectForm()
+    context = {
+        'project_form': project_form
+    }
+    return render(request, 'manage.html', context)
+
+
+def add_project(request):
+    company = get_object_or_404(Company, owner=request.user)
+    project = Project()
+    project_name = request.POST.get('project_name')
+    project.name = project_name
+    project.save()
+    company.projects.add(project)
+    employee = get_object_or_404(Employee, profile=request.user.profile)
+    project.members.add(employee)
+    data = {
+        'status': True
+    }
+    return JsonResponse(data)
 
 
 def generate_random_username(length=8,
