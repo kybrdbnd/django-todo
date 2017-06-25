@@ -32,7 +32,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display = ('get_profile', 'joined_at')
 
     def get_profile(self, obj):
-        return obj.profile.full_name()
+        return obj.profile.user
 
 
 admin.site.register(Profile, ProfileAdmin)

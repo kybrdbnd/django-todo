@@ -158,6 +158,6 @@ ACCOUNT_SIGNUP_FORM_CLASS = 'todo.forms.SignUpForm'
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
+# INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 INVITATIONS_SIGNUP_REDIRECT = '/accept_invitation'
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'

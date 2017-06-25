@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100, null=True)
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
     avatar_thumbnail = ImageSpecField(source='avatar',
                                       processors=[ResizeToFill(200, 300)],
@@ -28,7 +28,7 @@ class Employee(models.Model):
                                    on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.profile.full_name()
+        return self.profile.user.username
 
 
 class Task(models.Model):
