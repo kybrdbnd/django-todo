@@ -88,6 +88,9 @@ class ProjectCreateSerializer(ModelSerializer):
 
 
 class ProjectDetailSerializer(ModelSerializer):
+    tasks = TaskListSerializer(many=True)
+    members = EmployeeListSerializer(many=True)
+
     class Meta:
         model = Project
         fields = [

@@ -3,6 +3,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
     $scope.selected_project = 'all_projects';
+    $scope.project_id = "";
     $scope.summary_project = {};
     $scope.summary_project['name'] = 'All Projects'
     $http.get('/api/').then(function(response) {
@@ -22,6 +23,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
         if ($scope.selected_project != 'all_projects') {
             angular.forEach($scope.projects, function(project) {
                 if ($scope.selected_project == project.name) {
+                    $scope.project_id = project.id
                     $scope.tasks = project.tasks
                     $scope.members = project.members
                 }
@@ -30,10 +32,14 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     }
     $scope.addtask = function() {
         if ($scope.task != "") {
-            // console.log($scope.task, $scope.selected_project)
             url = '/todo/add_task/'
             data = $.param({ project_name: $scope.selected_project, task_name: $scope.task })
             $http.post(url, data).then(function(response) {
+                $scope.task = "";
+                project_detail_url = "/api/project/" + $scope.project_id
+                $http.get(project_detail_url).then(function(response) {
+                    $scope.tasks = response.data.tasks
+                })
                 Materialize.toast('Task Added', 2000, 'rounded')
             })
         }
