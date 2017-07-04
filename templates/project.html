@@ -50,7 +50,7 @@
         </div>
         {% verbatim %}
         <div class="row">
-            <div class="col m9" ng-show="selected_project=='all_projects'">
+            <div class="col m7" ng-show="selected_project=='all_projects'">
                 <h3>{{selected_project}}</h3>
                 <ul ng-repeat="project in summary_project.projects">
                     <li>{{project.name}}</li>
@@ -59,16 +59,38 @@
                     </ul>
                 </ul>
             </div>
-            <div class="col m9" ng-show="selected_project!='all_projects'">
+            <div class="col m7" ng-show="selected_project!='all_projects'">
                 <h3>{{selected_project}}</h3>
-                <ul ng-repeat="task in tasks">
-                    <li>
-                        <div>{{task.name}}</div>
-                    </li>
-                </ul>
             </div>
-            <div class="col m3">
-                Queues/Messages
+            <div class="col m5" ng-show="selected_project!='all_projects'">
+                <ul ng-repeat="task in tasks">
+                    Current Pending Tasks
+                    <div class="row">
+                        <div class="col m12">
+                            <div class="card blue-grey darken-1">
+                                <div class="card-content white-text">
+                                    <p>{{task.name}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#">Assign To Yourself</a>
+                                    <a href="#">Assign To Other</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+                <form action="">
+                    <div class="row">
+                        <div class="input-field col m8">
+                            <textarea id="task_name" class="materialize-textarea"></textarea>
+                            <label for="task_name">Task:</label>
+                        </div>
+                        <div class="m4">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         {% endverbatim %}
