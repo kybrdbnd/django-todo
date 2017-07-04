@@ -8,14 +8,14 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     $http.get('/api/').then(function(response) {
         $scope.projects = response.data
         projects = $scope.projects
-            console.log($scope.projects)
+            // console.log($scope.projects)
         $scope.summary_project['projects'] = response.data
         $scope.summary_project['project_count'] = $scope.projects.length
         $scope.summary_project['task_count'] = 0
         angular.forEach($scope.projects, function(project) {
-            $scope.summary_project['task_count'] += project.tasks.length
-        })
-        // console.log($scope.summary_project)
+                $scope.summary_project['task_count'] += project.tasks.length
+            })
+            // console.log($scope.summary_project)
     })
     $scope.current_project = function(selected_project) {
         $scope.selected_project = selected_project
@@ -25,6 +25,16 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                     $scope.tasks = project.tasks
                     $scope.members = project.members
                 }
+            })
+        }
+    }
+    $scope.addtask = function() {
+        if ($scope.task != "") {
+            // console.log($scope.task, $scope.selected_project)
+            url = '/todo/add_task/'
+            data = $.param({ project_name: $scope.selected_project, task_name: $scope.task })
+            $http.post(url, data).then(function(response) {
+                Materialize.toast('Task Added', 2000, 'rounded')
             })
         }
     }

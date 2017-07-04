@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<div class="row" ng-controller="projectController">
+<div class="row task-maincontent" ng-controller="projectController">
     {% verbatim %}
-    <div class="col m3">
+    <div class="col m3 project_names">
         <div class="row">
             <div class="col m12">
                 <div class="card blue-grey darken-1" ng-click="current_project('all_projects')">
@@ -63,8 +63,9 @@
                 <h3>{{selected_project}}</h3>
             </div>
             <div class="col m5" ng-show="selected_project!='all_projects'">
-                <ul ng-repeat="task in tasks">
                     Current Pending Tasks
+                <div class="task-panel">
+                    <ul ng-repeat="task in tasks" class="task_list">
                     <div class="row">
                         <div class="col m12">
                             <div class="card blue-grey darken-1">
@@ -78,15 +79,16 @@
                             </div>
                         </div>
                     </div>
-                </ul>
-                <form action="">
+                    </ul>
+                </div>
+                <form ng-submit="addtask()" class="form_list">
                     <div class="row">
                         <div class="input-field col m8">
-                            <textarea id="task_name" class="materialize-textarea"></textarea>
+                            <textarea id="task_name" ng-model="task" class="materialize-textarea"></textarea>
                             <label for="task_name">Task:</label>
                         </div>
                         <div class="m4">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Save
+                            <button class="btn waves-effect waves-light" type="submit" name="action" id="save_task">Save
                             </button>
                         </div>
                     </div>
@@ -99,22 +101,22 @@
 {% endblock %} {% block extra_js%}
 <script>
 $('.owl-carousel').owlCarousel({
-    loop: true,
-    margin: 3,
-    rewind: false,
-    autoWidth: true,
-    responsive: {
-        0: {
-            items: 3
-        },
-        600: {
-            items: 6
-        },
-        1000: {
-            items: 7,
-            nav: true
-        }
-    }
+    // loop: true,
+    // margin: 3,
+    // rewind: false,
+    // autoWidth: true,
+    // responsive: {
+    //     0: {
+    //         items: 3
+    //     },
+    //     600: {
+    //         items: 6
+    //     },
+    //     1000: {
+    //         items: 7,
+    //         nav: true
+    //     }
+    // }
 });
 $(document).ready(function() {
     $('.collapsible').collapsible();

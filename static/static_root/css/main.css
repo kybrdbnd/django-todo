@@ -1,0 +1,4 @@
+.task-panel {
+    height: 330px;
+    overflow-y: scroll;
+}

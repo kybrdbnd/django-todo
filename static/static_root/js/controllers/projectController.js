@@ -2,31 +2,40 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
-    $scope.projects = []
-    $http.get('/api/').then(result) - >
-        angular.forEach result.data, (item) - >
-        $scope.projects.push(item)
-
-
-
-    // $scope.submit = function($event) {
-    //     $event.preventDefault();
-    //     var in_data = jQuery.param({
-    //         'name': $scope.name,
-    //     });
-
-    //     $http({
-    //         method: 'POST',
-    //         url: '/todo/',
-    //         data: in_data
-    //     }).then(function success(response) {
-    //         $mdToast.show(
-    //             $mdToast.simple()
-    //             .textContent(response.data.success)
-    //             .position('right')
-    //             .hideDelay(1000)
-    //         );
-    //     })
-    // }
-    console.log($scope.projects)
+    $scope.selected_project = 'all_projects';
+    $scope.summary_project = {};
+    $scope.summary_project['name'] = 'All Projects'
+    $http.get('/api/').then(function(response) {
+        $scope.projects = response.data
+        projects = $scope.projects
+            // console.log($scope.projects)
+        $scope.summary_project['projects'] = response.data
+        $scope.summary_project['project_count'] = $scope.projects.length
+        $scope.summary_project['task_count'] = 0
+        angular.forEach($scope.projects, function(project) {
+                $scope.summary_project['task_count'] += project.tasks.length
+            })
+            // console.log($scope.summary_project)
+    })
+    $scope.current_project = function(selected_project) {
+        $scope.selected_project = selected_project
+        if ($scope.selected_project != 'all_projects') {
+            angular.forEach($scope.projects, function(project) {
+                if ($scope.selected_project == project.name) {
+                    $scope.tasks = project.tasks
+                    $scope.members = project.members
+                }
+            })
+        }
+    }
+    $scope.addtask = function() {
+        if ($scope.task != "") {
+            // console.log($scope.task, $scope.selected_project)
+            url = '/todo/add_task/'
+            data = $.param({ project_name: $scope.selected_project, task_name: $scope.task })
+            $http.post(url, data).then(function(response) {
+                Materialize.toast('Task Added', 2000, 'rounded')
+            })
+        }
+    }
 }]);

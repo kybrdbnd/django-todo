@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import (ProfileForm, ProjectForm)
-from .models import (Project, Profile, Employee, Company)
+from .models import (Project, Profile, Employee, Company, Task)
 # from datetime import datetime, timedelta
 from django.http import JsonResponse
 from invitations.models import Invitation
@@ -124,3 +124,19 @@ def send_invite(request):
 
 def accept_invitation(request):
     return render(request, 'accept_invitation.html', {})
+
+
+def add_task(request):
+    project_name = request.POST.get('project_name')
+    task_name = request.POST.get('task_name')
+    project = get_object_or_404(Project, name=project_name)
+    profile = get_object_or_404(Profile, user=request.user)
+    employee_instance = get_object_or_404(Employee, profile=profile)
+    task_instance = Task.objects.create(name=task_name,
+                                        created_by=employee_instance)
+    task_instance.save()
+    project.tasks.add(task_instance)
+    data = {
+        'status': True
+    }
+    return JsonResponse(data)
