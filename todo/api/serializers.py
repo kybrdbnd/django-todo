@@ -24,11 +24,11 @@ class ProfileListSerializer(ModelSerializer):
 
 
 class EmployeeListSerializer(ModelSerializer):
-    profile = ProfileListSerializer()
+    user = UserListSerializer()
 
     class Meta:
         model = Employee
-        fields = ['profile', ]
+        fields = ['user', ]
 
 
 class TaskListSerializer(ModelSerializer):

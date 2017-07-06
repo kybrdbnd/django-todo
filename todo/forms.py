@@ -1,7 +1,8 @@
 from django import forms
-from django.forms import TextInput, PasswordInput
+from django.forms import TextInput
 from django.utils.translation import ugettext_lazy as _
 from .models import (Project, Company, Profile, Employee)
+from django.contrib.auth.models import User
 
 
 class SignUpForm(forms.ModelForm):
@@ -25,7 +26,7 @@ class SignUpForm(forms.ModelForm):
         company.save()
         profile = Profile.objects.create(user=user)
         profile.save()
-        employee = Employee.objects.create(profile=profile)
+        employee = Employee.objects.create(user=user)
         employee.save()
         company.employees.add(employee)
 
@@ -38,8 +39,8 @@ class ProjectForm(forms.ModelForm):
 
 class ProfileForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ('first_name', 'last_name',)
+        model = User
+        fields = ['first_name', 'last_name']
         widgets = {
             'first_name': TextInput(attrs={
                 'placeholder': 'Enter Your First Name'
@@ -47,23 +48,4 @@ class ProfileForm(forms.ModelForm):
             'last_name': TextInput(attrs={
                 'placeholder': 'Enter Your Last Name'
             })
-        }
-
-
-class AcceptInvitationForm(forms.ModelForm):
-    password = forms.CharField()
-    confirm_password = forms.CharField()
-
-    class Meta:
-        model = Profile
-        fields = ('first_name', 'last_name',)
-        widgets = {
-            'first_name': TextInput(attrs={
-                'placeholder': 'Enter Your First Name'
-            }),
-            'last_name': TextInput(attrs={
-                'placeholder': 'Enter Your Last Name'
-            }),
-            'password': PasswordInput(),
-            'confirm_password': PasswordInput()
         }

@@ -19,7 +19,7 @@ class CompanyListView(ListAPIView):
     serializer_class = CompanyListSerializer
 
     def get_queryset(self, *args, **kwargs):
-        employee = Employee.objects.get(profile=self.request.user.profile)
+        employee = Employee.objects.get(user=self.request.user)
         company = employee.company_set.all()
         return company
 
@@ -45,7 +45,7 @@ class ProjectListView(ListAPIView):
     serializer_class = ProjectListSerializer
 
     def get_queryset(self, *args, **kwargs):
-        employee = Employee.objects.get(profile=self.request.user.profile)
+        employee = Employee.objects.get(user=self.request.user)
         projects = employee.project_set.all()
         return projects
 

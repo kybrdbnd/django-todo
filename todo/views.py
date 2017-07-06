@@ -45,7 +45,7 @@ def project(request):
 
 
 def profile(request):
-    instance = get_object_or_404(Profile, user=request.user)
+    instance = get_object_or_404(User, id=request.user.id)
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=instance)
         if form.is_valid():
@@ -73,7 +73,7 @@ def add_project(request):
     project.name = project_name
     project.save()
     company.projects.add(project)
-    employee = get_object_or_404(Employee, profile=request.user.profile)
+    employee = get_object_or_404(Employee, user=request.user)
     project.members.add(employee)
     data = {
         'status': True
@@ -111,7 +111,7 @@ def send_invite(request):
     user.save()
     profile = Profile.objects.create(user=user)
     profile.save()
-    employee = Employee.objects.create(profile=profile)
+    employee = Employee.objects.create(user=user)
     employee.save()
     company = get_object_or_404(Company, owner=request.user)
     company.employees.add(employee)
@@ -130,8 +130,8 @@ def add_task(request):
     project_name = request.POST.get('project_name')
     task_name = request.POST.get('task_name')
     project = get_object_or_404(Project, name=project_name)
-    profile = get_object_or_404(Profile, user=request.user)
-    employee_instance = get_object_or_404(Employee, profile=profile)
+    user = get_object_or_404(User, id=request.user.id)
+    employee_instance = get_object_or_404(Employee, user=user)
     task_instance = Task.objects.create(name=task_name,
                                         created_by=employee_instance)
     task_instance.save()

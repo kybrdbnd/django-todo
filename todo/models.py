@@ -6,8 +6,6 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    first_name = models.CharField(max_length=100, blank="")
-    last_name = models.CharField(max_length=100, blank="")
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
     avatar_thumbnail = ImageSpecField(source='avatar',
                                       processors=[ResizeToFill(200, 300)],
@@ -24,11 +22,13 @@ class Profile(models.Model):
 
 class Employee(models.Model):
     joined_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    profile = models.OneToOneField(Profile, blank=True, null=True,
-                                   on_delete=models.CASCADE)
+    # profile = models.OneToOneField(Profile, blank=True, null=True,
+    #                                on_delete=models.CASCADE)
+    user = models.OneToOneField(User, blank=True, null=True,
+                                on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.profile.user.username
+        return self.user.username
 
 
 class Task(models.Model):

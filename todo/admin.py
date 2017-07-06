@@ -4,7 +4,7 @@ from .models import (Profile, Project, Task, Company, Employee)
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('get_user', 'first_name', 'last_name',)
+    list_display = ['get_user']
 
     def get_user(self, obj):
         return obj.user.username
@@ -25,14 +25,14 @@ class CompanyAdmin(admin.ModelAdmin):
         return obj.owner.username
 
     def get_employees(self, obj):
-        return ', '.join([employee.profile.user.username for employee in obj.employees.all()])
+        return ', '.join([employee.user.username for employee in obj.employees.all()])
 
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('get_profile', 'joined_at')
+    list_display = ('get_user', 'joined_at')
 
-    def get_profile(self, obj):
-        return obj.profile.user
+    def get_user(self, obj):
+        return obj.user.username
 
 
 admin.site.register(Profile, ProfileAdmin)
