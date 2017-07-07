@@ -2,3 +2,26 @@
     height: 330px;
     overflow-y: scroll;
 }
+
+.task_list{
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+.form_list{
+	margin-top: 2em;
+	margin-bottom: 0px !important;
+}
+
+#save_task{
+	margin-top: 3em;
+}
+
+.task-maincontent{
+	margin-bottom: 0px !important;
+}
+
+.project_names{
+	height: 540px;
+    overflow-y: auto;
+}

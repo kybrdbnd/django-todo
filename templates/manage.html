@@ -14,8 +14,7 @@
             <form>
                 <div class="modal-content">
                     <div class="input-field col m8">
-                        <input type="text" name="name" ng-model="name">
-                        {{project_form.name.label_tag}}
+                        <input type="text" name="name" ng-model="name"> {{project_form.name.label_tag}}
                     </div>
                     <div class="col m4">
                         <button ng-click="addProject(name)" class="modal-action waves-effect waves-green btn-flat">Add</button>
@@ -55,26 +54,30 @@
                         Members:
                     </div>
                     <div class="clearfix"></div>
-                    <div class="col m3" ng-repeat="employee in company.employees">
+                    <div class="col m3" ng-repeat="employee in company.employees" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper:'clone'}" id="{{employee.user.id}}" jqyoui-draggable="{animate:true, placeholder:'keep', onDrag:'memberDragging(event)'}">
                         {{employee.user.username}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col m12" ng-repeat="project in projects">
-                    <h4>Project Name: {{project.name}}</h4>
-                    <div class="col m12">
-                        Members:
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col m3" ng-repeat="member in project.members">
-                        {{member.user.username}}
                     </div>
                 </div>
             </div>
         </div>
         <div class="col m4">
-            New project space
+            <div class="row" ng-repeat="project in projects">
+                <div class="col m12">
+                    <div class="card-panel teal" jqyoui-droppable="{onDrop:'addMember(project)'}" data-drop="true" id="{{project.id}}">
+                        <div class="white-text">
+                            <span>Project Name: {{project.name}}</span>
+                            <div class="col m12">
+                                Members:
+                            </div>
+                            <div class="clearfix"></div>
+                            <span>
+                            <div class="col m3" ng-repeat="member in project.members">
+                                {{member.user.username}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {% endverbatim %}

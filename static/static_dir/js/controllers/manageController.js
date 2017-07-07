@@ -5,6 +5,8 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
     $scope.company_request = $http.get('/api/company');
     $scope.project_request = $http.get('/api');
 
+    $scope.new_project_member_id = ""
+
 
     $q.all([$scope.company_request, $scope.project_request]).then(function(values) {
         $scope.company = values[0].data[0];
@@ -34,6 +36,13 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
                 Materialize.toast('Mail Send Successfully', 2000, 'rounded')
             })
         }
+    }
+    $scope.memberDragging = function(event){
+        $scope.new_project_member_id = event.target.id
+    }
+    $scope.addMember = function(event){
+        project_id = event.target.id
+        console.log(event.target.id)
     }
 
 }]);
