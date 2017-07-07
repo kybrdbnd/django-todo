@@ -127,9 +127,9 @@ def accept_invitation(request):
 
 
 def add_task(request):
-    project_name = request.POST.get('project_name')
+    project_id = request.POST.get('project_id')
     task_name = request.POST.get('task_name')
-    project = get_object_or_404(Project, name=project_name)
+    project = get_object_or_404(Project, id=project_id)
     user = get_object_or_404(User, id=request.user.id)
     employee_instance = get_object_or_404(Employee, user=user)
     task_instance = Task.objects.create(name=task_name,
@@ -140,3 +140,18 @@ def add_task(request):
         'status': True
     }
     return JsonResponse(data)
+
+
+def add_member(request):
+    project_id = request.POST.get('project_id')
+    member_id = request.POST.get('member_id')
+    project = get_object_or_404(Project, id=project_id)
+    member = get_object_or_404(User, id=member_id)
+    if project.members.filter(user=member).exists():
+        return JsonResponse({'status': False,
+                             'message': 'Member already exists'})
+    else:
+        employee = get_object_or_404(Employee, user=member)
+        project.members.add(employee)
+        return JsonResponse({'status': True,
+                             'message': 'Member Successfully added'})
