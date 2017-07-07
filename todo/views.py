@@ -127,9 +127,9 @@ def accept_invitation(request):
 
 
 def add_task(request):
-    project_name = request.POST.get('project_name')
+    project_id = request.POST.get('project_id')
     task_name = request.POST.get('task_name')
-    project = get_object_or_404(Project, name=project_name)
+    project = get_object_or_404(Project, id=project_id)
     user = get_object_or_404(User, id=request.user.id)
     employee_instance = get_object_or_404(Employee, user=user)
     task_instance = Task.objects.create(name=task_name,
