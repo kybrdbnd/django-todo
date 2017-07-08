@@ -20,12 +20,20 @@ class Profile(models.Model):
         return self.user.username
 
 
+class Role(models.Model):
+    name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      auto_now=False)
+
+    def __str__(self):
+        return self.name
+
+
 class Employee(models.Model):
     joined_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    # profile = models.OneToOneField(Profile, blank=True, null=True,
-    #                                on_delete=models.CASCADE)
     user = models.OneToOneField(User, blank=True, null=True,
                                 on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, blank=True, null=True)
 
     def __str__(self):
         return self.user.username

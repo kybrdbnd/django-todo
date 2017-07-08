@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import (ProfileForm, ProjectForm)
 from .models import (Project, Profile, Employee, Company, Task)
 # from datetime import datetime, timedelta
@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 
 
 def home(request):
+    if request.user.is_authenticated():
+        return redirect('todo:project')
     projects = Project.objects.all()
     context = {
         'projects': projects
