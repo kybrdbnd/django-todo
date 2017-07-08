@@ -68,11 +68,17 @@ def profile(request):
 def manage_profile(request):
     project_form = ProjectForm()
     employee = get_object_or_404(Employee, user=request.user)
+    company = employee.company_set.all()[0]
+    if company.owner == request.user:
+        owner = True
+    else:
+        owner = False
     if employee.role.name == 'Project Manager':
         project_manager = True
     else:
         project_manager = False
     context = {
+        'owner': owner,
         'project_manager': project_manager,
         'project_form': project_form
     }

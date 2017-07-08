@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container" ng-controller='manageController'>
     <br>
-    <br> {% if project_manager %}
+    <br> {% if project_manager or owner %}
     <div class="row">
         <div class="col m4">
             <a class="waves-effect waves-light btn" href="#project_modal"><i class="material-icons left">cloud</i>Add Project</a>
@@ -55,7 +55,7 @@
                         Members:
                     </div>
                     <div class="clearfix"></div>
-                    {% if project_manager %} {% verbatim %}
+                    {% if project_manager or owner %} {% verbatim %}
                     <div class="col m3" ng-repeat="employee in company.employees" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper:'clone'}" id="{{employee.user.id}}" jqyoui-draggable="{animate:true, placeholder:'keep', onDrag:'memberDragging(event)'}">
                         {{employee.user.username}} {% endverbatim %}
                     </div>
