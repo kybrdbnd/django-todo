@@ -39,8 +39,8 @@ class TaskListSerializer(ModelSerializer):
         model = Task
         fields = [
             'id',
-            'created_at',
             'name',
+            # 'created_at',
             'created_by',
             'assigned_to'
         ]

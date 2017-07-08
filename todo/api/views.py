@@ -1,15 +1,12 @@
-from rest_framework.generics import (CreateAPIView,
-                                     ListAPIView,
-                                     RetrieveAPIView,
-                                     DestroyAPIView,
-                                     RetrieveUpdateAPIView
-                                     )
-from .serializers import (CompanyListSerializer, ProjectCreateSerializer,
+from rest_framework.generics import (ListAPIView,
+                                     RetrieveAPIView)
+from rest_framework.mixins import (RetrieveModelMixin, ListModelMixin)
+
+from django.shortcuts import get_object_or_404
+from .serializers import (CompanyListSerializer,
                           ProjectListSerializer, ProjectDetailSerializer,
-                          TaskCreateSerializer,
-                          TaskListSerializer, TaskDetailSerializer,
-                          InivitationSerializer)
-from todo.models import (Project, Task, Employee)
+                          InivitationSerializer, TaskListSerializer)
+from todo.models import (Project, Employee)
 from invitations.models import Invitation
 
 
@@ -26,19 +23,25 @@ class CompanyListView(ListAPIView):
 
 # project
 
-class ProjectCreateView(CreateAPIView):
-    queryset = Project.objects.all()
-    serializer_class = ProjectCreateSerializer
-
-
-class ProjectDeleteView(DestroyAPIView):
-    queryset = Project.objects.all()
-    serializer_class = ProjectDetailSerializer
-
-
 class ProjectDetailView(RetrieveAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectDetailSerializer
+
+
+class ProjectTaskListView(ListModelMixin, RetrieveAPIView):
+    serializer_class = TaskListSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        project = kwargs.get('project')
+        employee = get_object_or_404(Employee, user=self.request.user)
+        project_tasks = project.tasks.all().filter(assigned_to=employee)
+        return project_tasks
+
+    def get_object(self, *args, **kwargs):
+        project_id = self.kwargs.get('pk')
+        project = Project.objects.get(id=project_id)
+        queryset = self.get_queryset(project=project)
+        # return queryset
 
 
 class ProjectListView(ListAPIView):
@@ -48,37 +51,6 @@ class ProjectListView(ListAPIView):
         employee = Employee.objects.get(user=self.request.user)
         projects = employee.project_set.all()
         return projects
-
-
-class ProjectUpdateView(RetrieveUpdateAPIView):
-    queryset = Project.objects.all()
-    serializer_class = ProjectDetailSerializer
-
-
-# task
-class TaskCreateView(CreateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskCreateSerializer
-
-
-class TaskDeleteView(DestroyAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskDetailSerializer
-
-
-class TaskDetailView(RetrieveAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskDetailSerializer
-
-
-class TaskListView(ListAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskListSerializer
-
-
-class TaskUpdateView(RetrieveUpdateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskDetailSerializer
 
 
 class InvitationListView(ListAPIView):
