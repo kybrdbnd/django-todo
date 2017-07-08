@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container" ng-controller='manageController'>
     <br>
-    <br>
+    <br> {% if project_manager %}
     <div class="row">
         <div class="col m4">
             <a class="waves-effect waves-light btn" href="#project_modal"><i class="material-icons left">cloud</i>Add Project</a>
@@ -44,23 +44,31 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    {% verbatim %}
+    {%endif%}
     <div class="row">
         <div class="col m8">
             <div class="row">
                 <div class="col m12">
-                    <h4>Company Name: {{company.name}}</h4>
+                    {% verbatim %}
+                    <h4>Company Name: {{company.name}}</h4> {% endverbatim %}
                     <div class="col m12">
                         Members:
                     </div>
                     <div class="clearfix"></div>
+                    {% if project_manager %} {% verbatim %}
                     <div class="col m3" ng-repeat="employee in company.employees" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper:'clone'}" id="{{employee.user.id}}" jqyoui-draggable="{animate:true, placeholder:'keep', onDrag:'memberDragging(event)'}">
-                        {{employee.user.username}}
+                        {{employee.user.username}} {% endverbatim %}
                     </div>
+                    {% else%}
+                    <div class="col m3" ng-repeat="employee in company.employees">
+                        {% verbatim %} {{employee.user.username}} {% endverbatim %}
+                    </div>
+                    {% endif%}
                 </div>
             </div>
         </div>
         <div class="col m4">
+            {% verbatim%}
             <div class="row" ng-repeat="project in projects">
                 <div class="col m12">
                     <div class="card-panel teal" jqyoui-droppable="{onDrop:'addMember(project)'}" data-drop="true" id="{{project.id}}">
@@ -68,18 +76,16 @@
                             <span>Project Name: {{project.name}}</span>
                             <br/> Members:
                             <span>
-                            <div class="row"> 
-                            <div class="col m4" ng-repeat="member in project.members">
-                                {{member.user.username}}
-                            </div>
-                            </div>
-                        </div>
+                    <div class="row"> 
+                    <div class="col m4" ng-repeat="member in project.members">
+                        {{member.user.username}}
+                    </div>
                     </div>
                 </div>
             </div>
+            {% endverbatim %}
         </div>
     </div>
-    {% endverbatim %}
 </div>
 {% endblock %} {% block extra_js %}
 <script>

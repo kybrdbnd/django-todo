@@ -67,14 +67,21 @@ def profile(request):
 
 def manage_profile(request):
     project_form = ProjectForm()
+    employee = get_object_or_404(Employee, user=request.user)
+    if employee.role.name == 'Project Manager':
+        project_manager = True
+    else:
+        project_manager = False
     context = {
+        'project_manager': project_manager,
         'project_form': project_form
     }
     return render(request, 'manage.html', context)
 
 
 def add_project(request):
-    company = get_object_or_404(Company, owner=request.user)
+    employee = get_object_or_404(Employee, user=request.user)
+    company = employee.company_set.all()[0]
     project = Project()
     project_name = request.POST.get('project_name')
     project.name = project_name
