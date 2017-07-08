@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import TextInput
 from django.utils.translation import ugettext_lazy as _
-from .models import (Project, Company, Profile, Employee)
+from .models import (Project, Company, Profile, Employee, Role)
 from django.contrib.auth.models import User
 
 
@@ -49,3 +49,11 @@ class ProfileForm(forms.ModelForm):
                 'placeholder': 'Enter Your Last Name'
             })
         }
+
+
+class RoleForm(forms.ModelForm):
+    role = forms.ModelChoiceField(Role.objects.all(), empty_label=None)
+
+    class Meta:
+        model = Employee
+        fields = ['role']

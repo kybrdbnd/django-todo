@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import (ProfileForm, ProjectForm)
+from .forms import (ProfileForm, ProjectForm, RoleForm)
 from .models import (Project, Profile, Employee, Company, Task)
 # from datetime import datetime, timedelta
 from django.http import JsonResponse
@@ -48,14 +48,19 @@ def project(request):
 
 def profile(request):
     instance = get_object_or_404(User, id=request.user.id)
+    employee = get_object_or_404(Employee, user=instance)
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=instance)
-        if form.is_valid():
+        role_form = RoleForm(request.POST, instance=employee)
+        if form.is_valid() and role_form.is_valid():
             form.save()
+            role_form.save()
     else:
         form = ProfileForm(instance=instance)
+        role_form = RoleForm(instance=employee)
     context = {
-        'form': form
+        'form': form,
+        'role_form': role_form
     }
     return render(request, 'profile.html', context)
 
