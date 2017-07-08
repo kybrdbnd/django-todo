@@ -2,11 +2,13 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+    $scope.selected_date = "";
     $scope.selected_project = 'all_projects';
     $scope.projects = "";
     $scope.project_id = "";
     $scope.summary_project = {};
-    $scope.summary_project['name'] = 'All Projects'
+    $scope.summary_project['name'] = 'All Projects';
+
     $scope.init = function() {
         $http.get('/api/').then(function(response) {
             $scope.projects = response.data
@@ -26,7 +28,14 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
             if ($scope.selected_project != 'all_projects') {
                 project_detail_url = "/api/project/" + $scope.project_id
                 $http.get(project_detail_url).then(function(response) {
-                    $scope.tasks = response.data.tasks
+                    temp_tasks = response.data.tasks;
+                    display_tasks = [];
+                    angular.forEach(temp_tasks, function(task) {
+                        if (task.assigned_to == null) {
+                            display_tasks.push(task)
+                        }
+                    })
+                    $scope.tasks = display_tasks;
                     $scope.members = response.data.members
                 })
             }
@@ -40,7 +49,15 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                 $scope.task = "";
                 project_detail_url = "/api/project/" + $scope.project_id
                 $http.get(project_detail_url).then(function(response) {
-                    $scope.tasks = response.data.tasks
+                    temp_tasks = response.data.tasks;
+                    display_tasks = [];
+                    angular.forEach(temp_tasks, function(task) {
+                        if (task.assigned_to == null) {
+                            display_tasks.push(task)
+                        }
+                    })
+                    $scope.tasks = display_tasks;
+
                 })
                 Materialize.toast('Task Added', 2000, 'rounded')
             })
@@ -59,6 +76,14 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                 $scope.summary_project['task_count'] += project.tasks.length
             })
         })
+    }
+    $scope.selectedDate = function(click) {
+        $scope.selected_date = click.currentTarget.innerText
+        console.log($scope.selected_date)
+
+    }
+    $scope.assignYourself = function(task_id) {
+        console.log(task_id)
     }
     $scope.init();
 }]);

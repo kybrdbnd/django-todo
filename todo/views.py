@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import (ProfileForm, ProjectForm, RoleForm)
 from .models import (Project, Profile, Employee, Company, Task)
-# from datetime import datetime, timedelta
+from datetime import datetime, timedelta
 from django.http import JsonResponse
 from invitations.models import Invitation
 from random import choice
@@ -21,27 +21,24 @@ def home(request):
 
 
 def project(request):
-    # projects = request.user.project_set.all()
-    # d1 = datetime.now()
-    # date_range = []
-    # for i in range(7):
-    #     date_range.append(d1 + timedelta(days=i))
-    # for i in range(7):
-    #     date_range.append(d1 - timedelta(days=i))
-    # # print(set(date_range))
-    # date_range = sorted(set(date_range))
+    d1 = datetime.now()
+    date_range = []
+    for i in range(7):
+        date_range.append(d1 + timedelta(days=i))
+    for i in range(7):
+        date_range.append(d1 - timedelta(days=i))
+    date_range = sorted(set(date_range))
 
-    # context = {
-    #     'projects': projects,
-    #     'date_range': date_range
-    # }
+    context = {
+        'date_range': date_range
+    }
     current_user_email = request.user.email
     i = Invitation.objects.filter(email=current_user_email)
     if not i.exists():
-        return render(request, 'project.html', {})
+        return render(request, 'project.html', context)
     else:
         if i[0].accepted:
-            return render(request, 'project.html', {})
+            return render(request, 'project.html', context)
         else:
             return render(request, 'error_invitation.html', {})
 

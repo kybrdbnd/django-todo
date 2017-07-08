@@ -15,7 +15,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at')
+    list_display = ('name', 'created_at', 'created_by', 'assigned_to')
 
 
 class CompanyAdmin(admin.ModelAdmin):

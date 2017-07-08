@@ -1,3 +1,6 @@
+.assign_operation{
+	font-size: 12px;
+}
 .task-panel {
     height: 330px;
     overflow-y: scroll;
@@ -24,4 +27,9 @@
 .project_names{
 	height: 540px;
     overflow-y: auto;
+}
+/*profile page*/
+.profile-page{
+	box-shadow: 0 1px 6px rgba(0,0,0,0.12),0 1px 3px rgba(0,0,0,0.12);
+	margin-top: 5em;
 }

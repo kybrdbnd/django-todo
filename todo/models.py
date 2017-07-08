@@ -40,12 +40,14 @@ class Employee(models.Model):
 
 
 class Task(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    created_at = models.DateField(auto_now_add=True, auto_now=False)
     name = models.CharField(max_length=100)
     created_by = models.ForeignKey(Employee, related_name='created_by')
     assigned_to = models.ForeignKey(Employee,
                                     related_name='assigned_to',
                                     null=True, blank=True)
+
+    assigned_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.name

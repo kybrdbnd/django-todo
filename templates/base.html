@@ -10,7 +10,7 @@
             <div class="nav-wrapper">
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     {% if user.is_authenticated%}
-                    <li><a href="{% url 'todo:project' %}">Collaborar</a></li>
+                    <li><a href="{% url 'todo:project' %}">Colaborar</a></li>
                     <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates='profile'>
                     {{user.username}}
                     </a></li>
@@ -20,7 +20,7 @@
                         <li><a href="{% url 'manage_profile' %}">Manage Projects</a></li>
                     </ul>
                     {% else%}
-                    <li><a href="{% url 'home' %}">Collaborar</a></li>
+                    <li><a href="{% url 'home' %}">Colaborar</a></li>
                     <li><a href="{% url 'account_signup' %}">Signup</a></li>
                     {% endif %}
                 </ul>
