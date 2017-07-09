@@ -1,9 +1,7 @@
 from rest_framework.generics import (ListAPIView,
                                      RetrieveAPIView)
-from rest_framework.mixins import (RetrieveModelMixin, ListModelMixin)
-
 from django.shortcuts import get_object_or_404
-from .serializers import (CompanyListSerializer,
+from .serializers import (CompanyListSerializer, EmployeePageSerializer,
                           ProjectListSerializer, ProjectDetailSerializer,
                           InivitationSerializer, TaskListSerializer)
 from todo.models import (Project, Employee)
@@ -28,20 +26,20 @@ class ProjectDetailView(RetrieveAPIView):
     serializer_class = ProjectDetailSerializer
 
 
-class ProjectTaskListView(ListModelMixin, RetrieveAPIView):
+class ProjectTaskListView(ListAPIView):
     serializer_class = TaskListSerializer
 
     def get_queryset(self, *args, **kwargs):
-        project = kwargs.get('project')
-        employee = get_object_or_404(Employee, user=self.request.user)
-        project_tasks = project.tasks.all().filter(assigned_to=employee)
-        return project_tasks
-
-    def get_object(self, *args, **kwargs):
         project_id = self.kwargs.get('pk')
+        day = self.kwargs.get('day')
+        month = self.kwargs.get('month')
+        year = self.kwargs.get('year')
+        query_date = year + '-' + month + '-' + day
         project = Project.objects.get(id=project_id)
-        queryset = self.get_queryset(project=project)
-        # return queryset
+        employee = get_object_or_404(Employee, user=self.request.user)
+        project_tasks = project.tasks.all().filter(
+            assigned_to=employee).filter(assigned_date=query_date)
+        return project_tasks
 
 
 class ProjectListView(ListAPIView):
@@ -51,6 +49,11 @@ class ProjectListView(ListAPIView):
         employee = Employee.objects.get(user=self.request.user)
         projects = employee.project_set.all()
         return projects
+
+
+class EmployeePageView(RetrieveAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeePageSerializer
 
 
 class InvitationListView(ListAPIView):

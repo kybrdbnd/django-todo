@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, RelatedField
 from todo.models import (Company, Project, Task, Employee, Profile)
 from django.contrib.auth.models import User
 from invitations.models import Invitation
@@ -23,12 +23,23 @@ class ProfileListSerializer(ModelSerializer):
         fields = ['first_name', 'last_name', 'user', 'full_name']
 
 
+class EmployeePageSerializer(ModelSerializer):
+    user = UserListSerializer()
+
+    class Meta:
+        model = Employee
+        fields = ['id', 'user', 'role', 'project_set',
+                  'company_set', 'assigned_to']
+        depth = 1
+
+
 class EmployeeListSerializer(ModelSerializer):
     user = UserListSerializer()
 
     class Meta:
         model = Employee
-        fields = ['user', ]
+        fields = ['id', 'user', 'role']
+        depth = 1
 
 
 class TaskListSerializer(ModelSerializer):
@@ -40,9 +51,10 @@ class TaskListSerializer(ModelSerializer):
         fields = [
             'id',
             'name',
-            # 'created_at',
+            'created_at',
             'created_by',
-            'assigned_to'
+            'assigned_to',
+            'assigned_date'
         ]
 
 
@@ -74,18 +86,6 @@ class CompanyListSerializer(ModelSerializer):
             'employees'
         ]
 
-# project
-
-
-class ProjectCreateSerializer(ModelSerializer):
-    class Meta:
-        model = Project
-        fields = [
-            'name',
-            'tasks',
-            'members'
-        ]
-
 
 class ProjectDetailSerializer(ModelSerializer):
     tasks = TaskListSerializer(many=True)
@@ -98,30 +98,6 @@ class ProjectDetailSerializer(ModelSerializer):
             'name',
             'tasks',
             'members'
-        ]
-
-
-class TaskCreateSerializer(ModelSerializer):
-
-    class Meta:
-        model = Task
-        fields = [
-            'name',
-            'created_by',
-            'assigned_to'
-
-        ]
-
-
-class TaskDetailSerializer(ModelSerializer):
-    class Meta:
-        model = Task
-        fields = [
-            'id',
-            'name',
-            'created_by',
-            'assigned_to'
-
         ]
 
 

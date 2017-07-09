@@ -131,11 +131,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-# TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
+
+DATE_FORMAT = 'd/M/Y'
 
 USE_TZ = True
 
@@ -163,3 +165,8 @@ if DEBUG:
 # INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 INVITATIONS_SIGNUP_REDIRECT = '/accept_invitation'
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+
+
+REST_FRAMEWORK = {
+    'DATE_FORMAT': '%d/%b/%Y',
+}

@@ -28,21 +28,21 @@
     <div class="col m9">
         <div class="row">
             <div class="col m6">
-                <div class="owl-carousel owl-theme project_dates">
+                <div class="owl-carousel owl-theme project_dates" ng-show="selected_project!='all_projects'">
                     {% for date in date_range%}
-                    <div ng-click="selectedDate($event)">
-                        {{date|date:'d/M'}}
+                    <div ng-click=" selectedDate($event) ">
+                        {{date|date:'d M,y'}}
                     </div>
                     {% endfor %}
                 </div>
             </div>
             {% verbatim %}
-            <div class="col m6" ng-show="selected_project=='all_projects'">
+            <div class="col m6 " ng-show="selected_project=='all_projects' ">
                 Members
             </div>
-            <div class="col m6" ng-show="selected_project!='all_projects'">
-                <div class="owl-carousel owl-theme">
-                    <span ng-repeat="member in members">
+            <div class="col m6 " ng-show="selected_project!='all_projects' ">
+                <div class="owl-carousel owl-theme ">
+                    <span ng-repeat="member in members ">
                         {{member.user.username}}
                     </span>
                 </div>
@@ -50,45 +50,51 @@
             {% endverbatim %}
         </div>
         {% verbatim %}
-        <div class="row">
-            <div class="col m7" ng-show="selected_project=='all_projects'">
+        <div class="row ">
+            <div class="col m7 " ng-show="selected_project=='all_projects' ">
                 <h3>All Projects</h3>
-                <ul ng-repeat="project in summary_project.projects">
+                <ul ng-repeat="project in summary_project.projects ">
                     <li>{{project.name}}</li>
-                    <ul ng-repeat="task in project.tasks">
+                    <ul ng-repeat="task in project.tasks ">
                         <li>{{task.name}}</li>
                     </ul>
                 </ul>
             </div>
-            <div class="col m7" ng-show="selected_project!='all_projects'">
+            <div class="col m7 " ng-show="selected_project!='all_projects' ">
                 <h3>{{selected_project}}</h3>
+                <div ng-if="tasks.length==0">
+                    No task for {{selected_date|date:'dd MMM,yy'}}
+                </div>
+                <div ng-repeat="task in tasks">
+                    {{task.name}}
+                </div>
             </div>
-            <div class="col m5" ng-show="selected_project!='all_projects'">
-                <div class="task-panel">
-                    <ul ng-repeat="task in tasks" class="task_list">
-                        <div class="row">
-                            <div class="col m12">
-                                <div class="card blue-grey darken-1">
-                                    <div class="card-content white-text">
+            <div class="col m5 " ng-show="selected_project!='all_projects' ">
+                <div class="task-panel ">
+                    <ul ng-repeat="task in queue " class="task_list ">
+                        <div class="row ">
+                            <div class="col m12 ">
+                                <div class="card blue-grey darken-1 ">
+                                    <div class="card-content white-text ">
                                         <p>{{task.name}}</p>
                                     </div>
-                                    <div class="card-action">
-                                        <a ng-click="assignYourself(task.id)" class="assign_operation">Assign To Yourself</a>
-                                        <a href="#" class="assign_operation">Assign To Other</a>
+                                    <div class="card-action ">
+                                        <a ng-click="assignYourself(task.id) " class="assign_operation ">Assign To Yourself</a>
+                                        <a href="# " class="assign_operation ">Assign To Other</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </ul>
                 </div>
-                <form ng-submit="addtask()" class="form_list">
-                    <div class="row">
-                        <div class="input-field col m8">
-                            <textarea id="task_name" ng-model="task" class="materialize-textarea"></textarea>
-                            <label for="task_name">Task:</label>
+                <form ng-submit="addtask() " class="form_list ">
+                    <div class="row ">
+                        <div class="input-field col m8 ">
+                            <textarea id="task_name " ng-model="task " class="materialize-textarea "></textarea>
+                            <label for="task_name ">Task:</label>
                         </div>
-                        <div class="m4">
-                            <button class="btn waves-effect waves-light" type="submit" name="action" id="save_task">Save
+                        <div class="m4 ">
+                            <button class="btn waves-effect waves-light " type="submit " name="action " id="save_task ">Save
                             </button>
                         </div>
                     </div>

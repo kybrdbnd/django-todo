@@ -15,7 +15,12 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at', 'created_by', 'assigned_to')
+    list_display = ('name', 'created_at', 'created_by',
+                    'assigned_to', 'assigned_date', 'get_project')
+
+    def get_project(self, obj):
+        project = obj.project_set.all()[0]
+        return project.name
 
 
 class CompanyAdmin(admin.ModelAdmin):
