@@ -1,35 +1,43 @@
-.assign_operation{
-	font-size: 12px;
+.assign_operation {
+    font-size: 12px;
 }
+
 .task-panel {
     height: 330px;
     overflow-y: scroll;
 }
 
-.task_list{
-	margin-top: 0px !important;
-	margin-bottom: 0px !important;
+.task_list {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
 }
 
-.form_list{
-	margin-top: 2em;
-	margin-bottom: 0px !important;
+.form_list {
+    margin-top: 2em;
+    margin-bottom: 0px !important;
 }
 
-#save_task{
-	margin-top: 3em;
+#save_task {
+    margin-top: 3em;
 }
 
-.task-maincontent{
-	margin-bottom: 0px !important;
+.task-maincontent {
+    margin-bottom: 0px !important;
 }
 
-.project_names{
-	height: 540px;
+.project_names {
+    height: 540px;
     overflow-y: auto;
 }
+
+
 /*profile page*/
-.profile-page{
-	box-shadow: 0 1px 6px rgba(0,0,0,0.12),0 1px 3px rgba(0,0,0,0.12);
-	margin-top: 5em;
+
+.profile-page {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.12);
+    margin-top: 5em;
+}
+
+.tooltip-position {
+    z-index: -9999;
 }

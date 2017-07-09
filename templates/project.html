@@ -41,9 +41,9 @@
                 Members
             </div>
             <div class="col m6 " ng-show="selected_project!='all_projects' ">
-                <div class="owl-carousel owl-theme ">
-                    <span ng-repeat="member in members ">
-                        {{member.user.username}}
+                <div>
+                    <span ng-repeat="member in members">
+                        <a ng-click="selectMember(member.id)" tooltips tooltip-template="{{member.role.name}}" tooltip-smart="true">{{member.user.username}}</a>
                     </span>
                 </div>
             </div>
@@ -106,7 +106,7 @@
 </div>
 {% endblock %} {% block extra_js%}
 <script>
-$('.project_dates').owlCarousel({
+$('.project_dates, .project_members').owlCarousel({
     loop: false,
     rewind: false,
     responsive: {
@@ -126,6 +126,9 @@ $('.project_dates').owlCarousel({
 });
 $(document).ready(function() {
     $('.collapsible').collapsible();
+    $('.tooltipped').tooltip({
+        delay: 50
+    });
 })
 </script>
 {% endblock%}

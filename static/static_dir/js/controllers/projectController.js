@@ -27,7 +27,6 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                 $scope.summary_project['task_count'] += project.tasks.length
             })
         })
-        console.log($scope.selected_date)
     }
     $scope.current_project = function(selected_project, selected_project_id) {
         $scope.selected_project = selected_project
@@ -101,6 +100,9 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     }
     $scope.assignYourself = function(task_id) {
         console.log(task_id)
+    }
+    $scope.selectMember = function(member_id) {
+        console.log(member_id)
     }
     $scope.init();
 }]);
