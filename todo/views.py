@@ -172,3 +172,17 @@ def add_member(request):
         project.members.add(employee)
         return JsonResponse({'status': True,
                              'message': 'Member Successfully added'})
+
+
+def assign_yourself(request):
+    task_id = request.POST.get('task_id')
+    task_assigned_date = request.POST.get('task_date')
+    format_date = datetime.strptime(task_assigned_date, '%d %B, %Y')
+    new_date = datetime.strftime(format_date, '%Y-%m-%d')
+    task = get_object_or_404(Task, id=task_id)
+    employee = get_object_or_404(Employee, user=request.user)
+    task.assigned_to = employee
+    task.assigned_date = new_date
+    task.save()
+    return JsonResponse({'status': True,
+                         'message': 'Task Successfully Assigned to You'})

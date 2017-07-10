@@ -48,6 +48,7 @@ class Task(models.Model):
                                     null=True, blank=True)
 
     assigned_date = models.DateField(blank=True, null=True)
+    percentage_complete = models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
         return self.name

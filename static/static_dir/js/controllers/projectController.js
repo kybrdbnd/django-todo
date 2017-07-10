@@ -8,6 +8,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     $scope.project_id = "";
     $scope.summary_project = {};
     $scope.summary_project['name'] = 'All Projects';
+    $scope.taskAssignDate = "";
 
     $scope.init = function() {
         unformat_date = new Date()
@@ -29,21 +30,26 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
         })
     }
     $scope.current_project = function(selected_project, selected_project_id) {
+        $scope.tasks = "";
         $scope.selected_project = selected_project
+        if (selected_project == 'all_projects') {
+            $http.get('/api/').then(function(response) {
+                $scope.summary_project['projects'] = response.data
+            })
+        }
         if (selected_project_id != 0) {
             $scope.project_id = selected_project_id
             if ($scope.selected_project != 'all_projects') {
                 project_detail_url = "/api/project/" + $scope.project_id
                 $http.get(project_detail_url).then(function(response) {
-                    temp_tasks = response.data.tasks;
-                    display_queue = [];
-                    angular.forEach(temp_tasks, function(task) {
-                        if (task.assigned_to == null) {
-                            display_queue.push(task)
-                        }
-                    })
-                    $scope.queue = display_queue;
+                    $scope.queue = response.data.tasks;
                     $scope.members = response.data.members
+                })
+            }
+            if ($scope.selected_date != "") {
+                project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
+                $http.get(project_date_url).then(function(response) {
+                    $scope.tasks = response.data
                 })
             }
         }
@@ -56,15 +62,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                 $scope.task = "";
                 project_detail_url = "/api/project/" + $scope.project_id
                 $http.get(project_detail_url).then(function(response) {
-                    temp_tasks = response.data.tasks;
-                    display_queue = [];
-                    angular.forEach(temp_tasks, function(task) {
-                        if (task.assigned_to == null) {
-                            display_queue.push(task)
-                        }
-                    })
-                    $scope.queue = display_queue;
-
+                    $scope.queue = response.data.tasks;
                 })
                 Materialize.toast('Task Added', 2000, 'rounded')
             })
@@ -99,10 +97,35 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
 
     }
     $scope.assignYourself = function(task_id) {
-        console.log(task_id)
+        url = '/todo/assign_yourself/'
+        if ($scope.taskAssignDate != "") {
+            data = $.param({ task_id: task_id, task_date: $scope.taskAssignDate })
+            $http.post(url, data).then(function(response) {
+                Materialize.toast(response.data.message, 2000, 'rounded')
+                project_detail_url = "/api/project/" + $scope.project_id
+                $http.get(project_detail_url).then(function(response) {
+                    $scope.queue = response.data.tasks;
+                })
+                $scope.taskDate = false;
+            })
+        } else {
+            Materialize.toast('Choose Task Date', 2000, 'rounded')
+        }
+
     }
     $scope.selectMember = function(member_id) {
         console.log(member_id)
+    }
+    $scope.assignDate = function(context, task_id) {
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+        $(".datepicker").on("change", function() {
+            $scope.taskAssignDate = $(".datepicker").val();
+        });
+
+        context.taskDate = true;
     }
     $scope.init();
 }]);

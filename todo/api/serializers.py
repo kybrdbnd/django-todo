@@ -54,7 +54,8 @@ class TaskListSerializer(ModelSerializer):
             'created_at',
             'created_by',
             'assigned_to',
-            'assigned_date'
+            'assigned_date',
+            'percentage_complete'
         ]
 
 

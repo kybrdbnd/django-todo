@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% block content%}
-{% load static %}
+{% extends 'base.html' %} {% block content %}
 <div class="row">
     <div class="col s5 offset-s4  profile-page blue-grey lighten-5">
         <form action="" method="POST">
@@ -19,21 +18,11 @@
                 </div>
             </div>
             <div class="row">
-            	<div class="col m3">
-            		<img src="{% static 'img/avatar.jpg'%}" class="profile-pic"/>
-            	</div>
-            	<div class="col m9">
-            		<div class="browse-btn">
-            			<button>Browse</button>
-            		</div>
-            	</div>
-            </div>
-            <div class="row">
                 <div class="col m6">
-                    <button action="submit" class="btn  blue-grey">Save</button>
+                    <button action="submit" class="blue-grey btn">Save</button>
                 </div>
                 <div class="col m6">
-                <a class=" blue-grey btn" href="{% url 'account_set_password' %}">Change Password</a>
+                <a class="blue-grey btn" href="{% url 'account_set_password' %}">Change Password</a>
                 </div>
             </div>
         </form>
