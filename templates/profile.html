@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content%}
 {% load static %}
 <div class="row">
-    <div class="col s5 offset-s4  profile-page">
+    <div class="col s5 offset-s4  profile-page blue-grey lighten-5">
         <form action="" method="POST">
             {% csrf_token %}
             <div class="row">
@@ -30,10 +30,10 @@
             </div>
             <div class="row">
                 <div class="col m6">
-                    <button action="submit" class="btn blue lighten-1">Save</button>
+                    <button action="submit" class="btn  blue-grey">Save</button>
                 </div>
                 <div class="col m6">
-                <a class="blue lighten-1 btn" href="{% url 'account_set_password' %}">Change Password</a>
+                <a class=" blue-grey btn" href="{% url 'account_set_password' %}">Change Password</a>
                 </div>
             </div>
         </form>
