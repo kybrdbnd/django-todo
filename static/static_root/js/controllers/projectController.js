@@ -30,6 +30,11 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     }
     $scope.current_project = function(selected_project, selected_project_id) {
         $scope.selected_project = selected_project
+        if (selected_project == 'all_projects') {
+            $http.get('/api/').then(function(response) {
+                $scope.summary_project['projects'] = response.data
+            })
+        }
         if (selected_project_id != 0) {
             $scope.project_id = selected_project_id
             if ($scope.selected_project != 'all_projects') {
@@ -99,7 +104,14 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
 
     }
     $scope.assignYourself = function(task_id) {
-        console.log(task_id)
+        url = '/todo/assign_yourself/'
+        data = $.param({ task_id: task_id })
+        $http.post(url, data).then(function(response) {
+            console.log(response.data.status)
+        })
+    }
+    $scope.selectMember = function(member_id) {
+        console.log(member_id)
     }
     $scope.init();
 }]);
