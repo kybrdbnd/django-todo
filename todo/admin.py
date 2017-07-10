@@ -16,7 +16,8 @@ class ProjectAdmin(admin.ModelAdmin):
 
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_at', 'created_by',
-                    'assigned_to', 'assigned_date', 'get_project')
+                    'assigned_to', 'assigned_date', 'get_project',
+                    'percentage_complete')
 
     def get_project(self, obj):
         project = obj.project_set.all()[0]

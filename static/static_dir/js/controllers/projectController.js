@@ -9,6 +9,8 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     $scope.summary_project = {};
     $scope.summary_project['name'] = 'All Projects';
     $scope.taskAssignDate = "";
+    $scope.members = {};
+    $scope.otherMember = "";
 
     $scope.init = function() {
         unformat_date = new Date()
@@ -126,6 +128,50 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
         });
 
         context.taskDate = true;
+        context.taskToOther = false;
+    }
+    $scope.assignTask = function(context) {
+        context.taskToOther = true;
+        context.taskDate = false;
+        $http.get('/api/company').then(function(response) {
+            angular.forEach(response.data[0].employees, function(member) {
+                $scope.members[member.user.username] = null
+            })
+        })
+        $('input.autocomplete').autocomplete({
+            data: $scope.members,
+            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function(val) {
+                $scope.otherMember = val
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+        });
+        $('#other_task').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+        $("#other_task").on("change", function() {
+            $scope.taskAssignDate = $("#other_task").val();
+        });
+    }
+    $scope.assignToOther = function(task_id) {
+        if ($scope.otherMember != "" && $scope.taskAssignDate != "") {
+            data = $.param({
+                task_id: task_id,
+                task_date: $scope.taskAssignDate,
+                task_member: $scope.otherMember
+            })
+            url = '/todo/assign_other/'
+            $http.post(url, data).then(function(response) {
+                Materialize.toast(response.data.message, 2000, 'rounded')
+                project_detail_url = "/api/project/" + $scope.project_id
+                $http.get(project_detail_url).then(function(response) {
+                    $scope.queue = response.data.tasks;
+                })
+                $scope.taskDate = false;
+                context.taskToOther = false;
+            })
+        }
     }
     $scope.init();
 }]);

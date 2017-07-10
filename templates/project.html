@@ -53,11 +53,22 @@
         <div class="row ">
             <div class="col m7 " ng-show="selected_project=='all_projects' ">
                 <h3>All Projects</h3>
-                <ul ng-repeat="project in summary_project.projects ">
-                    <li>{{project.name}}</li>
-                    <ul ng-repeat="task in project.tasks ">
-                        <li>{{task.name}}</li>
-                    </ul>
+                <ul class="collapsible popout" data-collapsible="accordion">
+                    <li ng-repeat="project in summary_project.projects track by $index">
+                        <div class="collapsible-header">
+                            {{project.name}}
+                        </div>
+                        <div class="collapsible-body" ng-repeat="task in project.tasks">
+                            <div>
+                                {{task.name}}
+                            </div>
+                            <div>
+                                <span>
+                                  Percentage Completed: {{task.percentage_complete}}%
+                                </span>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="col m7 " ng-show="selected_project!='all_projects' ">
@@ -66,7 +77,8 @@
                     No task for {{selected_date|date:'dd MMM,yy'}}
                 </div>
                 <div ng-repeat="task in tasks">
-                    {{task.name}}
+                    <span>{{task.name}}</span>
+                    <span>Percentage Complete {{task.percentage_complete}} %</span>
                 </div>
             </div>
             <div class="col m5 " ng-show="selected_project!='all_projects' ">
@@ -81,14 +93,28 @@
                                     <div ng-if="task.assigned_to==null">
                                         <div class="card-action ">
                                             <a ng-click="assignDate(this)" class="assign_operation">Assign To Yourself</a>
-                                            <a href="#" class="assign_operation">Assign To Other</a>
+                                            <a ng-click="assignTask(this)" class="assign_operation">Assign To Other</a>
                                             <div ng-show="taskDate" class="row">
                                                 <div class="input-field col m9">
-                                                    <label for="Choose the date"></label>
+                                                    <label for="date">Choose the date</label>
                                                     <input type="date" class="datepicker" ng-model="taskAssignDate">
                                                 </div>
-                                                <div ng-show="taskDate" class="input-field col m3">
+                                                <div class="input-field col m3">
                                                     <a ng-click="assignYourself(task.id)">Confirm</a>
+                                                </div>
+                                            </div>
+                                            <div ng-show="taskToOther" class="row">
+                                            <div class="input-field col m9">
+                                                <input type="text" id="autocomplete-input" class="autocomplete" ng-model="otherMember">
+                                                <label for="autocomplete-input">Choose Member</label>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="input-field col m9">
+                                                    <label for="date">Choose the date</label>
+                                                    <input type="date" id="other_task" class="datepicker" ng-model="taskAssignDate">
+                                                </div>
+                                                <div class="input-field col m3">
+                                                     <a ng-click="assignToOther(task.id)">Confirm</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,7 +168,7 @@ $('.project_dates, .project_members').owlCarousel({
     }
 });
 $(document).ready(function() {
-    $('.collapsible').collapsible();
+    $('.collapsible').collapsible('open', 0);
     $('.tooltipped').tooltip({
         delay: 50
     });

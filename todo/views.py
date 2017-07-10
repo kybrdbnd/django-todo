@@ -186,3 +186,19 @@ def assign_yourself(request):
     task.save()
     return JsonResponse({'status': True,
                          'message': 'Task Successfully Assigned to You'})
+
+
+def assign_other(request):
+    task_id = request.POST.get('task_id')
+    task_assigned_date = request.POST.get('task_date')
+    employee_username = request.POST.get('task_member')
+    user_instance = get_object_or_404(User, username=employee_username)
+    employee = get_object_or_404(Employee, user=user_instance)
+    format_date = datetime.strptime(task_assigned_date, '%d %B, %Y')
+    new_date = datetime.strftime(format_date, '%Y-%m-%d')
+    task = get_object_or_404(Task, id=task_id)
+    task.assigned_to = employee
+    task.assigned_date = new_date
+    task.save()
+    return JsonResponse({'status': True,
+                         'message': 'Task Successfully Assigned To ' + employee_username})
