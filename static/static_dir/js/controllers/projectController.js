@@ -42,14 +42,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
             if ($scope.selected_project != 'all_projects') {
                 project_detail_url = "/api/project/" + $scope.project_id
                 $http.get(project_detail_url).then(function(response) {
-                    temp_tasks = response.data.tasks;
-                    display_queue = [];
-                    angular.forEach(temp_tasks, function(task) {
-                        if (task.assigned_to == null) {
-                            display_queue.push(task)
-                        }
-                    })
-                    $scope.queue = display_queue;
+                    $scope.queue = response.data.tasks;
                     $scope.members = response.data.members
                 })
             }
@@ -69,15 +62,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                 $scope.task = "";
                 project_detail_url = "/api/project/" + $scope.project_id
                 $http.get(project_detail_url).then(function(response) {
-                    temp_tasks = response.data.tasks;
-                    display_queue = [];
-                    angular.forEach(temp_tasks, function(task) {
-                        if (task.assigned_to == null) {
-                            display_queue.push(task)
-                        }
-                    })
-                    $scope.queue = display_queue;
-
+                    $scope.queue = response.data.tasks;
                 })
                 Materialize.toast('Task Added', 2000, 'rounded')
             })
@@ -117,6 +102,11 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
             data = $.param({ task_id: task_id, task_date: $scope.taskAssignDate })
             $http.post(url, data).then(function(response) {
                 Materialize.toast(response.data.message, 2000, 'rounded')
+                project_detail_url = "/api/project/" + $scope.project_id
+                $http.get(project_detail_url).then(function(response) {
+                    $scope.queue = response.data.tasks;
+                })
+                $scope.taskDate = false;
             })
         } else {
             Materialize.toast('Choose Task Date', 2000, 'rounded')
