@@ -108,6 +108,15 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                 $http.get(project_detail_url).then(function(response) {
                     $scope.queue = response.data.tasks;
                 })
+                x = new Date($scope.taskAssignDate)
+                function pad(s) {
+                    return (s < 10) ? '0' + s : s;
+                }
+                $scope.taskAssignDate = [x.getFullYear(), pad(x.getMonth() + 1), pad(x.getDate())].join('-');
+                project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.taskAssignDate
+                $http.get(project_date_url).then(function(response) {
+                    $scope.tasks = response.data
+                })
                 $scope.taskDate = false;
             })
         } else {
@@ -127,11 +136,11 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
             $scope.taskAssignDate = $(".datepicker").val();
         });
 
-        context.taskDate = true;
+        context.taskDate = !context.taskDate;
         context.taskToOther = false;
     }
     $scope.assignTask = function(context) {
-        context.taskToOther = true;
+        context.taskToOther = !context.taskToOther;
         context.taskDate = false;
         $http.get('/api/company').then(function(response) {
             angular.forEach(response.data[0].employees, function(member) {
@@ -172,6 +181,28 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                 context.taskToOther = false;
             })
         }
+    }
+    $scope.editPercentage = function(context) {
+        context.showRange = !context.showRange;
+    }
+    $scope.savePercentage = function(task_id) {
+        $scope.showRange = false;
+        $scope.task_percentage = $('.taskPercentage').val()
+        url = "/todo/task_percentage/"
+        data = $.param({
+            task_id: task_id,
+            task_percentage: $scope.task_percentage
+        })
+        $http.post(url, data).then(function(response) {
+            project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
+            $http.get(project_date_url).then(function(response) {
+                $scope.tasks = response.data
+            })
+            project_detail_url = "/api/project/" + $scope.project_id
+            $http.get(project_detail_url).then(function(response) {
+                $scope.queue = response.data.tasks;
+            })
+        })
     }
     $scope.init();
 }]);

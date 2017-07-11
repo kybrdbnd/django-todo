@@ -201,3 +201,12 @@ def assign_other(request):
     task.save()
     return JsonResponse({'status': True,
                          'message': 'Task Successfully Assigned To ' + employee_username})
+
+
+def task_percentage(request):
+    task_id = request.POST.get('task_id')
+    task_percentage = request.POST.get('task_percentage')
+    task = get_object_or_404(Task, id=task_id)
+    task.percentage_complete = task_percentage
+    task.save()
+    return JsonResponse({'status': True})
