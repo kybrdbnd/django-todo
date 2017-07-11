@@ -187,12 +187,13 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     }
     $scope.savePercentage = function(task_id) {
         $scope.showRange = false;
-        $scope.task_percentage = $('.taskPercentage').val()
+        $scope.task_percentage = $('#'+task_id).val()
         url = "/todo/task_percentage/"
         data = $.param({
             task_id: task_id,
             task_percentage: $scope.task_percentage
         })
+        // console.log($scope.task_percentage)
         $http.post(url, data).then(function(response) {
             project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
             $http.get(project_date_url).then(function(response) {
