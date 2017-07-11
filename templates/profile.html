@@ -11,12 +11,10 @@
                     {{form.last_name}}
                 </div>
                 <div class="input-field col m12">
-                    <select name='role'>
-                        <option value="" disabled selected>Choose your Role</option>
-                        {% for role_name in role_form.role%} {{role_name}} {%endfor %}
-                    </select>
+                    <label for="role">Your Desgination: <b>{{role}}</b></label>
                 </div>
             </div>
+            <br><br>
             <div class="row">
                 <div class="col m6">
                     <button action="submit" class="blue-grey btn">Save</button>
@@ -26,6 +24,7 @@
                 </div>
             </div>
         </form>
+        <span>If your designation is not correct kindly contact HR Department or your product manager</span>
     </div>
 </div>
 {% endblock %} {% block extra_js %}

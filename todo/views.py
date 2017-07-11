@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import (ProfileForm, ProjectForm, RoleForm)
-from .models import (Project, Profile, Employee, Company, Task)
+from .models import (Project, Profile, Employee, Company, Task, Role)
 from datetime import datetime, timedelta
 from django.http import JsonResponse
 from invitations.models import Invitation
@@ -46,18 +46,16 @@ def project(request):
 def profile(request):
     instance = get_object_or_404(User, id=request.user.id)
     employee = get_object_or_404(Employee, user=instance)
+    role = employee.role
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=instance)
-        role_form = RoleForm(request.POST, instance=employee)
-        if form.is_valid() and role_form.is_valid():
+        if form.is_valid():
             form.save()
-            role_form.save()
     else:
         form = ProfileForm(instance=instance)
-        role_form = RoleForm(instance=employee)
     context = {
         'form': form,
-        'role_form': role_form
+        'role': role
     }
     return render(request, 'profile.html', context)
 
@@ -128,7 +126,8 @@ def send_invite(request):
     user.save()
     profile = Profile.objects.create(user=user)
     profile.save()
-    employee = Employee.objects.create(user=user)
+    role = get_object_or_404(Role, name="Tester")
+    employee = Employee.objects.create(user=user, role=role)
     employee.save()
     company = get_object_or_404(Company, owner=request.user)
     company.employees.add(employee)
