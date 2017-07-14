@@ -109,6 +109,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
                     $scope.queue = response.data.tasks;
                 })
                 x = new Date($scope.taskAssignDate)
+
                 function pad(s) {
                     return (s < 10) ? '0' + s : s;
                 }
@@ -187,14 +188,29 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     }
     $scope.savePercentage = function(task_id) {
         $scope.showRange = false;
-        $scope.task_percentage = $('#'+task_id).val()
+        $scope.task_percentage = $('#' + task_id).val()
         url = "/todo/task_percentage/"
         data = $.param({
-            task_id: task_id,
-            task_percentage: $scope.task_percentage
-        })
-        // console.log($scope.task_percentage)
+                task_id: task_id,
+                task_percentage: $scope.task_percentage
+            })
+            // console.log($scope.task_percentage)
         $http.post(url, data).then(function(response) {
+            project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
+            $http.get(project_date_url).then(function(response) {
+                $scope.tasks = response.data
+            })
+            project_detail_url = "/api/project/" + $scope.project_id
+            $http.get(project_detail_url).then(function(response) {
+                $scope.queue = response.data.tasks;
+            })
+        })
+    }
+    $scope.taskPutBack = function(task_id) {
+        data = $.param({ task_id: task_id })
+        url = '/todo/task_put_back/'
+        $http.post(url, data).then(function(response) {
+            Materialize.toast(response.data.message, 2000, 'rounded')
             project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
             $http.get(project_date_url).then(function(response) {
                 $scope.tasks = response.data

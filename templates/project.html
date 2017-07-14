@@ -85,6 +85,7 @@
                                 </div>
                                 <div class="card-action">
                                     <a class="assign_operation" href="#">{{task.percentage_complete}}% Completed</a>
+                                    <a class="assign_operation" ng-click="taskPutBack(task.id)">Put Back</a>
                                     <a class="assign_operation" ng-click="editPercentage(this)">Edit</a>
                                     <div class="row" ng-if="showRange">
                                         <div class="col m9">
@@ -102,6 +103,7 @@
                     </div>
                 </div>
             </div>
+            <!-- task queues -->
             <div class="col m5 " ng-show="selected_project!='all_projects' ">
                 <div class="task-panel ">
                     <ul ng-repeat="task in queue " class="task_list ">
@@ -164,6 +166,7 @@
                     </div>
                 </form>
             </div>
+            <!-- task queues ends -->
         </div>
         {% endverbatim %}
     </div>

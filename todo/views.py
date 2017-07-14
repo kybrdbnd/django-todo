@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import (ProfileForm, ProjectForm, RoleForm)
+from .forms import (ProfileForm, ProjectForm)
 from .models import (Project, Profile, Employee, Company, Task, Role)
 from datetime import datetime, timedelta
 from django.http import JsonResponse
@@ -210,3 +210,13 @@ def task_percentage(request):
     task.percentage_complete = task_percentage
     task.save()
     return JsonResponse({'status': True})
+
+
+def task_put_back(request):
+    task_id = request.POST.get('task_id')
+    task = get_object_or_404(Task, id=task_id)
+    task.assigned_to = None
+    task.assigned_date = None
+    task.save()
+    return JsonResponse({'status': True,
+                         'message': 'Task Successfully Put Back'})
