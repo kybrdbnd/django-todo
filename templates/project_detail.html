@@ -1,19 +1,49 @@
 {% extends 'base.html' %} {% load extra_todos_tags %} {% block content%}
 <div class="container">
-    <h3>Project Name:</h3>
-    <h4>{{project.name}}</h4>
-    <h3>Project Managers:</h3>
-    <h4>{%for manager in project.members.all|managers%}
-			{{manager.user.username}}
-	{% endfor %}
-    </h4>
-    <h3>Members:</h3> {% for member in project.members.all%}
-    <div>{{member.user.username}}</div>
-    <div>
-        {% for task in member.assigned_to.all|tasks:project.name %}
-        <h5>{{task.name}}</h5>
-        <h5>{{task.percentage_complete}}</h5> {% endfor %}
+    <br>
+    <div class="row">
+        <div class="col m12">
+            <h4>Project Name:</h4 >
+            <h5>{{project.name|capfirst}}</h5>
+        </div>
+        <div class="col m12">
+            <h4>Project Managers:</h4> {%for manager in project.members.all|managers%}
+				 <span>{{manager.user.username}}</span> 
+            {% empty%}
+            <span>No managers available</span>
+           {% endfor %}
+        </div>
+        <div class="col m12">
+            <h4>Stats:</h4>
+            <div class="col m4">
+                <span>Total Tasks:{{total_tasks_count}}</span>
+            </div>
+            <div class="col m4">
+                <span>Ongoing Tasks:{{ongoing_tasks_count}}</span>
+            </div>
+            <div class="col m4">
+                <span>Completed Tasks: {{completed_tasks_count}}</span>
+            </div>
+        </div>
+        <div class="col m12">
+            <h4>Members:</h4>
+        </div>
+        <div class="row">
+            {% for member in project.members.all%}
+            <div class="col s12 m4">
+                <div class="card blue-grey darken-1 hoverable">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{member.user.username}}</span>
+                        <span class="right">{{member.role.name}}</span> {% for task in member.assigned_to.all|tasks:project.name %}
+                        <div>
+                            <span>{{task.name}}</span> &nbsp; <span>{{task.percentage_complete}}%</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

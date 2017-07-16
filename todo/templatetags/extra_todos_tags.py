@@ -11,4 +11,4 @@ def managers(project_members):
 
 @register.filter
 def tasks(project_tasks, project_name):
-    return project_tasks.filter(percentage_complete__lte=100).filter(project__name=project_name)
+    return project_tasks.filter(percentage_complete__lte=100).filter(project__name=project_name)[:5][::-1]
