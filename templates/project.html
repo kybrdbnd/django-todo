@@ -37,9 +37,6 @@
                 </div>
             </div>
             {% verbatim %}
-            <div class="col m6 " ng-show="selected_project=='all_projects' ">
-                Members
-            </div>
             <div class="col m6 " ng-show="selected_project!='all_projects' ">
                 <div>
                     <span ng-repeat="member in members">
@@ -54,11 +51,11 @@
             <div class="col m7 " ng-show="selected_project=='all_projects' ">
                 <h3>All Projects</h3>
                 <ul class="collapsible popout" data-collapsible="accordion">
-                    <li ng-repeat="project in summary_project.projects track by $index">
+                    <li ng-repeat="(project,tasks) in summary_project.tasks|groupBy:'project_set[0].name'">
                         <div class="collapsible-header">
-                            {{project.name}}
+                            {{project}}
                         </div>
-                        <div class="collapsible-body" ng-repeat="task in project.tasks">
+                        <div class="collapsible-body" ng-repeat="task in tasks">
                             <div>
                                 {{task.name}}
                             </div>
@@ -90,7 +87,7 @@
                                     <div class="row" ng-if="showRange">
                                         <div class="col m9">
                                             <p class="range-field">
-                                                <input type="range" id="{{task.id}}" value="{{task.percentage_complete}}" min="0" max="100"/>
+                                                <input type="range" id="{{task.id}}" value="{{task.percentage_complete}}" min="0" max="100" />
                                             </p>
                                         </div>
                                         <div class="col m3">

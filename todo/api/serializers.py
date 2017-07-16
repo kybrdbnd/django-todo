@@ -55,8 +55,10 @@ class TaskListSerializer(ModelSerializer):
             'created_by',
             'assigned_to',
             'assigned_date',
-            'percentage_complete'
+            'percentage_complete',
+            'project_set'
         ]
+        depth = 1
 
 
 class ProjectListSerializer(ModelSerializer):

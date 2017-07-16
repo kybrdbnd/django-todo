@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404
 from .serializers import (CompanyListSerializer, EmployeePageSerializer,
                           ProjectListSerializer, ProjectDetailSerializer,
                           InivitationSerializer, TaskListSerializer)
-from todo.models import (Project, Employee)
+from todo.models import (Project, Employee, Task)
+from datetime import date
 from invitations.models import Invitation
 
 
@@ -59,3 +60,13 @@ class EmployeePageView(RetrieveAPIView):
 class InvitationListView(ListAPIView):
     queryset = Invitation.objects.all()
     serializer_class = InivitationSerializer
+
+
+class TodayTaskListView(ListAPIView):
+    serializer_class = TaskListSerializer
+
+    def get_queryset(self):
+        employee = get_object_or_404(Employee, user=self.request.user)
+        tasks = Task.objects.filter(assigned_to=employee,
+                                    assigned_date=date.today())
+        return tasks

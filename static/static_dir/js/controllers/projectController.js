@@ -1,4 +1,4 @@
-angular_module.controller('projectController', ['$scope', '$http', '$cookies', function($scope, $http, $cookies) {
+angular_module.controller('projectController', ['$scope', '$http', '$cookies', '$q', function($scope, $http, $cookies, $q) {
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
@@ -19,25 +19,28 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
             return (s < 10) ? '0' + s : s;
         }
         $scope.selected_date = [unformat_date.getFullYear(), pad(unformat_date.getMonth() + 1), pad(unformat_date.getDate())].join('-');
-
-        $http.get('/api/').then(function(response) {
-            $scope.projects = response.data
-            projects = $scope.projects
-            $scope.summary_project['projects'] = response.data
-            $scope.summary_project['project_count'] = $scope.projects.length
-            $scope.summary_project['task_count'] = 0
-            angular.forEach($scope.projects, function(project) {
-                $scope.summary_project['task_count'] += project.tasks.length
-            })
+        $scope.selected_project_request = $http.get('/api/');
+        $scope.today_tasks_request = $http.get('/api/tasks/');
+        $q.all([$scope.selected_project_request, $scope.today_tasks_request]).then(function(value) {
+            $scope.projects = value[0].data
+            $scope.summary_project['projects'] = value[0].data
+            $scope.summary_project['project_count'] = value[0].data.length
+            $scope.summary_project['tasks'] = value[1].data
+            $scope.summary_project['task_count'] = value[1].data.length
         })
     }
+    $scope.updateSummary = function() {
+        $http.get('/api/tasks/').then(function(response) {
+            $scope.summary_project['tasks'] = response.data
+            $scope.summary_project['task_count'] = response.data.length
+        })
+    }
+
     $scope.current_project = function(selected_project, selected_project_id) {
         $scope.tasks = "";
         $scope.selected_project = selected_project
         if (selected_project == 'all_projects') {
-            $http.get('/api/').then(function(response) {
-                $scope.summary_project['projects'] = response.data
-            })
+            $scope.updateSummary();
         }
         if (selected_project_id != 0) {
             $scope.project_id = selected_project_id
@@ -75,7 +78,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
         var projects;
         // just for update
         $http.get('/api/').then(function(response) {})
-            //actual updation
+        //actual updation
         $http.get('/api/').then(function(response) {
             $scope.summary_project['task_count'] = 0
             projects = response.data
@@ -192,10 +195,10 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
         $scope.task_percentage = $('#' + task_id).val()
         url = "/todo/task_percentage/"
         data = $.param({
-                task_id: task_id,
-                task_percentage: $scope.task_percentage
-            })
-            // console.log($scope.task_percentage)
+            task_id: task_id,
+            task_percentage: $scope.task_percentage
+        })
+        // console.log($scope.task_percentage)
         $http.post(url, data).then(function(response) {
             project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
             $http.get(project_date_url).then(function(response) {

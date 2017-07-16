@@ -38,6 +38,16 @@
     margin-top: 5em;
 }
 
-.tooltip-position {
-    z-index: -9999;
+.profile-pic{
+	border-radius: 50%;
+	width:70px;
+	height: 70px;
+	border:1px solid #546e7a;
+}
+/*navbar*/
+.nav-header{
+	background-color: #7f3f12 !important;
+}
+.browse-btn button{
+	margin-top: 1em;
 }

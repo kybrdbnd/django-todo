@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from .views import (ProjectListView, ProjectDetailView,
                     CompanyListView, ProjectTaskListView,
-                    InvitationListView, EmployeePageView)
+                    InvitationListView, EmployeePageView,
+                    TodayTaskListView)
 
 urlpatterns = [
 
@@ -14,4 +15,5 @@ urlpatterns = [
     url(r'^employee/(?P<pk>\d+)/$',
         EmployeePageView.as_view(), name='employee_page'),
     url(r'^invitations/', InvitationListView.as_view(), name='invitations'),
+    url(r'^tasks/', TodayTaskListView.as_view(), name='todaytasks'),
 ]
