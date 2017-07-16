@@ -142,6 +142,14 @@ def accept_invitation(request):
     return render(request, 'accept_invitation.html', {})
 
 
+def project_detail(request, id):
+    project = get_object_or_404(Project, id=id)
+    context = {
+        'project': project
+    }
+    return render(request, 'project_detail.html', context)
+
+
 def add_task(request):
     project_id = request.POST.get('project_id')
     task_name = request.POST.get('task_name')

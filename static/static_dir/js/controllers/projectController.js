@@ -143,8 +143,9 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', f
     $scope.assignTask = function(context) {
         context.taskToOther = !context.taskToOther;
         context.taskDate = false;
-        $http.get('/api/company').then(function(response) {
-            angular.forEach(response.data[0].employees, function(member) {
+        var project_detail_url = "/api/project/" + $scope.project_id
+        $http.get(project_detail_url).then(function(response) {
+            angular.forEach(response.data.members, function(member) {
                 $scope.members[member.user.username] = null
             })
         })

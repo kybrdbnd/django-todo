@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load extra_todos_tags %} {% block content%}
+<div class="container">
+    <h3>Project Name:</h3>
+    <h4>{{project.name}}</h4>
+    <h3>Project Managers:</h3>
+    <h4>{%for manager in project.members.all|managers%}
+			{{manager.user.username}}
+	{% endfor %}
+    </h4>
+    <h3>Members:</h3> {% for member in project.members.all%}
+    <div>{{member.user.username}}</div>
+    <div>
+        {% for task in member.assigned_to.all|tasks:project.name %}
+        <h5>{{task.name}}</h5>
+        <h5>{{task.percentage_complete}}</h5> {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
