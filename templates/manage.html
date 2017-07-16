@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}{% include 'preloader.html' %}
 <div class="container-fluid" ng-controller='manageController'>
     <br>
     <br> {% if project_manager or owner %}
@@ -75,26 +75,26 @@
                         <div class="card-content white-text">
                             <span>Project Name: {{project.name}}</span>
                             <br/> Members:
-                        <div class="row"> 
-                            <div class="col m4" ng-repeat="member in project.members">
-                                {{member.user.username}}
+                            <div class="row">
+                                <div class="col m4" ng-repeat="member in project.members">
+                                    {{member.user.username}}
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-action">
-                        <a class="assign_operation" href="/todo/project_detail/{{project.id}}">View Detail</a>
+                            <div class="card-action">
+                                <a class="assign_operation" href="/todo/project_detail/{{project.id}}">View Detail</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endverbatim %}
             </div>
-            {% endverbatim %}
         </div>
     </div>
-</div>
-{% endblock %} {% block extra_js %}
-<script>
-$(document).ready(function() {
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal();
-});
-</script>
-{% endblock %}
+    {% endblock %} {% block extra_js %}
+    <script>
+    $(document).ready(function() {
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+    });
+    </script>
+    {% endblock %}

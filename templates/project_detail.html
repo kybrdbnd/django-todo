@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load extra_todos_tags %} {% block content%}
+{% extends 'base.html' %} {% load extra_todos_tags %} {% block content%} {% include 'preloader.html' %}
 <div class="container">
     <br>
     <div class="row">
@@ -8,10 +8,8 @@
         </div>
         <div class="col m12">
             <h4>Project Managers:</h4> {%for manager in project.members.all|managers%}
-				 <span>{{manager.user.username}}</span> 
-            {% empty%}
-            <span>No managers available</span>
-           {% endfor %}
+            <span>{{manager.user.username}}</span> {% empty%}
+            <span>No managers available</span> {% endfor %}
         </div>
         <div class="col m12">
             <h4>Stats:</h4>

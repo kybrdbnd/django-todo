@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}  {% block content %}
+{% include 'preloader.html' %}
 <div class="row task-maincontent" ng-controller="projectController">
     {% verbatim %}
     <div class="col m3 project_names">
