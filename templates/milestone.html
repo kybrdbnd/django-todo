@@ -1,21 +1,21 @@
 {% extends 'base.html' %}{% block content%} {% include 'preloader.html' %}
 <div class="container">
-	<h4>Create MileStone</h4>
-	<hr/>
+    <h4>Create MileStone</h4>
+    <hr/>
     <form method='post' action="{% url 'todo:milestone' %}" novalidate>
-    {% csrf_token%}
+        {% csrf_token%}
         <div class="row">
-            <div class="input-field col m4">
-                <label for="name">Enter MileStone</label>
-                <input type="text" name="name" ng-model="name">
-            </div>
             <div class="input-field col m4">
                 <select name='projects' required="true">
                     <option value="" disabled selected>Choose your Project</option>
-                    {% for project in projects %} 
-                    <option value="{{project.id}}">{{project}}</option> 
+                    {% for project in projects %}
+                    <option value="{{project.id}}">{{project}}</option>
                     {% endfor%}
                 </select>
+            </div>
+            <div class="input-field col m4">
+                <label for="name">Enter MileStone</label>
+                <input type="text" name="name" ng-model="name">
             </div>
             <div class="input-field col m2">
                 <input type="date" id="start_date" name="start_date" placeholder="Choose Start Date" class="datepicker">
@@ -35,20 +35,15 @@
         </div>
     </form>
     <h4>View MileStones</h4>
-    <hr/>
-	{% for project in projects %}
-		{% if project.milestones.all %}
-			<ul><b>{{project.name}}</b>
-			{% for milestone in project.milestones.all %}
-				<li>MileStone TimeRemaining: {{milestone.end_date|timeuntil}}</li>
-				<li>Milestone Name: {{milestone.name}}</li>
-				<li>Milestone Description:{{milestone.description}}</li>
-			{% endfor %}
-			</ul>
-		{%else%}
-			<h5>No Milestones Available</h5>
-		{% endif %}
-	{% endfor %}
+    <hr/> {% for project in projects %} {% if project.milestones.all %}
+    <ul><b>{{project.name}}</b> {% for milestone in project.milestones.all %}
+        <li>MileStone TimeRemaining: {{milestone.end_date|timeuntil}}</li>
+        <li>Milestone Name: {{milestone.name}}</li>
+        <li>Milestone Description:{{milestone.description}}</li>
+        {% endfor %}
+    </ul>
+    {%else%}
+    <h5>No Milestones Available</h5> {% endif %} {% endfor %}
 </div>
 {% endblock %} {% block extra_js %}
 <script>

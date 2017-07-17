@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (Profile, Project, Task, Company,
                      Employee, Role, Backlog, Milestone)
+from safedelete.admin import SafeDeleteAdmin, highlight_deleted
 # Register your models here.
 
 
@@ -18,10 +19,10 @@ class ProjectAdmin(admin.ModelAdmin):
         return ', '.join([milestone.name for milestone in obj.milestones.all()])
 
 
-class TaskAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at', 'created_by',
+class TaskAdmin(SafeDeleteAdmin):
+    list_display = (highlight_deleted, 'created_at', 'created_by',
                     'assigned_to', 'assigned_date', 'get_project',
-                    'percentage_complete')
+                    'percentage_complete', 'deleted')
 
     def get_project(self, obj):
         project = obj.project_set.all()[0]
@@ -50,7 +51,8 @@ class RoleAdmin(admin.ModelAdmin):
 
 
 class BacklogAdmin(admin.ModelAdmin):
-    list_display = ('created_at', 'get_task', 'task_creator', 'reason')
+    list_display = ('created_at',
+                    'get_task', 'task_creator', 'reason')
 
     def get_task(self, obj):
         return obj.created_for.name
