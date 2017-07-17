@@ -86,6 +86,7 @@ def add_project(request):
     project = Project()
     project_name = request.POST.get('project_name')
     project.name = project_name
+    project.created_by = employee
     project.save()
     company.projects.add(project)
     project.members.add(employee)
@@ -268,3 +269,15 @@ def delete_task(request, id):
     task.delete()
     return JsonResponse({'status': True,
                          'message': 'Task successfully Deleted'})
+
+
+def delete_project(request, id):
+    project = get_object_or_404(Project, id=id)
+    employee = get_object_or_404(Employee, user=request.user)
+    if project.created_by == employee:
+        project.delete()
+        return JsonResponse({'status': True,
+                             'message': 'Project Successfully Archived'})
+    else:
+        return JsonResponse({'status': False,
+                             'message': "You Don't Have Permission To Delete The Project"})

@@ -58,9 +58,14 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
             $scope.refreshProjects();
         })
     }
-    $scope.openMilestone = function(project_id) {
-        // var milestone_ele = '#milestone' + project_id
-        $('#milestone1').modal('open');
+    $scope.deleteProject = function(project_id) {
+        var project_delete_url = '/todo/delete_project/' + project_id + "/"
+        $http.post(project_delete_url).then(function(response) {
+            Materialize.toast(response.data.message, 2000, 'rounded')
+            if (response.data.status) {
+                $scope.refreshProjects();
+            }
+        })
     }
     $scope.init();
 

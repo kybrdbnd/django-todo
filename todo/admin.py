@@ -12,8 +12,9 @@ class ProfileAdmin(admin.ModelAdmin):
         return obj.user.username
 
 
-class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at', 'get_milestones')
+class ProjectAdmin(SafeDeleteAdmin):
+    list_display = (highlight_deleted, 'created_by',
+                    'created_at', 'get_milestones')
 
     def get_milestones(self, obj):
         return ', '.join([milestone.name for milestone in obj.milestones.all()])

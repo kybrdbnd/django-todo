@@ -79,8 +79,10 @@ class Milestone(models.Model):
         return self.name
 
 
-class Project(models.Model):
+class Project(SafeDeleteModel):
+    _safedelete_policy = SOFT_DELETE_CASCADE
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    created_by = models.ForeignKey(Employee, null=True, related_name='creator')
     name = models.CharField(max_length=100)
     tasks = models.ManyToManyField(Task, blank=True)
     members = models.ManyToManyField(Employee, blank=True)

@@ -242,8 +242,8 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
         }
     }
     $scope.deleteFromQueue = function(task_id) {
-        var task_delete_url = '/todo/delete_task/' + task_id
-        $http.get(task_delete_url).then(function(response) {
+        var task_delete_url = '/todo/delete_task/' + task_id + "/"
+        $http.post(task_delete_url).then(function(response) {
             Materialize.toast(response.data.message, 2000, 'rounded')
             project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
             $http.get(project_date_url).then(function(response) {
