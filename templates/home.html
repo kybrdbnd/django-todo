@@ -2,12 +2,22 @@
 <div class="container">
     <div class="row">
         <div class="col m7">
-           <a href="{% url 'account_login' %}">Login </a>
+            <!-- <a href="{% url 'account_login' %}">Login </a> -->
+            <form action="/accounts/login/" method="POST">
+            {% csrf_token%}
+                <div class="input-field col m12">
+                    <input type="email" name="login" placeholder="Enter Your Email Address" required autofocus>
+                </div>
+                <div class="input-field col m12">
+                    <input type="password" name="password" placeholder="Enter Your Password" required>
+                </div>
+                <button class="waves-effect waves-light btn" type="submit">Login</button>
+            </form>
         </div>
         <div class="col m5">
             <h5>Currently Running Projects in Your Organization</h5> {% for project in projects%}
             <div class="chip">
-               {{project.name}}
+                {{project.name}}
             </div>
             {% endfor%}
         </div>

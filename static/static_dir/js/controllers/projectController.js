@@ -134,7 +134,8 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
     $scope.assignDate = function(context, task_id) {
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15 // Creates a dropdown of 15 years to control year
+            selectYears: 15, // Creates a dropdown of 15 years to control year
+            min: 0
         });
         $(".datepicker").on("change", function() {
             $scope.taskAssignDate = $(".datepicker").val();
@@ -162,7 +163,8 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
         });
         $('#other_task').pickadate({
             selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15 // Creates a dropdown of 15 years to control year
+            selectYears: 15, // Creates a dropdown of 15 years to control year
+            min: 0
         });
         $("#other_task").on("change", function() {
             $scope.taskAssignDate = $("#other_task").val();
