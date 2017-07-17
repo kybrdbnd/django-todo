@@ -261,3 +261,10 @@ def milestone(request):
         'form': form
     }
     return render(request, 'milestone.html', context)
+
+
+def delete_task(request, id):
+    task = get_object_or_404(Task, id=id)
+    task.delete()
+    return JsonResponse({'status': True,
+                         'message': 'Task successfully Deleted'})

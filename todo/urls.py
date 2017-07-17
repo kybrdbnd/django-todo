@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from .views import (project, send_invite, add_project,
                     add_task, add_member, assign_yourself, assign_other,
-                    task_percentage, task_put_back, project_detail, milestone)
+                    task_percentage, task_put_back, project_detail, milestone,
+                    delete_task)
 
 urlpatterns = [
     url(r'^$', project, name='project'),
@@ -14,5 +15,6 @@ urlpatterns = [
     url(r'^assign_yourself/', assign_yourself, name='assign_yourself'),
     url(r'^assign_other/', assign_other, name='assign_other'),
     url(r'^task_percentage/', task_percentage, name='task_percentage'),
-    url(r'^task_put_back/', task_put_back, name='task_put_back')
+    url(r'^task_put_back/', task_put_back, name='task_put_back'),
+    url(r'^delete_task/(?P<id>\d+)/$', delete_task, name='delete_task'),
 ]

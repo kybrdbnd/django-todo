@@ -116,9 +116,12 @@
                     <ul ng-repeat="task in queue " class="task_list ">
                         <div class="row ">
                             <div class="col m12 ">
-                                <div class="card   blue-grey lighten-5">
+                                <div class="card blue-grey lighten-5">
                                     <div class="card-content">
                                         <p>{{task.name}}</p>
+                                        <div ng-if="task.assigned_to==null">
+                                        <a ng-click="deleteFromQueue(task.id)"><p>X</p></a>
+                                        </div>
                                     </div>
                                     <div ng-if="task.assigned_to==null">
                                         <div class="card-action ">

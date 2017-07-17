@@ -2,6 +2,9 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from django.contrib.auth.models import User
+
+from safedelete.models import SafeDeleteModel
+from safedelete.models import SOFT_DELETE_CASCADE
 # Create your models here.
 
 
@@ -39,7 +42,8 @@ class Employee(models.Model):
         return self.user.username
 
 
-class Task(models.Model):
+class Task(SafeDeleteModel):
+    _safedelete_policy = SOFT_DELETE_CASCADE
     created_at = models.DateField(auto_now_add=True, auto_now=False)
     name = models.CharField(max_length=100)
     created_by = models.ForeignKey(Employee, related_name='created_by')
