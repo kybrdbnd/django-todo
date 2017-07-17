@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import TextInput
 from django.utils.translation import ugettext_lazy as _
-from .models import (Project, Company, Profile, Employee, Role)
+from .models import (Project, Company, Profile, Employee, Role, Milestone)
 from django.contrib.auth.models import User
 
 
@@ -57,3 +57,11 @@ class RoleForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = ['role']
+
+
+class MileStoneForm(forms.ModelForm):
+    # projects = forms.MultipleChoiceField()
+
+    class Meta:
+        model = Milestone
+        fields = ['name', 'description', 'start_date', 'end_date']

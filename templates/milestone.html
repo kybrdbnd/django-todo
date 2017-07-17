@@ -1,0 +1,65 @@
+{% extends 'base.html' %}{% block content%} {% include 'preloader.html' %}
+<div class="container">
+	<h4>Create MileStone</h4>
+	<hr/>
+    <form method='post' action="{% url 'todo:milestone' %}" novalidate>
+    {% csrf_token%}
+        <div class="row">
+            <div class="input-field col m4">
+                <label for="name">Enter MileStone</label>
+                <input type="text" name="name" ng-model="name">
+            </div>
+            <div class="input-field col m4">
+                <select name='projects' required="true">
+                    <option value="" disabled selected>Choose your Project</option>
+                    {% for project in projects %} 
+                    <option value="{{project.id}}">{{project}}</option> 
+                    {% endfor%}
+                </select>
+            </div>
+            <div class="input-field col m2">
+                <input type="date" id="start_date" name="start_date" placeholder="Choose Start Date" class="datepicker">
+            </div>
+            <div class="input-field col m2">
+                <input type="date" id="end_date" name="end_date" placeholder="Choose End Date" class="datepicker">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col m8">
+                <textarea id="milestone_description" name="description" class="materialize-textarea"></textarea>
+                <label for="milestone_description">Enter MileStone Description</label>
+            </div>
+            <div class="input-field col m4">
+                <button class="waves-effect waves-light btn" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+    <h4>View MileStones</h4>
+    <hr/>
+	{% for project in projects %}
+		{% if project.milestones.all %}
+			<ul><b>{{project.name}}</b>
+			{% for milestone in project.milestones.all %}
+				<li>MileStone TimeRemaining: {{milestone.end_date|timeuntil}}</li>
+				<li>Milestone Name: {{milestone.name}}</li>
+				<li>Milestone Description:{{milestone.description}}</li>
+			{% endfor %}
+			</ul>
+		{%else%}
+			<h5>No Milestones Available</h5>
+		{% endif %}
+	{% endfor %}
+</div>
+{% endblock %} {% block extra_js %}
+<script>
+$('#start_date').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+});
+$('#end_date').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+});
+$('select').material_select();
+</script>
+{% endblock %}

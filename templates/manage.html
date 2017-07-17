@@ -10,7 +10,7 @@
             <a class="waves-effect waves-light btn" href="#send_invitaton_modal"><i class="material-icons left">cloud</i>Send Invite</a>
         </div>
         <div class="col m6">
-            <a class="waves-effect waves-light btn" href="#milestone_modal"><i class="material-icons left">cloud</i>View/Manage MileStones</a>
+            <a class="waves-effect waves-light btn" href="{% url "todo:milestone" %}"><i class="material-icons left">cloud</i>View/Manage MileStones</a>
         </div>
         <!-- Project Modal Structure -->
         <div id="project_modal" class="modal">
@@ -45,46 +45,7 @@
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
             </div>
         </div>
-        <!-- Project Modal Structure -->
-        <div id="milestone_modal" class="modal">
-            <form>
-                <div class="modal-content">
-                    <div class="row">
-                        <div class="input-field col m4">
-                            <label for="name">Enter MileStone</label>
-                            <input type="text" name="name" ng-model="name">
-                        </div>
-                        <div class="col m4">
-                            <select>
-                                <option value="" disabled selected>Choose your Project</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                            <label>Project Name</label>
-                        </div>
-                        <div class="col m4">
-                            <label for="start_date">Choose Start Date</label>
-                            <input type="date" id="start_date" name="start_date" class="datepicker">
-                        </div>
-                        <div class="col m4">
-                            <label for="end_date">Choose End Date</label>
-                            <input type="date" id="end_date" name="end_date" class="datepicker">
-                        </div>
-                    </div>
-                    <div class="input-field col m8">
-                        <textarea id="milestone_description" class="materialize-textarea"></textarea>
-                        <label for="milestone_description">Enter MileStone Description</label>
-                    </div>
-                    <div class="input-field col m4">
-                        <button class="modal-action waves-effect waves-green btn-flat">Save</button>
-                    </div>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-            </div>
-        </div>
+        <div class="clearfix"></div>
     </div>
     {%endif%}
     <div class="row">
@@ -135,15 +96,6 @@
 </div>
 {% endblock %} {% block extra_js %}
 <script>
-$('#start_date').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-});
-$('#end_date').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-});
 $('.modal').modal();
-$('select').material_select();
 </script>
 {% endblock %}

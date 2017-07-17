@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import (ProfileForm, ProjectForm)
+from .forms import (ProfileForm, ProjectForm, MileStoneForm)
 from .models import (Project, Profile, Employee, Task, Role, Backlog)
 from datetime import datetime, timedelta
 from django.http import JsonResponse
@@ -242,3 +242,22 @@ def task_put_back(request):
     backlog.save()
     return JsonResponse({'status': True,
                          'message': 'Task Successfully Put Back'})
+
+
+def milestone(request):
+    employee = get_object_or_404(Employee, user=request.user)
+    projects = employee.project_set.all()
+    if request.method == 'POST':
+        form = MileStoneForm(request.POST)
+        if form.is_valid():
+            project_id = request.POST.get('projects')
+            project = get_object_or_404(Project, id=project_id)
+            milestone_instance = form.save()
+            project.milestones.add(milestone_instance)
+    else:
+        form = MileStoneForm()
+    context = {
+        'projects': projects,
+        'form': form
+    }
+    return render(request, 'milestone.html', context)
