@@ -113,12 +113,12 @@
                                     </div>
                                     <div ng-if="task.assigned_to==null">
                                         <div class="card-action ">
-                                            <a ng-click="assignDate(this)" class="assign_operation">Assign To Yourself</a>
-                                            <a ng-click="assignTask(this)" class="assign_operation">Assign To Other</a>
+                                            <a ng-click="assignDate(this, task.id)" class="assign_operation">Assign To Yourself</a>
+                                            <a ng-click="assignTask(this, task.id)" class="assign_operation">Assign To Other</a>
                                             <div ng-show="taskDate" class="row">
                                                 <div class="input-field col m9">
                                                     <label for="date">Choose the date</label>
-                                                    <input type="date" class="datepicker" ng-model="taskAssignDate">
+                                                    <input type="date" id="your_date{{task.id}}" class="datepicker" ng-model="taskAssignDate">
                                                 </div>
                                                 <div class="input-field col m3">
                                                     <a ng-click="assignYourself(task.id)">Confirm</a>
@@ -132,7 +132,7 @@
                                                 <div class="clearfix"></div>
                                                 <div class="input-field col m9">
                                                     <label for="date">Choose the date</label>
-                                                    <input type="date" id="other_task" class="datepicker" ng-model="taskAssignDate">
+                                                    <input type="date" id="other_task{{task.id}}" class="datepicker" ng-model="taskAssignDate">
                                                 </div>
                                                 <div class="input-field col m3">
                                                     <a ng-click="assignToOther(task.id)">Confirm</a>

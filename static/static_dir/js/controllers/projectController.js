@@ -117,10 +117,12 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
                     return (s < 10) ? '0' + s : s;
                 }
                 $scope.taskAssignDate = [x.getFullYear(), pad(x.getMonth() + 1), pad(x.getDate())].join('-');
-                project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.taskAssignDate
-                $http.get(project_date_url).then(function(response) {
-                    $scope.tasks = response.data
-                })
+                if ($scope.selected_date == $scope.taskAssignDate) {
+                    project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.taskAssignDate
+                    $http.get(project_date_url).then(function(response) {
+                        $scope.tasks = response.data
+                    })
+                }
                 $scope.taskDate = false;
             })
         } else {
@@ -132,21 +134,24 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
         console.log(member_id)
     }
     $scope.assignDate = function(context, task_id) {
-        $('.datepicker').pickadate({
+        var date_element = "#your_date" + task_id
+        $(date_element).pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year
             min: 0
         });
-        $(".datepicker").on("change", function() {
-            $scope.taskAssignDate = $(".datepicker").val();
+        $(date_element).on("change", function() {
+            $scope.taskAssignDate = $(date_element).val();
         });
 
         context.taskDate = !context.taskDate;
         context.taskToOther = false;
     }
-    $scope.assignTask = function(context) {
+    $scope.assignTask = function(context, task_id) {
         context.taskToOther = !context.taskToOther;
+        context.otherMember = ""
         context.taskDate = false;
+        var other_task_date = "#other_task" + task_id
         var project_detail_url = "/api/project/" + $scope.project_id
         $http.get(project_detail_url).then(function(response) {
             angular.forEach(response.data.members, function(member) {
@@ -161,13 +166,13 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
             },
             minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
-        $('#other_task').pickadate({
+        $(other_task_date).pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year
             min: 0
         });
-        $("#other_task").on("change", function() {
-            $scope.taskAssignDate = $("#other_task").val();
+        $(other_task_date).on("change", function() {
+            $scope.taskAssignDate = $(other_task_date).val();
         });
     }
     $scope.assignToOther = function(task_id) {
