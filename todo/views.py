@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import (ProfileForm, ProjectForm)
-from .models import (Project, Profile, Employee, Company, Task, Role)
+from .models import (Project, Profile, Employee, Task, Role, Backlog)
 from datetime import datetime, timedelta
 from django.http import JsonResponse
 from invitations.models import Invitation
@@ -223,10 +223,16 @@ def task_percentage(request):
 
 
 def task_put_back(request):
+    reason = request.POST.get('reason')
     task_id = request.POST.get('task_id')
     task = get_object_or_404(Task, id=task_id)
     task.assigned_to = None
     task.assigned_date = None
     task.save()
+    employee = get_object_or_404(Employee, user=request.user)
+    backlog = Backlog.objects.create(created_for=task,
+                                     created_by=employee,
+                                     reason=reason)
+    backlog.save()
     return JsonResponse({'status': True,
                          'message': 'Task Successfully Put Back'})

@@ -1,5 +1,4 @@
-{% extends 'base.html' %}  {% block content %}
-{% include 'preloader.html' %}
+{% extends 'base.html' %} {% block content %} {% include 'preloader.html' %}
 <div class="row task-maincontent" ng-controller="projectController">
     {% verbatim %}
     <div class="col m3 project_names">
@@ -83,8 +82,18 @@
                                 </div>
                                 <div class="card-action">
                                     <a class="assign_operation" href="#">{{task.percentage_complete}}% Completed</a>
-                                    <a class="assign_operation" ng-click="taskPutBack(task.id)">Put Back</a>
+                                    <a class="assign_operation" ng-click="edittaskPutBack(this)">Put Back</a>
                                     <a class="assign_operation" ng-click="editPercentage(this)">Edit</a>
+                                    <div class="row" ng-if="showPutBack">
+                                        <div class="col m9">
+                                            <p class="input-field col m12">
+                                                <input type="text" id="{{task.id}}" ng-model="reason"/>
+                                            </p>
+                                        </div>
+                                        <div class="col m3">
+                                            <a ng-click="taskPutBack(reason,task.id)">Save</a>
+                                        </div>
+                                    </div>
                                     <div class="row" ng-if="showRange">
                                         <div class="col m9">
                                             <p class="range-field">
@@ -189,12 +198,9 @@ $('.project_dates, .project_members').owlCarousel({
         }
     }
 });
-$(document).ready(function() {
-    $('.collapsible').collapsible('open', 0);
-    $('.tooltipped').tooltip({
-        delay: 50
-    });
-
-})
+$('.collapsible').collapsible('open', 0);
+$('.tooltipped').tooltip({
+    delay: 50
+});
 </script>
 {% endblock%}

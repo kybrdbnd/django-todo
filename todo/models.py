@@ -55,8 +55,10 @@ class Task(models.Model):
 
 
 class Backlog(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    created_at = models.DateField(auto_now_add=True, auto_now=False)
     created_for = models.ForeignKey(Task)
+    created_by = models.ForeignKey(Employee, null=True, blank=True)
+    reason = models.CharField(max_length=100, null=True)
 
 
 class Project(models.Model):

@@ -11,6 +11,8 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
     $scope.taskAssignDate = "";
     $scope.members = {};
     $scope.otherMember = "";
+    $scope.showPutBack = false;
+    $scope.reason = ""
 
     $scope.init = function() {
         unformat_date = new Date()
@@ -196,6 +198,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
     }
     $scope.editPercentage = function(context) {
         context.showRange = !context.showRange;
+        context.showPutBack = false;
     }
     $scope.savePercentage = function(task_id) {
         $scope.showRange = false;
@@ -217,20 +220,26 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
             })
         })
     }
-    $scope.taskPutBack = function(task_id) {
-        data = $.param({ task_id: task_id })
-        url = '/todo/task_put_back/'
-        $http.post(url, data).then(function(response) {
-            Materialize.toast(response.data.message, 2000, 'rounded')
-            project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
-            $http.get(project_date_url).then(function(response) {
-                $scope.tasks = response.data
+    $scope.edittaskPutBack = function(context) {
+        context.showPutBack = !context.showPutBack
+        context.showRange = false;
+    }
+    $scope.taskPutBack = function(reason, task_id) {
+        if (reason != "") {
+            data = $.param({ reason: reason, task_id: task_id })
+            url = '/todo/task_put_back/'
+            $http.post(url, data).then(function(response) {
+                Materialize.toast(response.data.message, 2000, 'rounded')
+                project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
+                $http.get(project_date_url).then(function(response) {
+                    $scope.tasks = response.data
+                })
+                project_detail_url = "/api/project/" + $scope.project_id
+                $http.get(project_detail_url).then(function(response) {
+                    $scope.queue = response.data.tasks;
+                })
             })
-            project_detail_url = "/api/project/" + $scope.project_id
-            $http.get(project_detail_url).then(function(response) {
-                $scope.queue = response.data.tasks;
-            })
-        })
+        }
     }
     $scope.init();
 }]);
