@@ -1,13 +1,16 @@
 {% extends 'base.html' %} {% block content %}{% include 'preloader.html' %}
-<div class="container-fluid" ng-controller='manageController'>
+<div class="container" ng-controller='manageController'>
     <br>
     <br> {% if project_manager or owner %}
     <div class="row">
-        <div class="col m4">
+        <div class="col m3">
             <a class="waves-effect waves-light btn" href="#project_modal"><i class="material-icons left">cloud</i>Add Project</a>
         </div>
-        <div class="col m4">
+        <div class="col m3">
             <a class="waves-effect waves-light btn" href="#send_invitaton_modal"><i class="material-icons left">cloud</i>Send Invite</a>
+        </div>
+        <div class="col m6">
+            <a class="waves-effect waves-light btn" href="#milestone_modal"><i class="material-icons left">cloud</i>View/Manage MileStones</a>
         </div>
         <!-- Project Modal Structure -->
         <div id="project_modal" class="modal">
@@ -42,11 +45,50 @@
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
             </div>
         </div>
-        <div class="clearfix"></div>
+        <!-- Project Modal Structure -->
+        <div id="milestone_modal" class="modal">
+            <form>
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="input-field col m4">
+                            <label for="name">Enter MileStone</label>
+                            <input type="text" name="name" ng-model="name">
+                        </div>
+                        <div class="col m4">
+                            <select>
+                                <option value="" disabled selected>Choose your Project</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                            <label>Project Name</label>
+                        </div>
+                        <div class="col m4">
+                            <label for="start_date">Choose Start Date</label>
+                            <input type="date" id="start_date" name="start_date" class="datepicker">
+                        </div>
+                        <div class="col m4">
+                            <label for="end_date">Choose End Date</label>
+                            <input type="date" id="end_date" name="end_date" class="datepicker">
+                        </div>
+                    </div>
+                    <div class="input-field col m8">
+                        <textarea id="milestone_description" class="materialize-textarea"></textarea>
+                        <label for="milestone_description">Enter MileStone Description</label>
+                    </div>
+                    <div class="input-field col m4">
+                        <button class="modal-action waves-effect waves-green btn-flat">Save</button>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
     </div>
     {%endif%}
     <div class="row">
-        <div class="col m8">
+        <div class="col m7">
             <div class="row">
                 <div class="col m12">
                     {% verbatim %}
@@ -67,7 +109,7 @@
                 </div>
             </div>
         </div>
-        <div class="col m4">
+        <div class="col m5">
             {% verbatim%}
             <div class="row" ng-repeat="project in projects">
                 <div class="col m12">
@@ -80,9 +122,9 @@
                                     {{member.user.username}}
                                 </div>
                             </div>
-                            <div class="card-action">
-                                <a class="assign_operation" href="/todo/project_detail/{{project.id}}">View Detail</a>
-                            </div>
+                        </div>
+                        <div class="card-action">
+                            <a class="assign_operation" href="/todo/project_detail/{{project.id}}">View Detail</a>
                         </div>
                     </div>
                 </div>
@@ -90,8 +132,18 @@
             </div>
         </div>
     </div>
-    {% endblock %} {% block extra_js %}
-    <script>
-        $('.modal').modal();
-    </script>
-    {% endblock %}
+</div>
+{% endblock %} {% block extra_js %}
+<script>
+$('#start_date').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+});
+$('#end_date').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+});
+$('.modal').modal();
+$('select').material_select();
+</script>
+{% endblock %}

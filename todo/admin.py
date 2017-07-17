@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import (Profile, Project, Task, Company, Employee, Role, Backlog)
+from .models import (Profile, Project, Task, Company,
+                     Employee, Role, Backlog, Milestone)
 # Register your models here.
 
 
@@ -11,7 +12,10 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at')
+    list_display = ('name', 'created_at', 'get_milestones')
+
+    def get_milestones(self, obj):
+        return ', '.join([milestone.name for milestone in obj.milestones.all()])
 
 
 class TaskAdmin(admin.ModelAdmin):
@@ -55,6 +59,11 @@ class BacklogAdmin(admin.ModelAdmin):
         return obj.created_by.user.username
 
 
+class MileStoneAdmin(admin.ModelAdmin):
+    list_display = ('created_at', 'name', 'description',
+                    'start_date', 'end_date')
+
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Task, TaskAdmin)
@@ -62,3 +71,4 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Role, RoleAdmin)
 admin.site.register(Backlog, BacklogAdmin)
+admin.site.register(Milestone, MileStoneAdmin)

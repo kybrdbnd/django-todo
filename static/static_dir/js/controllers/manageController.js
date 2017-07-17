@@ -58,6 +58,10 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
             $scope.refreshProjects();
         })
     }
+    $scope.openMilestone = function(project_id) {
+        // var milestone_ele = '#milestone' + project_id
+        $('#milestone1').modal('open');
+    }
     $scope.init();
 
 }]);

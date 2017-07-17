@@ -61,11 +61,27 @@ class Backlog(models.Model):
     reason = models.CharField(max_length=100, null=True)
 
 
+class Milestone(models.Model):
+    created_at = models.DateField(auto_now_add=True, auto_now=False)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    class Meta:
+        ordering = ['start_date']
+
+    def __str__(self):
+        return self.name
+
+
 class Project(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     name = models.CharField(max_length=100)
     tasks = models.ManyToManyField(Task, blank=True)
     members = models.ManyToManyField(Employee, blank=True)
+    milestones = models.ManyToManyField(Milestone, blank=True,
+                                        related_name='milestones')
 
     class Meta:
         ordering = ['-created_at']
