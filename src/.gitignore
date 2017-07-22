@@ -1,2 +1,2 @@
 .py[cod]
-settings/local.py
+src/todo_django/settings/local.py

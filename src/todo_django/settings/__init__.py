@@ -1,6 +1,11 @@
 from .base import *
 
-if DEBUG:
+try:
     from .local import *
-else:
+    live = False
+except:
+    live = True
+
+
+if live:
     from .production import *
