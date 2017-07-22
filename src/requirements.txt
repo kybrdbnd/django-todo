@@ -10,6 +10,7 @@ django-extensions==1.7.9
 django-filter==1.0.4
 django-imagekit==4.0.1
 django-invitations==1.9.1
+django-safedelete==0.4.2
 djangorestframework==3.6.3
 gunicorn==19.7.1
 idna==2.5
@@ -27,3 +28,4 @@ requests==2.17.3
 requests-oauthlib==0.8.0
 six==1.10.0
 urllib3==1.21.1
+whitenoise==3.3.0
