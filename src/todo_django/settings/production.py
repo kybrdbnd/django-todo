@@ -166,7 +166,6 @@ ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_REDIRECT_URL = "/todo"
 ACCOUNT_SIGNUP_FORM_CLASS = 'todo.forms.SignUpForm'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 INVITATIONS_SIGNUP_REDIRECT = '/accept_invitation'
@@ -194,3 +193,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'kybrdbnd@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
+
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

@@ -13,11 +13,7 @@ from django.contrib.auth.models import User
 def home(request):
     if request.user.is_authenticated():
         return redirect('todo:project')
-    projects = Project.objects.all()
-    context = {
-        'projects': projects
-    }
-    return render(request, 'home.html', context)
+    return render(request, 'home.html', {})
 
 
 def project(request):

@@ -1,4 +1,4 @@
-angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$q', function($scope, $http, $cookies, $q) {
+angular_module.controller('manageController', ['$scope', '$http', 'cookies', '$q', function($scope, $http, $cookies, $q) {
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
@@ -56,6 +56,15 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
         $http.post(url, data).then(function(response) {
             Materialize.toast(response.data.message, 2000, 'rounded')
             $scope.refreshProjects();
+        })
+    }
+    $scope.deleteProject = function(project_id) {
+        var project_delete_url = '/todo/delete_project/' + project_id + "/"
+        $http.post(project_delete_url).then(function(response) {
+            Materialize.toast(response.data.message, 2000, 'rounded')
+            if (response.data.status) {
+                $scope.refreshProjects();
+            }
         })
     }
     $scope.init();

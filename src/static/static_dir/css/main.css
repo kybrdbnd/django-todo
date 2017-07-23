@@ -5,17 +5,54 @@
     align-items: center;
     justify-content: center;
     background-color: #eee;
-    
+
     position: fixed;
     z-index: 100;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;  
+    bottom: 0;
 }
+
 
 /*preloader ends*/
 
+.home {
+    background-image: url('../img/home_background.jpg');
+}
+
+.image_overlay {
+    background-color: black;
+    opacity: .7;
+    height: 654px
+}
+
+
+.project_heading {
+    color: white;
+    /*opacity: .3;*/
+}
+
+.project_title {
+    font-size: 100px;
+    text-align: center;
+    padding-top: 70px
+}
+
+.project_desc {
+    font-size: 20px;
+    text-align: center;
+}
+
+.project_demo {
+    color: white;
+    text-align: center;
+    font-size: 16px;
+}
+
+#demo_mailid {
+    color: #ff3d00;
+}
 
 .assign_operation {
     font-size: 12px;
@@ -50,6 +87,7 @@
 }
 
 
+
 /*profile page*/
 
 .profile-page {
@@ -57,16 +95,46 @@
     margin-top: 5em;
 }
 
-.profile-pic{
-	border-radius: 50%;
-	width:70px;
-	height: 70px;
-	border:1px solid #546e7a;
+.profile-pic {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    border: 1px solid #546e7a;
 }
+
+
 /*navbar*/
-.nav-header{
-	background-color: #7f3f12 !important;
+
+.nav-header {
+    background-color: #7f3f12 !important;
 }
-.browse-btn button{
-	margin-top: 1em;
+
+.browse-btn button {
+    margin-top: 1em;
+}
+
+
+/*navbar ends*/
+
+
+/*input forms ends*/
+
+.home_login {
+    color: white;
+}
+
+.home_login.input-field input:focus {
+    border-bottom: 1px solid #ff3d00;
+    box-shadow: 0 1px 0 0 #ff3d00;
+}
+
+.home_login.input-field .prefix.active {
+    color: #ff3d00;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+    background-color: transparent;
+    background-image: none;
+    color: rgb(0, 0, 0);
 }

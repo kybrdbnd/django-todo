@@ -1,0 +1,39 @@
+<title>Colaborar:Sign In</title>
+{% include 'css.html'%} {% load i18n %} {% block content %}
+<div class="container-fluid home">
+    <div class="image_overlay">
+        <div class="row">
+            <div class="col m12">
+                <div class="project_heading">
+                    <div class="project_title">
+                        <span>Sign In</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col m4 offset-m4">
+                <form class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    <div class="input-field col m12">
+                        <div class="input-field col m12 home_login">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="email" name="login" placeholder="Enter Your Email Address" required>
+                        </div>
+                        <div class="input-field col m12 home_login">
+                            <i class="material-icons prefix">create</i>
+                            <input type="password" name="password" placeholder="Enter Your Password" required>
+                        </div>
+                        <div class="input-field col m12 center-align">
+                            <button class="waves-effect waves-light btn deep-orange accent-3" type="submit">Login</button>
+                        </div>
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+                        <div class="input-field col m12 center-align">
+                            <a class="waves-effect waves-light btn deep-orange accent-3" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}
+                        </a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% include 'js.html'%}

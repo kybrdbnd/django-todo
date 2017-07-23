@@ -19,7 +19,7 @@
                     <div class="card-content">
                         <span class="card-title">{{project.name}}</span>
                         <p></p>
-                    </div>
+                    </div>1
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
     <div class="col m9">
         <div class="row">
             <div class="col m6">
-                <div class="owl-carousel owl-theme project_dates" ng-show="selected_project!='all_projects'">
+                <div class="project_dates" ng-show="selected_project!='all_projects'">
                     {% for date in date_range%}
                     <div ng-click=" selectedDate($event) ">
                         {{date|date:'d M,y'}}
@@ -183,24 +183,6 @@
 </div>
 {% endblock %} {% block extra_js%}
 <script>
-$('.project_dates, .project_members').owlCarousel({
-    loop: false,
-    rewind: false,
-    responsive: {
-        0: {
-            items: 3,
-            nav: true
-        },
-        600: {
-            items: 4,
-            nav: true
-        },
-        1000: {
-            items: 5,
-            nav: true
-        }
-    }
-});
 $('.collapsible').collapsible('open', 0);
 $('.tooltipped').tooltip({
     delay: 50

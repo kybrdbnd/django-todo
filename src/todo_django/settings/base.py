@@ -20,11 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i8)(t%e)&#vcgsz_t@ugr*uvzi-#!chjs2q-^=3r*82+$464^i'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -160,9 +156,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_REDIRECT_URL = "/todo"
 ACCOUNT_SIGNUP_FORM_CLASS = 'todo.forms.SignUpForm'
-
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 INVITATIONS_SIGNUP_REDIRECT = '/accept_invitation'
