@@ -4,6 +4,7 @@ from .views import (project, send_invite, add_project,
                     task_percentage, task_put_back, project_detail, milestone,
                     delete_task, delete_project)
 
+app_name = 'todo'
 urlpatterns = [
     url(r'^$', project, name='project'),
     url(r'^project_detail/(?P<id>\d+)', project_detail, name='project_detail'),
