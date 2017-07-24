@@ -24,9 +24,16 @@
 .image_overlay {
     background-color: black;
     opacity: .7;
-    height: 654px
+    height: 654px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
-
+.main_content{
+    position: relative;
+}
 
 .project_heading {
     color: white;
