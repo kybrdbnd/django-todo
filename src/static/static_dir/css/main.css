@@ -197,17 +197,10 @@ nav ul a {
 }
 
 
-
-
-
-
-
-
-
 /*navbar ends*/
 
 
-/*input forms ends*/
+/*home input forms starts*/
 
 .home_login {
     color: white;
@@ -228,3 +221,19 @@ textarea:-webkit-autofill {
     background-image: none;
     color: rgb(0, 0, 0);
 }
+
+/*home input form ends*/
+
+
+/*profile input forms starts*/
+
+.profile_page.input-field input:focus {
+    border-bottom: 1px solid #f4511e;
+    box-shadow: 0 1px 0 0 #f4511e;
+}
+
+.profile_page.input-field .prefix.active {
+    color: #f4511e;
+}
+
+/*profile input forms ends*/
