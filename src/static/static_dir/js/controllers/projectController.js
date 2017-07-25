@@ -15,17 +15,17 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
     $scope.reason = ""
 
     $scope.init = function() {
-        unformat_date = new Date()
+        $scope.unformat_date = new Date()
 
         function pad(s) {
             return (s < 10) ? '0' + s : s;
         }
-        $scope.selected_date = [unformat_date.getFullYear(), pad(unformat_date.getMonth() + 1), pad(unformat_date.getDate())].join('-');
+        $scope.selected_date = [$scope.unformat_date.getFullYear(), pad($scope.unformat_date.getMonth() + 1), pad($scope.unformat_date.getDate())].join('-');
         $scope.selected_project_request = $http.get('/api/');
         $scope.today_tasks_request = $http.get('/api/tasks/');
         $q.all([$scope.selected_project_request, $scope.today_tasks_request]).then(function(value) {
             $scope.projects = value[0].data
-            $scope.summary_project['projects'] = value[0].data
+            $scope.summary_project['projeyesterdayDatects'] = value[0].data
             $scope.summary_project['project_count'] = value[0].data.length
             $scope.summary_project['tasks'] = value[1].data
             $scope.summary_project['task_count'] = value[1].data.length
@@ -89,14 +89,14 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
             })
         })
     }
-    $scope.selectedDate = function(click) {
-        clicked_date = click.currentTarget.innerText
-        x = new Date(clicked_date)
+    $scope.selectedDate = function() {
+        x = new Date($scope.project_date)
 
         function pad(s) {
             return (s < 10) ? '0' + s : s;
         }
         $scope.selected_date = [x.getFullYear(), pad(x.getMonth() + 1), pad(x.getDate())].join('-');
+        console.log($scope.selected_date)
         project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
         $http.get(project_date_url).then(function(response) {
             $scope.tasks = response.data
@@ -140,7 +140,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
         $(date_element).pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year
-            min: 0
+            min: true
         });
         $(date_element).on("change", function() {
             $scope.taskAssignDate = $(date_element).val();
@@ -171,7 +171,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
         $(other_task_date).pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year
-            min: 0
+            min: true
         });
         $(other_task_date).on("change", function() {
             $scope.taskAssignDate = $(other_task_date).val();

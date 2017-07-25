@@ -19,7 +19,7 @@
                     <div class="card-content">
                         <span class="card-title">{{project.name}}</span>
                         <p></p>
-                    </div>1
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,11 +29,9 @@
         <div class="row">
             <div class="col m6">
                 <div class="project_dates" ng-show="selected_project!='all_projects'">
-                    {% for date in date_range%}
-                    <div ng-click=" selectedDate($event) ">
-                        {{date|date:'d M,y'}}
-                    </div>
-                    {% endfor %}
+                    {% verbatim %}
+                    <input type="date" class="datepicker" id="week_back" ng-change="selectedDate()" ng-model="project_date" placeholder="Choose A Date">
+                    {% endverbatim%}
                 </div>
             </div>
             {% verbatim %}
@@ -87,7 +85,7 @@
                                     <div class="row" ng-if="showPutBack">
                                         <div class="col m9">
                                             <p class="input-field col m12">
-                                                <input type="text" id="{{task.id}}" ng-model="reason"/>
+                                                <input type="text" id="{{task.id}}" ng-model="reason" />
                                             </p>
                                         </div>
                                         <div class="col m3">
@@ -120,7 +118,9 @@
                                     <div class="card-content">
                                         <p>{{task.name}}</p>
                                         <div ng-if="task.assigned_to==null">
-                                        <a ng-click="deleteFromQueue(task.id)"><p>X</p></a>
+                                            <a ng-click="deleteFromQueue(task.id)">
+                                                <p>X</p>
+                                            </a>
                                         </div>
                                     </div>
                                     <div ng-if="task.assigned_to==null">
@@ -183,6 +183,9 @@
 </div>
 {% endblock %} {% block extra_js%}
 <script>
+$('.datepicker').pickadate({
+    min: -7
+});
 $('.collapsible').collapsible('open', 0);
 $('.tooltipped').tooltip({
     delay: 50

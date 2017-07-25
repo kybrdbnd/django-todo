@@ -14,7 +14,6 @@
     bottom: 0;
 }
 
-
 /*preloader ends*/
 
 .home {
@@ -32,7 +31,8 @@
     bottom: 0;
     right: 0;
 }
-.main_content{
+
+.main_content {
     position: relative;
 }
 
@@ -96,6 +96,7 @@
 
 
 
+
 /*profile page*/
 
 .profile-page {
@@ -111,6 +112,7 @@
 }
 
 
+
 /*navbar*/
 
 .nav-header {
@@ -120,6 +122,7 @@
 .browse-btn button {
     margin-top: 1em;
 }
+
 
 
 /*navbar ends*/
