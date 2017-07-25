@@ -19,12 +19,13 @@
 
 .home {
     background-image: url('../img/home_background.jpg');
+    height: 100vh;
 }
 
 .image_overlay {
     background-color: black;
     opacity: .7;
-    height: 654px;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -58,7 +59,7 @@
 }
 
 #demo_mailid {
-    color: #ff3d00;
+    color: #f4511e;
 }
 
 .assign_operation {
@@ -131,12 +132,12 @@
 }
 
 .home_login.input-field input:focus {
-    border-bottom: 1px solid #ff3d00;
-    box-shadow: 0 1px 0 0 #ff3d00;
+    border-bottom: 1px solid #f4511e;
+    box-shadow: 0 1px 0 0 #f4511e;
 }
 
 .home_login.input-field .prefix.active {
-    color: #ff3d00;
+    color: #f4511e;
 }
 
 input:-webkit-autofill,
