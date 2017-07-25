@@ -14,6 +14,12 @@
     bottom: 0;
 }
 
+
+
+
+
+
+
 /*preloader ends*/
 
 .home {
@@ -62,10 +68,59 @@
     color: #f4511e;
 }
 
+
+
+
+
+
+
+/*navbar*/
+
+nav ul a {
+    padding: 0 20px;
+}
+
+
+
+
+/*navbar ends*/
+.summary_project_name{
+    font-size: 20px;
+}
+.summary_task_heading {
+    margin-top: -18px !important;
+}
+
+.all_task_status {
+    top: 5px;
+    left: 9px;
+    position: relative;
+}
+
+.task_percentage {
+    display: inline-block;
+    bottom: 5px;
+    left: 2px;
+    font-weight: 600;
+    position: relative;
+}
+.task_delete{
+    top: 7px;
+    position: relative;
+    left: 20px;
+}
+.task_delete:hover{
+    cursor: pointer;
+}
 .assign_operation {
     font-size: 12px;
 }
-
+.assign_operation:hover{
+    cursor: pointer
+}
+.confirm_btn:hover{
+    cursor: pointer;
+}
 .task-panel {
     height: 330px;
     overflow-y: scroll;
@@ -73,7 +128,7 @@
 
 .task_list {
     margin-top: 0px !important;
-    margin-bottom: 0px !important;
+    margin-bottom: -20px !important;
 }
 
 .form_list {
@@ -86,13 +141,25 @@
 }
 
 .task-maincontent {
-    margin-bottom: 0px !important;
+    /*margin-bottom: 0px !important;*/
 }
 
 .project_names {
-    height: 540px;
+    height: 100vh;
     overflow-y: auto;
 }
+
+
+.project_card {
+    margin-top: -24px;
+}
+
+.project_name {
+    font-size: 42px;
+    top: -35px;
+    position: relative;
+}
+
 
 
 
@@ -113,6 +180,12 @@
 
 
 
+
+
+
+
+
+
 /*navbar*/
 
 .nav-header {
@@ -122,6 +195,12 @@
 .browse-btn button {
     margin-top: 1em;
 }
+
+
+
+
+
+
 
 
 

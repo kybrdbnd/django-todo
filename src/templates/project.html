@@ -3,8 +3,8 @@
     {% verbatim %}
     <div class="col m3 project_names">
         <div class="row">
-            <div class="col m12">
-                <div class="card   blue-grey lighten-5" ng-click="current_project('all_projects',0)">
+            <div class="col m10">
+                <div class="card yellow lighten-4" ng-click="current_project('all_projects',0)">
                     <div class="card-content">
                         <span class="card-title">All Projects</span>
                         <p>Total Projects: {{summary_project.project_count}}</p>
@@ -14,8 +14,8 @@
             </div>
         </div>
         <div class="row" ng-repeat="project in projects">
-            <div class="col m12">
-                <div class="card   blue-grey lighten-5" ng-click="current_project(project.name,project.id)">
+            <div class="col m10 project_card">
+                <div class="card yellow lighten-4" ng-click="current_project(project.name,project.id)">
                     <div class="card-content">
                         <span class="card-title">{{project.name}}</span>
                         <p></p>
@@ -29,16 +29,22 @@
         <div class="row">
             <div class="col m6">
                 <div class="project_dates" ng-show="selected_project!='all_projects'">
-                    {% verbatim %}
-                    <input type="date" class="datepicker" id="week_back" ng-change="selectedDate()" ng-model="project_date" placeholder="Choose A Date">
-                    {% endverbatim%}
+                    <div class="row">
+                        <div class="input-field col m4">
+                            <label>Viewing Tasks for:</lable>
+                        </div>
+                        <div class="input-field col m5">
+                            <input type="date" class="datepicker" id="week_back" ng-change="selectedDate()" ng-model="project_date" placeholder="Choose A Date">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
             </div>
             {% verbatim %}
             <div class="col m6 " ng-show="selected_project!='all_projects' ">
-                <div>
+                <div class="col m12 input-field">
                     <span ng-repeat="member in members">
-                        <a ng-click="selectMember(member.id)" tooltips tooltip-template="{{member.role.name}}" tooltip-smart="true">{{member.user.username}}</a>
+                        <a ng-click="selectMember(member.id)" tooltips tooltip-template="{{member.role.name}}" tooltip-smart="true"><span class="chip">{{member.user.username}}</span></a>
                     </span>
                 </div>
             </div>
@@ -46,20 +52,19 @@
         </div>
         {% verbatim %}
         <div class="row ">
-            <div class="col m7 " ng-show="selected_project=='all_projects' ">
+            <div class="col m8 " ng-show="selected_project=='all_projects' ">
                 <h3>All Projects</h3>
                 <ul class="collapsible popout" data-collapsible="accordion">
                     <li ng-repeat="(project,tasks) in summary_project.tasks|groupBy:'project_set[0].name'">
                         <div class="collapsible-header">
-                            {{project}}
+                            <span class="summary_project_name">{{project}}</span>
                         </div>
-                        <div class="collapsible-body" ng-repeat="task in tasks">
+                        <div class="collapsible-body summary_task_heading" ng-repeat="task in tasks">
                             <div>
-                                {{task.name}}
-                            </div>
-                            <div>
-                                <span>
-                                  Percentage Completed: {{task.percentage_complete}}%
+                                <span>{{task.name}}</span>
+                                <span class="all_task_status">
+                                    <span class="task_percentage">{{task.percentage_complete}}%</span>
+                                <i class="material-icons">done</i>
                                 </span>
                             </div>
                         </div>
@@ -67,14 +72,14 @@
                 </ul>
             </div>
             <div class="col m7 " ng-show="selected_project!='all_projects' ">
-                <h3>{{selected_project}}</h3>
+                <span class="project_name">{{selected_project}}</span>
                 <div ng-if="tasks.length==0">
                     No task for {{selected_date|date:'dd MMM,yy'}}
                 </div>
                 <div ng-repeat="task in tasks | orderBy : 'percentage_complete'">
                     <div class="row">
                         <div class="col s12 m10">
-                            <div class="card blue-grey darken-1">
+                            <div class="card brown darken-2">
                                 <div class="card-content white-text">
                                     <p>{{task.name}}</p>
                                 </div>
@@ -114,48 +119,55 @@
                     <ul ng-repeat="task in queue " class="task_list ">
                         <div class="row ">
                             <div class="col m12 ">
-                                <div class="card blue-grey lighten-5">
+                                <div class="card yellow lighten-4">
                                     <div class="card-content">
-                                        <p>{{task.name}}</p>
-                                        <div ng-if="task.assigned_to==null">
+                                        <span>{{task.name}}</span>
+                                        <span ng-if="task.assigned_to==null">
                                             <a ng-click="deleteFromQueue(task.id)">
-                                                <p>X</p>
+                                                <span><i class="material-icons orange-text text-darken-4 task_delete">delete</i></span>
                                             </a>
-                                        </div>
+                                        </span>
                                     </div>
                                     <div ng-if="task.assigned_to==null">
-                                        <div class="card-action ">
-                                            <a ng-click="assignDate(this, task.id)" class="assign_operation">Assign To Yourself</a>
-                                            <a ng-click="assignTask(this, task.id)" class="assign_operation">Assign To Other</a>
+                                        <div class="card-action">
+                                            <a ng-click="assignDate(this, task.id)" class="assign_operation orange-text text-darken-4">Assign To Yourself
+                                            </a>
+                                            <a ng-click="assignTask(this, task.id)" class="assign_operation orange-text text-darken-4">
+                                                Assign To Other
+                                            </a>
                                             <div ng-show="taskDate" class="row">
                                                 <div class="input-field col m9">
                                                     <label for="date">Choose the date</label>
-                                                    <input type="date" id="your_date{{task.id}}" class="datepicker" ng-model="taskAssignDate">
+                                                    <input type="date" id="your_date{{task.id}}" class="datepicker" ng-model="taskAssignDate" />
                                                 </div>
                                                 <div class="input-field col m3">
-                                                    <a ng-click="assignYourself(task.id)">Confirm</a>
+                                                    <a class="orange-text text-darken-4 confirm_btn" ng-click="assignYourself(task.id)">Confirm
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div ng-show="taskToOther" class="row">
                                                 <div class="input-field col m9">
-                                                    <input type="text" id="autocomplete-input" class="autocomplete" ng-model="otherMember">
+                                                    <input type="text" id="autocomplete-input" class="autocomplete" ng-model="otherMember" />
                                                     <label for="autocomplete-input">Choose Member</label>
                                                 </div>
                                                 <div class="clearfix"></div>
                                                 <div class="input-field col m9">
                                                     <label for="date">Choose the date</label>
-                                                    <input type="date" id="other_task{{task.id}}" class="datepicker" ng-model="taskAssignDate">
+                                                    <input type="date" id="other_task{{task.id}}" class="datepicker" ng-model="taskAssignDate" />
                                                 </div>
                                                 <div class="input-field col m3">
-                                                    <a ng-click="assignToOther(task.id)">Confirm</a>
+                                                    <a class="orange-text text-darken-4 confirm_btn" ng-click="assignToOther(task.id)">Confirm
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div ng-if="task.assigned_to!=null">
                                         <div class="card-action ">
-                                            <a href="#">{{task.assigned_to.user.username}}</a>
-                                            <a href="#">{{task.percentage_complete}} % Completed</a>
+                                            <a class="orange-text text-darken-4" href="#">{{task.assigned_to.user.username}}
+                                            </a>
+                                            <a class="orange-text text-darken-4" href="#">{{task.percentage_complete}} % Completed
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -183,10 +195,10 @@
 </div>
 {% endblock %} {% block extra_js%}
 <script>
-$('.datepicker').pickadate({
+$('#week_back').pickadate({
     min: -7
 });
-$('.collapsible').collapsible('open', 0);
+$('.collapsible').collapsible();
 $('.tooltipped').tooltip({
     delay: 50
 });
