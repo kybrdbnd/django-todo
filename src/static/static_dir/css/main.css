@@ -23,6 +23,7 @@
 
 
 
+
 /*preloader ends*/
 
 .home {
@@ -71,11 +72,13 @@
     color: #f4511e;
 }
 
+
 /*navbar*/
 
 nav ul a {
     padding: 0 20px;
 }
+
 
 /*navbar ends*/
 
@@ -163,10 +166,15 @@ input[type=range]+.thumb {
 }
 
 
-.member_name{
+.member_name {
     background-color: #ffb300;
     color: #fff;
 }
+
+.member_name:hover {
+    cursor: pointer
+}
+
 
 /*profile page*/
 
@@ -185,6 +193,7 @@ input[type=range]+.thumb {
 
 
 
+
 /*navbar*/
 
 .nav-header {
@@ -197,10 +206,62 @@ input[type=range]+.thumb {
 
 
 
-
-
 /*navbar ends*/
 
+
+/*manage page starts*/
+.manage_projects{
+    margin-bottom: -20px;
+}
+.manage_project_name {
+    font-size: 28px;
+}
+
+.project_delete {
+    top: 1px;
+    position: relative;
+    left: 20px;
+}
+
+.project_delete:hover{
+    cursor: pointer;
+}
+
+.manage_project_tile{
+    padding-top: 10px !important;
+}
+
+.member_pic{
+    top: 2px;
+    position: relative;
+}
+
+.member_profile_pic{
+    border-radius: 100%;
+    width: 25px;
+}
+
+.add_project_modal,.send_invitation_modal{
+    top: 43% !important;
+}
+
+/*manage page ends*/
+
+
+/*project detail pages starts*/
+.project_detail_heading{
+    font-size: 28px;
+    font-weight: 300;
+}
+
+.project_detail_project_heading{
+    position: relative;
+    left: 6px;
+    font-weight: 300;
+    font-size: 38px;
+}
+
+/*project detail page ends*/
 
 /*home input forms starts*/
 
@@ -225,8 +286,6 @@ textarea:-webkit-autofill {
 }
 
 
-
-
 /*home input form ends*/
 
 
@@ -240,6 +299,7 @@ textarea:-webkit-autofill {
 .profile_page.input-field .prefix.active {
     color: #f4511e;
 }
+
 
 
 
@@ -263,6 +323,7 @@ textarea:-webkit-autofill {
 
 
 
+
 /*project input form starts*/
 
 .task_fields {
@@ -277,6 +338,7 @@ textarea:-webkit-autofill {
 .task_fields.input-field .prefix.active {
     color: #ffab40;
 }
+
 
 
 
@@ -307,7 +369,31 @@ textarea:-webkit-autofill {
 
 
 
+
 /*task creation form ends*/
+
+
+/*manage project form starts*/
+
+.manage_project.input-field label {
+    color: #ffab40;
+}
+
+.manage_project.input-field input:focus+label {
+    color: #ffab40;
+}
+
+.manage_project.input-field input:focus {
+    border-bottom: 1px solid #ffab40;
+    box-shadow: 0 1px 0 0 #ffab40;
+}
+
+.manage_project.input-field .prefix.active {
+    color: #ffab40;
+}
+
+
+/*manage project form ends*/
 
 
 /*calender css*/
@@ -315,6 +401,7 @@ textarea:-webkit-autofill {
 .picker {
     outline: none;
 }
+
 
 
 /* Optional feature */
@@ -328,11 +415,13 @@ textarea:-webkit-autofill {
 }
 
 
+
 /* Body - Today info */
 
 .picker__date-display {
     background-color: #f9a825;
 }
+
 
 
 /* Buttons of actions */
@@ -376,6 +465,7 @@ textarea:-webkit-autofill {
 }
 
 
+
 /* Select months of the year */
 
 .picker__select--month.browser-default {
@@ -385,6 +475,7 @@ textarea:-webkit-autofill {
     border: none;
     outline: none;
 }
+
 
 
 /* Every month of the year except: today */
@@ -405,6 +496,7 @@ textarea:-webkit-autofill {
 }
 
 
+
 /* Today */
 
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted {
@@ -415,6 +507,7 @@ textarea:-webkit-autofill {
     color: #ff6f00;
     font-weight: 700;
 }
+
 
 
 /*calender css ends*/

@@ -141,16 +141,20 @@ def accept_invitation(request):
 
 def project_detail(request, id):
     project = get_object_or_404(Project, id=id)
-    total_tasks_count = project.tasks.count
+    total_tasks_count = project.tasks.count()
     ongoing_tasks_count = project.tasks.filter(percentage_complete__gte=0,
-                                               percentage_complete__lt=100).count
-    completed_tasks_count = project.tasks.filter(percentage_complete=100).count
-
+                                               percentage_complete__lt=100).count()
+    completed_tasks_count = project.tasks.filter(
+        percentage_complete=100).count()
+    stats_data = [
+        ['Total Tasks', total_tasks_count],
+        ['Completed Tasks', completed_tasks_count],
+        ['Ongoing Tasks', ongoing_tasks_count]
+    ]
+    # stats_data = json.dumps(stats_data)
     context = {
         'project': project,
-        'total_tasks_count': total_tasks_count,
-        'ongoing_tasks_count': ongoing_tasks_count,
-        'completed_tasks_count': completed_tasks_count
+        'stats_data': stats_data
     }
     return render(request, 'project_detail.html', context)
 
