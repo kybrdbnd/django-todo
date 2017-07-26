@@ -16,20 +16,35 @@
 
 
 
-
-
-
-
-
-
-
-
 /*preloader ends*/
 
 .home {
-    background-image: url('../img/home_background.jpg');
+    background-image: url('../images/home_background.jpg');
     height: 100vh;
 }
+
+.login_page {
+    background-image: url('../images/sign_in.jpg');
+    background-position: center;
+    height: 100vh;
+}
+
+.forgot_page {
+    background-image: url('../images/house-key.png');
+    background-position: center;
+    background-size: contain;
+    height: 100vh;
+}
+
+.forgot_page_success {
+    background-image: url('../images/success.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+
+
 
 .image_overlay {
     background-color: black;
