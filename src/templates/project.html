@@ -44,7 +44,7 @@
             <div class="col m6 " ng-show="selected_project!='all_projects' ">
                 <div class="col m12 input-field">
                     <span ng-repeat="member in members">
-                        <a ng-click="selectMember(member.id)" tooltips tooltip-template="{{member.role.name}}" tooltip-smart="true"><span class="chip">{{member.user.username}}</span></a>
+                        <a ng-click="selectMember(member.id)" tooltips tooltip-template="{{member.role.name}}" tooltip-smart="true"><span class="chip member_name">{{member.user.username}}</span></a>
                     </span>
                 </div>
             </div>
@@ -89,12 +89,12 @@
                                     <a class="assign_operation" ng-click="editPercentage(this)">Edit</a>
                                     <div class="row" ng-if="showPutBack">
                                         <div class="col m9">
-                                            <p class="input-field col m12">
+                                            <p class="input-field col m12 task_fields">
                                                 <input type="text" id="{{task.id}}" ng-model="reason" />
                                             </p>
                                         </div>
-                                        <div class="col m3">
-                                            <a ng-click="taskPutBack(reason,task.id)">Save</a>
+                                        <div class="input-field col m3">
+                                            <a class="confirm_btn" ng-click="taskPutBack(reason,task.id)">Save</a>
                                         </div>
                                     </div>
                                     <div class="row" ng-if="showRange">
@@ -103,8 +103,8 @@
                                                 <input type="range" id="{{task.id}}" value="{{task.percentage_complete}}" min="0" max="100" />
                                             </p>
                                         </div>
-                                        <div class="col m3">
-                                            <a ng-click="savePercentage(task.id)">Save</a>
+                                        <div class="input-field col m3">
+                                            <a class="confirm_btn" ng-click="savePercentage(task.id)">Save</a>
                                         </div>
                                     </div>
                                 </div>
@@ -177,12 +177,12 @@
                 </div>
                 <form ng-submit="addtask() " class="form_list ">
                     <div class="row ">
-                        <div class="input-field col m8">
+                        <div class="input-field col m8 task_create">
                             <textarea id="task_name " ng-model="task " class="materialize-textarea "></textarea>
                             <label for="task_name ">Task:</label>
                         </div>
-                        <div class="m4 ">
-                            <button class="btn waves-effect waves-light " type="submit " name="action " id="save_task ">Save
+                        <div class="input-field col m4">
+                            <button class="waves-effect waves-light btn deep-orange darken-1" type="submit " name="action " id="save_task">Save
                             </button>
                         </div>
                     </div>

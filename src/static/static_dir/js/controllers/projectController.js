@@ -25,7 +25,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
         $scope.today_tasks_request = $http.get('/api/tasks/');
         $q.all([$scope.selected_project_request, $scope.today_tasks_request]).then(function(value) {
             $scope.projects = value[0].data
-            $scope.summary_project['projeyesterdayDatects'] = value[0].data
+            // $scope.summary_project['projeyesterdayDatects'] = value[0].data
             $scope.summary_project['project_count'] = value[0].data.length
             $scope.summary_project['tasks'] = value[1].data
             $scope.summary_project['task_count'] = value[1].data.length

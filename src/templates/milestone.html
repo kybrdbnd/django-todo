@@ -35,8 +35,9 @@
         </div>
     </form>
     <h4>View MileStones</h4>
-    <hr/> {% for project in projects %} {% if project.milestones.all %}
-    <ul><b>{{project.name}}</b> {% for milestone in project.milestones.all %}
+    <hr/> {% for project in projects %}
+    <ul><h4><b>{{project.name}}</b></h4> {% if project.milestones.all %}
+    {% for milestone in project.milestones.all %}
         <li>MileStone TimeRemaining: {{milestone.end_date|timeuntil}}</li>
         <li>Milestone Name: {{milestone.name}}</li>
         <li>Milestone Description:{{milestone.description}}</li>
