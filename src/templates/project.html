@@ -4,7 +4,7 @@
     <div class="col m3 project_names">
         <div class="row">
             <div class="col m10">
-                <div class="card yellow lighten-4" ng-click="current_project('all_projects',0)">
+                <div class="card colaborar-cards" ng-click="current_project('all_projects',0)">
                     <div class="card-content">
                         <span class="card-title">All Projects</span>
                         <p>Total Projects: {{summary_project.project_count}}</p>
@@ -15,7 +15,7 @@
         </div>
         <div class="row" ng-repeat="project in projects">
             <div class="col m10 project_card">
-                <div class="card yellow lighten-4" ng-click="current_project(project.name,project.id)">
+                <div class="card colaborar-cards" ng-click="current_project(project.name,project.id)">
                     <div class="card-content">
                         <span class="card-title">{{project.name}}</span>
                         <p></p>
@@ -79,14 +79,14 @@
                 <div ng-repeat="task in tasks | orderBy : 'percentage_complete'">
                     <div class="row">
                         <div class="col s12 m10">
-                            <div class="card brown hoverable">
-                                <div class="card-content white-text">
+                            <div class="card colaborar-cards hoverable">
+                                <div class="card-content">
                                     <p>{{task.name}}</p>
                                 </div>
                                 <div class="card-action">
-                                    <a class="assign_operation" href="#">{{task.percentage_complete}}% Completed</a>
-                                    <a class="assign_operation" ng-click="edittaskPutBack(this)">Put Back</a>
-                                    <a class="assign_operation" ng-click="editPercentage(this)">Edit</a>
+                                    <a class="assign_operation colaborar_taskassign" href="#">{{task.percentage_complete}}% Completed</a>
+                                    <a class="assign_operation colaborar_taskassign" ng-click="edittaskPutBack(this)">Put Back</a>
+                                    <a class="assign_operation colaborar_taskassign" ng-click="editPercentage(this)">Edit</a>
                                     <div class="row" ng-if="showPutBack">
                                         <div class="col m9">
                                             <p class="input-field col m12 task_fields">
@@ -94,7 +94,7 @@
                                             </p>
                                         </div>
                                         <div class="input-field col m3">
-                                            <a class="confirm_btn" ng-click="taskPutBack(reason,task.id)">Save</a>
+                                            <a class="confirm_btn colaborar_taskassign" ng-click="taskPutBack(reason,task.id)">Save</a>
                                         </div>
                                     </div>
                                     <div class="row" ng-if="showRange">
@@ -104,7 +104,7 @@
                                             </p>
                                         </div>
                                         <div class="input-field col m3">
-                                            <a class="confirm_btn" ng-click="savePercentage(task.id)">Save</a>
+                                            <a class="confirm_btn colaborar_taskassign" ng-click="savePercentage(task.id)">Save</a>
                                         </div>
                                     </div>
                                 </div>
@@ -119,20 +119,20 @@
                     <ul ng-repeat="task in queue | orderBy : '-assigned_to'" class="task_list ">
                         <div class="row ">
                             <div class="col m12 ">
-                                <div class="card yellow lighten-4 hoverable">
+                                <div class="card colaborar-cards hoverable">
                                     <div class="card-content">
                                         <span>{{task.name}}</span>
                                         <span ng-if="task.assigned_to==null">
                                             <a ng-click="deleteFromQueue(task.id)">
-                                                <span><i class="material-icons orange-text text-darken-4 task_delete">delete</i></span>
+                                                <span><i class="material-icons task_delete">delete</i></span>
                                             </a>
                                         </span>
                                     </div>
                                     <div ng-if="task.assigned_to==null">
                                         <div class="card-action">
-                                            <a ng-click="assignDate(this, task.id)" class="assign_operation orange-text text-darken-4">Assign To Yourself
+                                            <a ng-click="assignDate(this, task.id)" class="assign_operation colaborar_taskassign">Assign To Yourself
                                             </a>
-                                            <a ng-click="assignTask(this, task.id)" class="assign_operation orange-text text-darken-4">
+                                            <a ng-click="assignTask(this, task.id)" class="assign_operation colaborar_taskassign">
                                                 Assign To Other
                                             </a>
                                             <div ng-show="taskDate" class="row">
@@ -164,9 +164,9 @@
                                     </div>
                                     <div ng-if="task.assigned_to!=null">
                                         <div class="card-action ">
-                                            <a class="orange-text text-darken-4" href="#">{{task.assigned_to.user.username}}
+                                            <a class="colaborar_taskassign" href="#">{{task.assigned_to.user.username}}
                                             </a>
-                                            <a class="orange-text text-darken-4" href="#">{{task.percentage_complete}} % Completed
+                                            <a class="colaborar_taskassign" href="#">{{task.percentage_complete}} % Completed
                                             </a>
                                         </div>
                                     </div>
@@ -182,7 +182,7 @@
                             <label for="task_name ">Task:</label>
                         </div>
                         <div class="input-field col m4">
-                            <button class="waves-effect waves-light btn deep-orange darken-1" type="submit " name="action " id="save_task">Save
+                            <button class="waves-effect waves-light btn colaborar-buttons" type="submit " name="action " id="save_task">Save
                             </button>
                         </div>
                     </div>

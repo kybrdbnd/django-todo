@@ -15,8 +15,30 @@
 }
 
 
+
 /*preloader ends*/
 
+.colaborar-navbar {
+    background-color: #1d96d6;
+}
+
+.colaborar-buttons, .colaborar-buttons:hover {
+    background-color: #4862c1;
+}
+
+.colaborar-cards{
+    background-color: #eee;
+    color: black;
+}
+
+.colaborar_taskassign{
+    color: #0b1a88 !important;
+}
+
+.colaborar_task_card{
+    background-color: #99e442;
+    color: black;
+}
 .home {
     background-image: url('../images/home_background.jpg');
     height: 100vh;
@@ -84,11 +106,17 @@
 
 
 
+
+
+
 /*navbar*/
 
 nav ul a {
     padding: 0 20px;
 }
+
+
+
 
 
 
@@ -177,18 +205,21 @@ nav ul a {
 }
 
 input[type=range]+.thumb {
-    background-color: #ffab40 !important;
+    background-color: #0b1a88 !important;
 }
 
 
 .member_name {
-    background-color: #ffb300;
+    background-color: #5b51f5;
     color: #fff;
 }
 
 .member_name:hover {
     cursor: pointer
 }
+
+
+
 
 
 /*project page ends*/
@@ -211,6 +242,9 @@ input[type=range]+.thumb {
 .browse-btn button {
     margin-top: 1em;
 }
+
+
+
 
 
 /*profile page ends*/
@@ -256,6 +290,9 @@ input[type=range]+.thumb {
 }
 
 
+
+
+
 /*manage page ends*/
 
 
@@ -272,6 +309,9 @@ input[type=range]+.thumb {
     font-weight: 300;
     font-size: 38px;
 }
+
+
+
 
 
 /*project detail page ends*/
@@ -312,12 +352,33 @@ input[type=range]+.thumb {
     box-shadow: 0 1px 0 0 #ffab40;
 }
 
-#start_date_root.picker--opened .picker__holder{
+#start_date_root.picker--opened .picker__holder {
     top: -48px !important;
 }
-#end_date_root.picker--opened .picker__holder{
+
+#end_date_root.picker--opened .picker__holder {
     top: -48px !important;
 }
+
+.milestone_details {
+    top: 9px;
+    position: relative;
+    margin-bottom: 55px;
+}
+
+.milestone_fields {
+    display: block;
+    line-height: 1.7;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.milestone_project_heading {
+    font-size: 45px;
+    font-weight: 300;
+}
+
+
 /*milestone page and form ends*/
 
 
@@ -342,8 +403,6 @@ textarea:-webkit-autofill {
     background-image: none;
     color: rgb(0, 0, 0);
 }
-
-
 
 /*home input form ends*/
 
@@ -378,25 +437,23 @@ textarea:-webkit-autofill {
     color: #f4511e;
 }
 
-
 /*home pages ends*/
 
 
 /*project input form starts*/
 
 .task_fields {
-    color: white;
+    color: black;
 }
 
 .task_fields.input-field input:focus {
-    border-bottom: 1px solid #ffab40;
-    box-shadow: 0 1px 0 0 #ffab40;
+    border-bottom: 1px solid #0b1a88;
+    box-shadow: 0 1px 0 0 #0b1a88;
 }
 
 .task_fields.input-field .prefix.active {
-    color: #ffab40;
+    color: #0b1a88;
 }
-
 
 
 /*project input form ends*/
@@ -405,22 +462,21 @@ textarea:-webkit-autofill {
 /*task creation form starts*/
 
 .task_create.input-field label {
-    color: #e65100;
+    color: #0b1a88;
 }
 
 .task_create.input-field textarea:focus+label {
-    color: #e65100;
+    color: #0b1a88;
 }
 
 .task_create.input-field textarea:focus {
-    border-bottom: 1px solid #e65100;
-    box-shadow: 0 1px 0 0 #e65100;
+    border-bottom: 1px solid #0b1a88;
+    box-shadow: 0 1px 0 0 #0b1a88;
 }
 
 .task_create.input-field .prefix.active {
-    color: #e65100;
+    color: #0b1a88;
 }
-
 
 
 /*task creation form ends*/
@@ -447,6 +503,9 @@ textarea:-webkit-autofill {
 
 
 
+
+
+
 /*manage project form ends*/
 
 
@@ -455,6 +514,9 @@ textarea:-webkit-autofill {
 .picker {
     outline: none;
 }
+
+
+
 
 
 
@@ -472,11 +534,17 @@ textarea:-webkit-autofill {
 
 
 
+
+
+
 /* Body - Today info */
 
 .picker__date-display {
     background-color: #f9a825;
 }
+
+
+
 
 
 
@@ -524,6 +592,9 @@ textarea:-webkit-autofill {
 
 
 
+
+
+
 /* Select months of the year */
 
 .picker__select--month.browser-default {
@@ -533,6 +604,9 @@ textarea:-webkit-autofill {
     border: none;
     outline: none;
 }
+
+
+
 
 
 /* Every month of the year except: today */
@@ -553,6 +627,9 @@ textarea:-webkit-autofill {
 }
 
 
+
+
+
 /* Today */
 
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted {
@@ -563,6 +640,9 @@ textarea:-webkit-autofill {
     color: #ff6f00;
     font-weight: 700;
 }
+
+
+
 
 
 

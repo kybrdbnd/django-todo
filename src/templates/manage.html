@@ -4,13 +4,13 @@
     <br> {% if project_manager or owner %}
     <div class="row">
     <div class="col m4 center-align">
-            <a class="waves-effect waves-light btn amber darken-2" href="{% url 'todo:milestone' %}"><i class="material-icons left">assignment</i>View/Manage MileStones</a>
+            <a class="waves-effect waves-light btn colaborar-buttons" href="{% url 'todo:milestone' %}"><i class="material-icons left">assignment</i>View/Manage MileStones</a>
         </div>
         <div class="col m4 center-align">
-            <a class="waves-effect waves-light btn amber darken-2" href="#send_invitaton_modal"><i class="material-icons left">file_upload</i>Send Invite</a>
+            <a class="waves-effect waves-light btn colaborar-buttons" href="#send_invitaton_modal"><i class="material-icons left">file_upload</i>Send Invite</a>
         </div>
         <div class="col m4 center-align">
-            <a class="waves-effect waves-light btn amber darken-2" href="#project_modal"><i class="material-icons left">note_add</i>Add Project</a>
+            <a class="waves-effect waves-light btn colaborar-buttons" href="#project_modal"><i class="material-icons left">note_add</i>Add Project</a>
         </div>
         <!-- Project Modal Structure -->
         <div id="project_modal" class="modal add_project_modal">
@@ -20,7 +20,7 @@
                         <input type="text" name="name" ng-model="name" autofocus> {{project_form.name.label_tag}}
                     </div>
                     <div class="input-field col m4">
-                        <button ng-click="addProject(name)" class="modal-action waves-effect waves-light btn amber darken-2">Add</button>
+                        <button ng-click="addProject(name)" class="modal-action waves-effect waves-light btn colaborar-buttons">Add</button>
                     </div>
                 </div>
             </form>
@@ -37,7 +37,7 @@
                         <label for="email">Enter Inviter Email Id</label>
                     </div>
                     <div class="input-field col m4">
-                        <button ng-click="sendInvite(email)" class="mmodal-action waves-effect waves-light btn amber darken-2">Send</button>
+                        <button ng-click="sendInvite(email)" class="mmodal-action waves-effect waves-light btn colaborar-buttons">Send</button>
                     </div>
                 </div>
             </form>
@@ -75,7 +75,7 @@
             {% verbatim%}
             <div class="row" ng-repeat="project in projects">
                 <div class="col m12 manage_projects">
-                    <div class="card yellow lighten-3 hoverable" jqyoui-droppable="{onDrop:'addMember(project)'}" data-drop="true" id="{{project.id}}">
+                    <div class="card colaborar-cards hoverable" jqyoui-droppable="{onDrop:'addMember(project)'}" data-drop="true" id="{{project.id}}">
                         <div class="card-content manage_project_tile">
                             <span class="manage_project_name">{{project.name}}</span>
                             <span><a ng-click="deleteProject(project.id)"><i class="material-icons black-text text-darken-4 project_delete">delete</i></a></span>
