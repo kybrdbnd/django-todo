@@ -1,60 +1,85 @@
 {% extends 'base.html' %}{% block content%} {% include 'preloader.html' %}
 <div class="container">
-    <h4>Create MileStone</h4>
-    <hr/>
-    <form method='post' action="{% url 'todo:milestone' %}" novalidate>
-        {% csrf_token%}
-        <div class="row">
-            <div class="input-field col m4">
-                <select name='projects' required="true">
-                    <option value="" disabled selected>Choose your Project</option>
-                    {% for project in projects %}
-                    <option value="{{project.id}}">{{project}}</option>
-                    {% endfor%}
-                </select>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large waves-effect waves-light amber darken-2 modal-trigger" href="#add_milestone">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    </div>
+    <!-- Modal Structure -->
+    <div id="add_milestone" class="modal">
+        <form method='post' action="{% url 'todo:milestone' %}" novalidate>
+            {% csrf_token%}
+            <div class="modal-content">
+                <div class="row">
+                    <div class="input-field col m4">
+                        <select name='projects' required="true" class="milestone_form">
+                            <option value="" disabled selected>Choose your Project</option>
+                            {% for project in projects %}
+                            <option value="{{project.id}}">{{project}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="input-field col m4 milestone_form">
+                        <label for="name">Enter MileStone Name</label>
+                        <input type="text" name="name" ng-model="name">
+                    </div>
+                    <div class="input-field col m3 milestone_form">
+                        <input type="date" id="start_date" name="start_date" placeholder="Choose Start Date" class="datepicker">
+                    </div>
+                    <div class="input-field col m3 milestone_form">
+                        <input type="date" id="end_date" name="end_date" placeholder="Choose End Date" class="datepicker">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m12 milestone_form">
+                        <textarea id="milestone_description" name="description" class="materialize-textarea"></textarea>
+                        <label for="milestone_description">Enter MileStone Description</label>
+                    </div>
+                </div>
             </div>
-            <div class="input-field col m4">
-                <label for="name">Enter MileStone</label>
-                <input type="text" name="name" ng-model="name">
+            <div class="modal-footer">
+                <div class="input-field">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+                </div>
+                <div class="input-field">
+                    <button class="waves-effect waves-light btn amber darken-2" type="submit">Save</button>
+                </div>
             </div>
-            <div class="input-field col m2">
-                <input type="date" id="start_date" name="start_date" placeholder="Choose Start Date" class="datepicker">
-            </div>
-            <div class="input-field col m2">
-                <input type="date" id="end_date" name="end_date" placeholder="Choose End Date" class="datepicker">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col m8">
-                <textarea id="milestone_description" name="description" class="materialize-textarea"></textarea>
-                <label for="milestone_description">Enter MileStone Description</label>
-            </div>
-            <div class="input-field col m4">
-                <button class="waves-effect waves-light btn" type="submit">Save</button>
-            </div>
-        </div>
-    </form>
-    <h4>View MileStones</h4>
-    <hr/> {% for project in projects %}
-    <ul><h4><b>{{project.name}}</b></h4> {% if project.milestones.all %}
-    {% for milestone in project.milestones.all %}
-        <li>MileStone TimeRemaining: {{milestone.end_date|timeuntil}}</li>
-        <li>Milestone Name: {{milestone.name}}</li>
-        <li>Milestone Description:{{milestone.description}}</li>
+        </form>
+    </div>
+    {% for project in projects %}
+    <h4><b>{{project.name}}</b></h4> {% if project.milestones.all %}
+    <ul class="tabs z-depth-1">
+        {% for milestone in project.milestones.all %}
+        <li class="tab"><a href="#{{milestone.id}}">{{milestone.name}}</a></li>
         {% endfor %}
     </ul>
-    {%else%}
+    {% for milestone in project.milestones.all %}
+    <div id="{{milestone.id}}">
+        <span>Time Remaining: {{milestone.end_date|timeuntil}}</span>
+        <br>
+        <span>Description:{{milestone.description}}</span>
+        <br>
+        <span>Modules: NAme of the MOdules to be added</span>
+        <br>
+        <a class="btn waves-effect waves-light amber darken-2">Finish</a>
+    </div>
+    {% endfor %} {%else%}
     <h5>No Milestones Available</h5> {% endif %} {% endfor %}
 </div>
 {% endblock %} {% block extra_js %}
 <script>
+$('.modal').modal();
 $('#start_date').pickadate({
     selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
+    selectYears: 15, // Creates a dropdown of 15 years to control year
+    min: true
 });
 $('#end_date').pickadate({
     selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
+    selectYears: 15, // Creates a dropdown of 15 years to control year
+    min: true
 });
 $('select').material_select();
 </script>
