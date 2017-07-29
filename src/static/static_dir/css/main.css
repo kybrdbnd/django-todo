@@ -18,6 +18,27 @@
 
 /*preloader ends*/
 
+.colaborar-navbar {
+    background-color: #1d96d6;
+}
+
+.colaborar-buttons, .colaborar-buttons:hover {
+    background-color: #4862c1;
+}
+
+.colaborar-cards{
+    background-color: #eee;
+    color: black;
+}
+
+.colaborar_taskassign{
+    color: #0b1a88 !important;
+}
+
+.colaborar_task_card{
+    background-color: #99e442;
+    color: black;
+}
 .home {
     background-image: url('../images/home_background.jpg');
     height: 100vh;
@@ -43,9 +64,6 @@
     height: 100vh;
 }
 
-
-
-
 .image_overlay {
     background-color: black;
     opacity: .7;
@@ -63,7 +81,6 @@
 
 .project_heading {
     color: white;
-    /*opacity: .3;*/
 }
 
 .project_title {
@@ -88,6 +105,10 @@
 }
 
 
+
+
+
+
 /*navbar*/
 
 nav ul a {
@@ -95,7 +116,14 @@ nav ul a {
 }
 
 
+
+
+
+
 /*navbar ends*/
+
+
+/*project page starts*/
 
 .summary_project_name {
     font-size: 20px;
@@ -177,18 +205,24 @@ nav ul a {
 }
 
 input[type=range]+.thumb {
-    background-color: #ffab40 !important;
+    background-color: #0b1a88 !important;
 }
 
 
 .member_name {
-    background-color: #ffb300;
+    background-color: #5b51f5;
     color: #fff;
 }
 
 .member_name:hover {
     cursor: pointer
 }
+
+
+
+
+
+/*project page ends*/
 
 
 /*profile page*/
@@ -205,29 +239,23 @@ input[type=range]+.thumb {
     border: 1px solid #546e7a;
 }
 
-
-
-
-
-/*navbar*/
-
-.nav-header {
-    background-color: #7f3f12 !important;
-}
-
 .browse-btn button {
     margin-top: 1em;
 }
 
 
 
-/*navbar ends*/
+
+
+/*profile page ends*/
 
 
 /*manage page starts*/
-.manage_projects{
+
+.manage_projects {
     margin-bottom: -20px;
 }
+
 .manage_project_name {
     font-size: 28px;
 }
@@ -238,45 +266,121 @@ input[type=range]+.thumb {
     left: 20px;
 }
 
-.project_delete:hover{
+.project_delete:hover {
     cursor: pointer;
 }
 
-.manage_project_tile{
+.manage_project_tile {
     padding-top: 10px !important;
 }
 
-.member_pic{
+.member_pic {
     top: 2px;
     position: relative;
 }
 
-.member_profile_pic{
+.member_profile_pic {
     border-radius: 100%;
     width: 25px;
 }
 
-.add_project_modal,.send_invitation_modal{
+.add_project_modal,
+.send_invitation_modal {
     top: 43% !important;
 }
+
+
+
+
 
 /*manage page ends*/
 
 
 /*project detail pages starts*/
-.project_detail_heading{
+
+.project_detail_heading {
     font-size: 28px;
     font-weight: 300;
 }
 
-.project_detail_project_heading{
+.project_detail_project_heading {
     position: relative;
     left: 6px;
     font-weight: 300;
     font-size: 38px;
 }
 
+
+
+
+
 /*project detail page ends*/
+
+
+/*milestone page and form starts*/
+
+#add_milestone {
+    top: 6% !important;
+    width: 85%;
+    min-height: 89vh;
+}
+
+.milestone_form>option {
+    color: #ffab40 !important;
+}
+
+.milestone_form.input-field label.active {
+    color: #ffab40;
+}
+
+.milestone_form.input-field input:focus {
+    border-bottom: 1px solid #ffab40;
+    box-shadow: 0 1px 0 0 #ffab40;
+}
+
+.milestone_form.input-field .prefix.active {
+    color: #ffab40;
+}
+
+
+.milestone_form.input-field textarea:focus+label {
+    color: #ffab40;
+}
+
+.milestone_form.input-field textarea:focus {
+    border-bottom: 1px solid #ffab40;
+    box-shadow: 0 1px 0 0 #ffab40;
+}
+
+#start_date_root.picker--opened .picker__holder {
+    top: -48px !important;
+}
+
+#end_date_root.picker--opened .picker__holder {
+    top: -48px !important;
+}
+
+.milestone_details {
+    top: 9px;
+    position: relative;
+    margin-bottom: 55px;
+}
+
+.milestone_fields {
+    display: block;
+    line-height: 1.7;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.milestone_project_heading {
+    font-size: 45px;
+    font-weight: 300;
+}
+
+
+/*milestone page and form ends*/
+
 
 /*home input forms starts*/
 
@@ -300,7 +404,6 @@ textarea:-webkit-autofill {
     color: rgb(0, 0, 0);
 }
 
-
 /*home input form ends*/
 
 
@@ -316,10 +419,10 @@ textarea:-webkit-autofill {
 }
 
 
-
-
-
 /*profile input forms ends*/
+
+
+/*home pages starts*/
 
 .home_login {
     color: white;
@@ -334,29 +437,23 @@ textarea:-webkit-autofill {
     color: #f4511e;
 }
 
-
-
-
+/*home pages ends*/
 
 
 /*project input form starts*/
 
 .task_fields {
-    color: white;
+    color: black;
 }
 
 .task_fields.input-field input:focus {
-    border-bottom: 1px solid #ffab40;
-    box-shadow: 0 1px 0 0 #ffab40;
+    border-bottom: 1px solid #0b1a88;
+    box-shadow: 0 1px 0 0 #0b1a88;
 }
 
 .task_fields.input-field .prefix.active {
-    color: #ffab40;
+    color: #0b1a88;
 }
-
-
-
-
 
 
 /*project input form ends*/
@@ -365,24 +462,21 @@ textarea:-webkit-autofill {
 /*task creation form starts*/
 
 .task_create.input-field label {
-    color: #e65100;
+    color: #0b1a88;
 }
 
 .task_create.input-field textarea:focus+label {
-    color: #e65100;
+    color: #0b1a88;
 }
 
 .task_create.input-field textarea:focus {
-    border-bottom: 1px solid #e65100;
-    box-shadow: 0 1px 0 0 #e65100;
+    border-bottom: 1px solid #0b1a88;
+    box-shadow: 0 1px 0 0 #0b1a88;
 }
 
 .task_create.input-field .prefix.active {
-    color: #e65100;
+    color: #0b1a88;
 }
-
-
-
 
 
 /*task creation form ends*/
@@ -408,6 +502,10 @@ textarea:-webkit-autofill {
 }
 
 
+
+
+
+
 /*manage project form ends*/
 
 
@@ -416,6 +514,10 @@ textarea:-webkit-autofill {
 .picker {
     outline: none;
 }
+
+
+
+
 
 
 
@@ -431,11 +533,19 @@ textarea:-webkit-autofill {
 
 
 
+
+
+
+
 /* Body - Today info */
 
 .picker__date-display {
     background-color: #f9a825;
 }
+
+
+
+
 
 
 
@@ -481,6 +591,10 @@ textarea:-webkit-autofill {
 
 
 
+
+
+
+
 /* Select months of the year */
 
 .picker__select--month.browser-default {
@@ -490,6 +604,8 @@ textarea:-webkit-autofill {
     border: none;
     outline: none;
 }
+
+
 
 
 
@@ -512,6 +628,8 @@ textarea:-webkit-autofill {
 
 
 
+
+
 /* Today */
 
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted {
@@ -522,6 +640,9 @@ textarea:-webkit-autofill {
     color: #ff6f00;
     font-weight: 700;
 }
+
+
+
 
 
 
