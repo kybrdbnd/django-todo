@@ -3,7 +3,7 @@
     <br>
     <br> {% if project_manager or owner %}
     <div class="row">
-    <div class="col m4 center-align">
+        <div class="col m4 center-align">
             <a class="waves-effect waves-light btn amber darken-2" href="{% url 'todo:milestone' %}"><i class="material-icons left">assignment</i>View/Manage MileStones</a>
         </div>
         <div class="col m4 center-align">
@@ -65,7 +65,12 @@
                     </div>
                     {% else%}
                     <div class="col m3" ng-repeat="employee in company.employees">
-                        {% verbatim %} {{employee.user.username}} {% endverbatim %}
+                        <span class="chip member_name">
+                        <img src="{% static 'images/avatar.jpg'%}" alt="Contact Person">
+                        {% verbatim%}
+                        {{employee.user.username}}
+                        {% endverbatim %}
+                        </span>
                     </div>
                     {% endif%}
                 </div>
@@ -81,7 +86,7 @@
                             <span><a ng-click="deleteProject(project.id)"><i class="material-icons black-text text-darken-4 project_delete">delete</i></a></span>
                             <br/> Members:
                             <div class="row">
-                                <div class="col m4" ng-repeat="member in project.members">
+                                <div class="col m2" ng-repeat="member in project.members">
                                     <span class="member_pic" tooltips tooltip-template="{{member.user.username}}" tooltip-smart="true">
                                     {%endverbatim%}
                                         <img class="member_profile_pic" src="{%static 'images/avatar.jpg'%}" alt="">

@@ -2,11 +2,13 @@ from django.conf.urls import url
 from .views import (ProjectListView, ProjectDetailView,
                     CompanyListView, ProjectTaskListView,
                     InvitationListView, EmployeePageView,
-                    TodayTaskListView)
+                    TodayTaskListView, CompanyProjectListView)
 
 urlpatterns = [
 
     url(r'^$', ProjectListView.as_view(), name='project_list'),
+    url(r'^company-projects/', CompanyProjectListView.as_view(),
+        name='company_project_list'),
     url(r'^project/(?P<pk>\d+)/task/date/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$',
         ProjectTaskListView.as_view(), name='project_task_detail'),
     url(r'^project/(?P<pk>\d+)/$',

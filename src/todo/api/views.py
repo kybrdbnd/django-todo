@@ -43,6 +43,15 @@ class ProjectTaskListView(ListAPIView):
         return project_tasks
 
 
+class CompanyProjectListView(ListAPIView):
+    serializer_class = ProjectListSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        employee = Employee.objects.get(user=self.request.user)
+        company = employee.company_set.all()[0]
+        return company.projects
+
+
 class ProjectListView(ListAPIView):
     serializer_class = ProjectListSerializer
 

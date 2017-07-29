@@ -1,4 +1,4 @@
-angular_module.controller('manageController', ['$scope', '$http', 'cookies', '$q', function($scope, $http, $cookies, $q) {
+angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$q', function($scope, $http, $cookies, $q) {
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;

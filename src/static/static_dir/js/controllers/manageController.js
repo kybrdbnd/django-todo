@@ -7,14 +7,14 @@ angular_module.controller('manageController', ['$scope', '$http', '$cookies', '$
 
     $scope.init = function() {
         $scope.company_request = $http.get('/api/company');
-        $scope.project_request = $http.get('/api');
+        $scope.project_request = $http.get('/api/company-projects');
         $q.all([$scope.company_request, $scope.project_request]).then(function(values) {
             $scope.company = values[0].data[0];
             $scope.projects = values[1].data;
         })
     }
     $scope.refreshProjects = function() {
-        $http.get('/api').then(function(response) {
+        $http.get('/api/company-projects').then(function(response) {
             $scope.projects = response.data;
         })
     }
