@@ -151,7 +151,6 @@ def project_detail(request, id):
         ['Completed Tasks', completed_tasks_count],
         ['Ongoing Tasks', ongoing_tasks_count]
     ]
-    # stats_data = json.dumps(stats_data)
     context = {
         'project': project,
         'stats_data': stats_data

@@ -2,6 +2,11 @@
 <script src="{% static 'libs/chartkick/js/chartkick.js'%}"></script>
 <script src="{% static 'libs/chartkick/js/Chart.min.js'%}"></script>
 <div class="container">
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    </div>
     <br>
     <div class="row">
         <div class="col m12">
@@ -30,8 +35,7 @@
             <div>
                 <span class="project_detail_heading">Stats:</span>
             </div>
-            <br>
-            {% bar_chart stats_data with min=0 max=50%}
+            <br> {% bar_chart stats_data with min=0 max=50%}
         </div>
         <div class="row"></div>
         <div class="col m12">
@@ -39,7 +43,7 @@
         </div>
         {% for member in project.members.all%}
         <div class="col s12 m4">
-            <div class="card yellow lighten-4 hoverable">
+            <div class="card colaborar-cards hoverable">
                 <div class="card-content">
                     <span class="card-title">{{member.user.username}}
                         <span class="right">{{member.role.name}}</span>

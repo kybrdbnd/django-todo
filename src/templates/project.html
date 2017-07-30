@@ -141,12 +141,12 @@
                                                     <input type="date" id="your_date{{task.id}}" class="datepicker" ng-model="taskAssignDate" />
                                                 </div>
                                                 <div class="input-field col m3">
-                                                    <a class="orange-text text-darken-4 confirm_btn" ng-click="assignYourself(task.id)">Confirm
+                                                    <a class="colaborar_taskassign confirm_btn" ng-click="assignYourself(task.id)">Confirm
                                                     </a>
                                                 </div>
                                             </div>
                                             <div ng-show="taskToOther" class="row">
-                                                <div class="input-field col m9">
+                                                <div class="input-field col m9 assign_task">
                                                     <input type="text" id="autocomplete-input" class="autocomplete" ng-model="otherMember" />
                                                     <label for="autocomplete-input">Choose Member</label>
                                                 </div>
@@ -156,7 +156,7 @@
                                                     <input type="date" id="other_task{{task.id}}" class="datepicker" ng-model="taskAssignDate" />
                                                 </div>
                                                 <div class="input-field col m3">
-                                                    <a class="orange-text text-darken-4 confirm_btn" ng-click="assignToOther(task.id)">Confirm
+                                                    <a class="colaborar_taskassign confirm_btn" ng-click="assignToOther(task.id)">Confirm
                                                     </a>
                                                 </div>
                                             </div>

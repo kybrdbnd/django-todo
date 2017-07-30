@@ -43,7 +43,7 @@
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
                 </div>
                 <div class="input-field">
-                    <button class="waves-effect waves-light btn amber darken-2" type="submit">Save</button>
+                    <button class="waves-effect waves-light btn colaborar-buttons" type="submit">Save</button>
                 </div>
             </div>
         </form>
@@ -52,7 +52,7 @@
     {% for project in projects %}
     <span class="milestone_project_heading">{{project.name}}</span> 
     {% if project.milestones.all %}
-    <ul class="tabs z-depth-1">
+    <ul class="tabs z-depth-1 milestones">
         {% for milestone in project.milestones.all %}
         <li class="tab"><a href="#{{milestone.id}}">{{milestone.name}}</a></li>
         {% endfor %}
@@ -64,7 +64,7 @@
             <span class="milestone_fields">Description:&nbsp;{{milestone.description}}</span>
             <span class="milestone_fields">Modules:&nbsp;Name of the Modules to be added</span>
             <br>
-            <a class="btn waves-effect waves-light amber darken-2">
+            <a class="btn waves-effect waves-light colaborar-buttons">
             <i class="material-icons right">done_all</i>
             Finish</a>
         </div>
