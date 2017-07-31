@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% block content%} {% include 'preloader.html' %}
 <div class="container">
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large waves-effect waves-light colaborar-buttons modal-trigger" href="#add_milestone">
+        <a class="btn-floating btn-large waves-effect waves-light blue darken-4 modal-trigger" href="#add_milestone">
       <i class="large material-icons">note_add</i>
     </a>
     </div>
@@ -43,7 +43,7 @@
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
                 </div>
                 <div class="input-field">
-                    <button class="waves-effect waves-light btn colaborar-buttons" type="submit">Save</button>
+                    <button class="waves-effect waves-light btn blue darken-4" type="submit">Save</button>
                 </div>
             </div>
         </form>
@@ -64,7 +64,7 @@
             <span class="milestone_fields">Description:&nbsp;{{milestone.description}}</span>
             <span class="milestone_fields">Modules:&nbsp;Name of the Modules to be added</span>
             <br>
-            <a class="btn waves-effect waves-light colaborar-buttons">
+            <a class="btn waves-effect waves-light blue darken-4">
             <i class="material-icons right">done_all</i>
             Finish</a>
         </div>

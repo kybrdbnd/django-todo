@@ -17,18 +17,12 @@
 .colaborar-navbar {
     background-color: #1d96d6;
 }
-.colaborar-buttons,
-.colaborar-buttons:hover,
-.colaborar-button:visited,
-.colaborar-button:active {
-    background-color: #095d98;
-}
 .colaborar-cards {
     background-color: #eee;
     color: black;
 }
 .colaborar_taskassign {
-    color: #095d98 !important;
+    color: #d32f2f !important;
 }
 .colaborar_task_card {
     background-color: #99e442;
@@ -380,13 +374,13 @@ textarea:-webkit-autofill {
 /* Header - Day of the week */
 
 .picker__weekday-display {
-    background-color: #f57f17;
+    background-color: #d32f2f;
     font-weight: 600;
 }
 /* Body - Today info */
 
 .picker__date-display {
-    background-color: #f9a825;
+    background-color: #e53935;
 }
 /* Buttons of actions */
 
@@ -398,17 +392,17 @@ textarea:-webkit-autofill {
 }
 .picker__nav--prev:before {
     border-left: 0;
-    border-right: 0.75em solid #ef6c00;
+    border-right: 0.75em solid #d32f2f;
 }
 .picker__nav--next:before {
     border-right: 0;
-    border-left: 0.75em solid #ef6c00;
+    border-left: 0.75em solid #d32f2f;
 }
 .picker__today {
-    color: #e65100;
+    color: #b71c1c;
 }
 .picker__close {
-    color: #e65100;
+    color: #b71c1c;
 }
 .btn-flat.picker__today:active {
     background-color: #fff3e0;
@@ -431,7 +425,7 @@ textarea:-webkit-autofill {
 /* Every month of the year except: today */
 
 .picker__day--infocus:hover {
-    color: #f57c00;
+    color: #c62828;
 }
 .picker__day--selected,
 .picker__day--selected:hover,
@@ -440,15 +434,15 @@ textarea:-webkit-autofill {
     font-weight: 700;
 }
 .picker__day.picker__day--infocus.picker__day--selected.picker__day--highlighted {
-    background-color: #ff8f00;
+    background-color: #e53934;
 }
 /* Today */
 
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted {
-    background-color: #ff8f00;
+    background-color: #e53934;
 }
 .picker__day.picker__day--today {
-    color: #ff6f00;
+    color: #f44336;
     font-weight: 700;
 }
 /*calender css ends*/
