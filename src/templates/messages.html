@@ -4,12 +4,21 @@
     <li id="notification" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
+{% endif %} {% if form.non_field_errors %}
+<ul>
+    {% for error in form.non_field_errors %}
+    <li id="form_errors">{{ error|escape }}</li>
+    {% endfor %}
+</ul>
 {% endif %} {% block extra_js %}
 <script>
 $(document).ready(function() {
 
     var $notification_text = $('#notification').text()
     Materialize.toast($notification_text, 2000, 'rounded');
+
+    var $error_text = $('#form_errors').text()
+    Materialize.toast($error_text, 2000, 'rounded');
 })
 </script>
 {% endblock %}
