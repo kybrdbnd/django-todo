@@ -28,7 +28,7 @@
                 </ul>
             </div>
         </nav>
-        {% block content%} {% endblock%} {%include 'js.html'%} {% block extra_js %} {% endblock %}
+        {% block content%} {% endblock%} {%include 'js.html'%} {%include 'messages.html' %}{% block extra_js %} {% endblock %}
     </body>
 </main>
 <footer>

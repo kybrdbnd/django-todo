@@ -1,0 +1,15 @@
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li id="notification" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} {% block extra_js %}
+<script>
+$(document).ready(function() {
+
+    var $notification_text = $('#notification').text()
+    Materialize.toast($notification_text, 2000, 'rounded');
+})
+</script>
+{% endblock %}
