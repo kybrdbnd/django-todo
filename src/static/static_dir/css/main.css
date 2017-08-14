@@ -119,10 +119,6 @@ nav ul a {
 .assign_operation {
     font-size: 12px;
 }
-.task-panel {
-    height: 330px;
-    overflow-y: scroll;
-}
 .task_list {
     margin-top: 0px !important;
     margin-bottom: -20px !important;
@@ -135,7 +131,7 @@ nav ul a {
     margin-top: 3em;
 }
 .project_names {
-    height: 100vh;
+    height: 80vh;
     overflow-y: auto;
 }
 .project_card {

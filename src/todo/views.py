@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 def home(request):
     if request.user.is_authenticated():
         return redirect('todo:project')
-    return render(request, 'home.html', {})
+    return render(request, 'colaborar/home.html', {})
 
 
 def project(request):
@@ -31,12 +31,12 @@ def project(request):
     current_user_email = request.user.email
     i = Invitation.objects.filter(email=current_user_email)
     if not i.exists():
-        return render(request, 'project.html', context)
+        return render(request, 'colaborar/project.html', context)
     else:
         if i[0].accepted:
-            return render(request, 'project.html', context)
+            return render(request, 'colaborar/project.html', context)
         else:
-            return render(request, 'error_invitation.html', {})
+            return render(request, 'invitation/error_invitation.html', {})
 
 
 def profile(request):
@@ -53,7 +53,7 @@ def profile(request):
         'form': form,
         'role': role
     }
-    return render(request, 'profile.html', context)
+    return render(request, 'colaborar/profile.html', context)
 
 
 def manage_profile(request):
@@ -73,7 +73,7 @@ def manage_profile(request):
         'project_manager': project_manager,
         'project_form': project_form
     }
-    return render(request, 'manage.html', context)
+    return render(request, 'colaborar/manage.html', context)
 
 
 def add_project(request):
@@ -136,7 +136,7 @@ def send_invite(request):
 
 
 def accept_invitation(request):
-    return render(request, 'accept_invitation.html', {})
+    return render(request, 'invitation/accept_invitation.html', {})
 
 
 def project_detail(request, id):
@@ -155,7 +155,7 @@ def project_detail(request, id):
         'project': project,
         'stats_data': stats_data
     }
-    return render(request, 'project_detail.html', context)
+    return render(request, 'colaborar/project_detail.html', context)
 
 
 def add_task(request):
@@ -260,7 +260,7 @@ def milestone(request):
         'projects': projects,
         'form': form
     }
-    return render(request, 'milestone.html', context)
+    return render(request, 'colaborar/milestone.html', context)
 
 
 def delete_task(request, id):

@@ -48,10 +48,8 @@
             </div>
         </form>
     </div>
-    <br>
-    {% for project in projects %}
-    <span class="milestone_project_heading">{{project.name}}</span> 
-    {% if project.milestones.all %}
+    <br> {% for project in projects %}
+    <span class="milestone_project_heading">{{project.name}}</span> {% if project.milestones.all %}
     <ul class="tabs z-depth-1 milestones">
         {% for milestone in project.milestones.all %}
         <li class="tab"><a href="#{{milestone.id}}">{{milestone.name}}</a></li>
