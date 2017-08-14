@@ -123,6 +123,11 @@ nav ul a {
     margin-top: 0px !important;
     margin-bottom: -20px !important;
 }
+.task-panel{
+    height: 310px;
+    overflow-y: auto;
+
+}
 .form_list {
     margin-top: 2em;
     margin-bottom: 0px !important;
@@ -131,7 +136,7 @@ nav ul a {
     margin-top: 3em;
 }
 .project_names {
-    height: 80vh;
+    height: 84vh;
     overflow-y: auto;
 }
 .project_card {
@@ -167,7 +172,14 @@ input[type=range]+.thumb {
 }
 /*profile page ends*/
 /*manage page starts*/
-
+.height_employee{
+    height: 62vh;
+    overflow-y: auto;
+}
+.height_manage_project{
+    height: 74vh;
+    overflow-y: auto;
+}
 .manage_projects {
     margin-bottom: -20px;
 }

@@ -57,7 +57,7 @@
                     <input type="text" ng-model="employee" placeholder="Enter The Name of the Employee">
                 </div>
                 <div class="clearfix"></div>
-                <div class="col m3" ng-repeat="employee in company.employees|filter:employee" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper:'clone'}" id="{{employee.user.id}}" jqyoui-draggable="{animate:true, placeholder:'keep', onDrag:'memberDragging(event)'}">
+                <div class="col m3 height_employee" ng-repeat="employee in company.employees|filter:employee" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper:'clone'}" id="{{employee.user.id}}" jqyoui-draggable="{animate:true, placeholder:'keep', onDrag:'memberDragging(event)'}">
                     <span class="chip member_name">
                         {%endverbatim%}
                         <img src="{% static 'images/avatar.jpg'%}" alt="Contact Person">
@@ -65,7 +65,7 @@
                          {{employee.user.username}}</span> {% endverbatim %}
                 </div>
                 {% else%}
-                <div class="col m3" ng-repeat="employee in company.employees">
+                <div class="col m3 height_employee" ng-repeat="employee in company.employees">
                     <span class="chip member_name">
                         <img src="{% static 'images/avatar.jpg'%}" alt="Contact Person">
                         {% verbatim%}
@@ -76,7 +76,7 @@
                 {% endif%}
             </div>
         </div>
-        <div class="col m4 offset-m2">
+        <div class="col m4 offset-m2 height_manage_project">
             {% verbatim%}
             <div class="input-field col m8 manage_project">
                 <input type="text" ng-model="projectName" placeholder="Enter The Name of the project">
