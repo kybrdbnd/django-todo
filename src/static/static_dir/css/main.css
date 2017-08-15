@@ -92,6 +92,13 @@ nav ul a {
 }
 /*navbar ends*/
 /*project page starts*/
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #db6161;
+}
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #F1F1F1;
+    left: 24px;
+}
 .project_members {
     display: inline-block;
     overflow-x: auto;
@@ -192,12 +199,15 @@ input[type=range]+.thumb {
 /*profile page ends*/
 /*manage page starts*/
 .height_employee{
-    height: 62vh;
+    height: 59vh;
     overflow-y: auto;
 }
 .height_manage_project{
-    height: 74vh;
+    height: 71vh;
     overflow-y: auto;
+}
+.manage_projects:first-child{
+    margin-top: -12px;
 }
 .manage_projects {
     margin-bottom: -20px;

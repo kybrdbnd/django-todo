@@ -116,18 +116,18 @@
             <!-- task queues -->
             <div class="col m5" ng-show="selected_project!='all_projects' ">
                 <div class="task-panel">
-                    <div class="show_ongoing" ng-show="queue.length>0">
+                    <div class="show_ongoing">
                         <div class="col m12">
                             <div class="switch">
                                 <label>
                                     Show Ongoing
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="showongoing" ng-click="showOnGoing($event)">
                                     <span class="lever"></span>
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <ul ng-repeat="task in queue | orderBy : '-assigned_to'" class="task_list ">
+                    <ul ng-repeat="task in queue | orderBy : ['-assigned_to','percentage_complete']" class="task_list ">
                         <div class="row ">
                             <div class="col m12 ">
                                 <div class="card colaborar-cards hoverable">
