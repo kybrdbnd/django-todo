@@ -97,6 +97,10 @@ nav ul a {
     overflow-x: auto;
     white-space: nowrap;
 }
+.show_ongoing{
+    position: absolute;
+    top: 161px;
+}
 .summary_project_name {
     font-size: 20px;
 }
@@ -139,7 +143,7 @@ nav ul a {
     margin-bottom: -20px !important;
 }
 .task-panel{
-    height: 59vh;
+    height: 52vh;
     overflow-y: auto;
 }
 .form_list {

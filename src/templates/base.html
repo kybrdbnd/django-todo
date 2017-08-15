@@ -19,8 +19,8 @@
                     </a></li>
                     <li><a href="{% url 'account_logout' %}"><i class="material-icons left">exit_to_app</i></a></li>
                     <ul id='profile' class='dropdown-content'>
-                        <li><a href="{% url 'profile' %}">Manage Profile</a></li>
-                        <li><a href="{% url 'manage_profile' %}">Manage Projects</a></li>
+                        <li><a href="{% url 'profile' %}"><span class="blue-text text-darken-2">Manage Profile</span></a></li>
+                        <li><a href="{% url 'manage_profile' %}"><span class="blue-text text-darken-2">Manage Projects</span></a></li>
                     </ul>
                     {% else%}
                     <li><a href="{% url 'home' %}">Colaborar</a></li>
