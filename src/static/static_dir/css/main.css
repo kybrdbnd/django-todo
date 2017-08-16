@@ -13,7 +13,9 @@
     bottom: 0;
 }
 /*preloader ends*/
-
+#notification, #form_errors{
+    display: none;
+}
 .colaborar-navbar {
     background-color: #1d96d6;
 }
