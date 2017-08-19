@@ -45,6 +45,7 @@ class Employee(models.Model):
 class Task(SafeDeleteModel):
     _safedelete_policy = SOFT_DELETE_CASCADE
     created_at = models.DateField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateField(auto_now_add=False, auto_now=True)
     name = models.CharField(max_length=100)
     created_by = models.ForeignKey(Employee, related_name='created_by')
     assigned_to = models.ForeignKey(Employee,

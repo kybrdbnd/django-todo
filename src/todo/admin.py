@@ -21,9 +21,9 @@ class ProjectAdmin(SafeDeleteAdmin):
 
 
 class TaskAdmin(SafeDeleteAdmin):
-    list_display = (highlight_deleted, 'created_at', 'created_by',
-                    'assigned_to', 'assigned_date', 'get_project',
-                    'percentage_complete', 'deleted')
+    list_display = (highlight_deleted, 'created_at', 'updated_at',
+                    'created_by', 'assigned_to', 'assigned_date',
+                    'get_project', 'percentage_complete', 'deleted')
 
     def get_project(self, obj):
         project = obj.project_set.all()[0]

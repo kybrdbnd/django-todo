@@ -3,7 +3,7 @@
 <script src="{% static 'libs/chartkick/js/Chart.min.js'%}"></script>
 <div class="container">
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
+        <a class="btn-floating btn-large red" href="{% url 'todo:report' project.id%}">
       <i class="large material-icons">mode_edit</i>
     </a>
     </div>

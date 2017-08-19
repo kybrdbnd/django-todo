@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import (ProfileForm, ProjectForm, MileStoneForm)
 from .models import (Project, Profile, Employee, Task, Role, Backlog)
 from datetime import datetime, timedelta
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from xlsxwriter.workbook import Workbook
 from invitations.models import Invitation
 from random import choice
 from string import ascii_lowercase, digits
@@ -281,3 +282,94 @@ def delete_project(request, id):
     else:
         return JsonResponse({'status': False,
                              'message': "You Don't Have Permission To Delete The Project"})
+
+
+def download_project_report(request, id):
+    project = get_object_or_404(Project, id=id)
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = "attachment; filename=%s.xlsx" % (
+        project.name + '-' + str(datetime.now()))
+    book = Workbook(response, {'in_memory': True})
+    sheet_1 = book.add_worksheet('Members')
+    title_style = book.add_format({
+        'bold': True,
+        'align': 'center',
+        'valign': 'vcenter'})
+    element_style = book.add_format({
+        'align': 'center',
+        'valign': 'vcenter'})
+    element_date_format = book.add_format({
+        'align': 'center',
+        'valign': 'vcenter',
+        'num_format': 'd mmm yyyy'})
+    sheet_1_columns = ["ID", "First Name",
+                       "Last Name", "Username", "Email", "Role"]
+    first_name_col_width = last_name_col_width = username_col_width = email_col_width = role_col_width = 10
+    row = 0
+    for i, elem in enumerate(sheet_1_columns):
+        sheet_1.write(row, i, elem, title_style)
+    row += 1
+    for member in project.members.all():
+        sheet_1.write(row, 0, member.user.id, element_style)
+        sheet_1.write(row, 1, member.user.first_name, element_style)
+        sheet_1.write(row, 2, member.user.last_name, element_style)
+        sheet_1.write(row, 3, member.user.username, element_style)
+        sheet_1.write(row, 4, member.user.email, element_style)
+        sheet_1.write(row, 5, member.role.name, element_style)
+        if len(member.user.first_name) > first_name_col_width:
+            first_name_col_width = len(member.user.first_name)
+        if len(member.user.last_name) > last_name_col_width:
+            last_name_col_width = len(member.user.last_name)
+        if len(member.user.username) > username_col_width:
+            username_col_width = len(member.user.username)
+        if len(member.user.email) > email_col_width:
+            email_col_width = len(member.user.email)
+        if len(member.role.name) > role_col_width:
+            role_col_width = len(member.role.name)
+        row += 1
+    sheet_1.set_column('A:A', 10)
+    sheet_1.set_column('B:B', first_name_col_width)
+    sheet_1.set_column('C:C', last_name_col_width)
+    sheet_1.set_column('D:D', username_col_width)
+    sheet_1.set_column('E:E', email_col_width)
+    sheet_1.set_column('F:F', role_col_width)
+
+    sheet_2 = book.add_worksheet('Task Report')
+    title_text = "Tasks Summary"
+    sheet_2.merge_range('A2:H2', title_text, title_style)
+    row = 3
+    sheet_2_columns = ['ID', 'Task Name',
+                       '% Complete', 'Assigned To', 'Assigned Date',
+                       'Last Updated', 'Created Date']
+    for i, elem in enumerate(sheet_2_columns):
+        sheet_2.write(row, i, elem, title_style)
+    row += 1
+    tasks = project.tasks.all().order_by('percentage_complete')
+    task_name_col_width = assigned_to_col_width = 10
+    for task in tasks:
+        sheet_2.write(row, 0, task.id, element_style)
+        sheet_2.write(row, 1, task.name, element_style)
+        sheet_2.write(row, 2, task.percentage_complete, element_style)
+        if task.assigned_to:
+            sheet_2.write(
+                row, 3, task.assigned_to.user.username, element_style)
+            if len(task.assigned_to.user.username) > assigned_to_col_width:
+                assigned_to_col_width = len(task.assigned_to.user.username)
+        else:
+            sheet_2.write(row, 3, "None", element_style)
+        sheet_2.write(row, 4, task.assigned_date, element_date_format)
+        sheet_2.write(row, 5, task.updated_at, element_date_format)
+        sheet_2.write(row, 6, task.created_at, element_date_format)
+        if len(task.name) > task_name_col_width:
+            task_name_col_width = len(task.name)
+        row += 1
+    sheet_2.set_column('A:A', 10)
+    sheet_2.set_column('B:B', task_name_col_width)
+    sheet_2.set_column('C:C', 20)
+    sheet_2.set_column('D:D', assigned_to_col_width + 10)
+    sheet_2.set_column('E:E', 20)
+    sheet_2.set_column('F:F', 20)
+    sheet_2.set_column('G:G', 20)
+    book.close()
+    return response
