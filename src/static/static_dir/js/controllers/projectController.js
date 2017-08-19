@@ -213,7 +213,21 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
             $http.get(project_date_url).then(function(response) {
                 $scope.tasks = response.data
             })
-            $scope.updateQueue();
+            if ($('#showongoing').is(':checked')) {
+                temp_queue = [];
+                project_detail_url = "/api/project/" + $scope.project_id;
+                $http.get(project_detail_url).then(function(response) {
+                    angular.forEach(response.data.tasks, function(task) {
+                        if (task.percentage_complete >= 0 && task.percentage_complete < 100 && task.assigned_to != null) {
+                            temp_queue.push(task);
+                        }
+                    })
+                    $scope.queue = temp_queue;
+                })
+            } else {
+                $scope.updateQueue();
+            }
+
         })
     }
     $scope.edittaskPutBack = function(context) {
@@ -230,7 +244,20 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
                 $http.get(project_date_url).then(function(response) {
                     $scope.tasks = response.data
                 })
-                $scope.updateQueue();
+                if ($('#showongoing').is(':checked')) {
+                    temp_queue = [];
+                    project_detail_url = "/api/project/" + $scope.project_id;
+                    $http.get(project_detail_url).then(function(response) {
+                        angular.forEach(response.data.tasks, function(task) {
+                            if (task.percentage_complete >= 0 && task.percentage_complete < 100 && task.assigned_to != null) {
+                                temp_queue.push(task);
+                            }
+                        })
+                        $scope.queue = temp_queue;
+                    })
+                } else {
+                    $scope.updateQueue();
+                }
             })
         }
     }
@@ -252,7 +279,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
             project_detail_url = "/api/project/" + $scope.project_id;
             $http.get(project_detail_url).then(function(response) {
                 angular.forEach(response.data.tasks, function(task) {
-                    if (task.percentage_complete >= 0 && task.percentage_complete < 100 && task.assigned_to!=null) {
+                    if (task.percentage_complete >= 0 && task.percentage_complete < 100 && task.assigned_to != null) {
                         temp_queue.push(task);
                     }
                 })
