@@ -33,3 +33,4 @@ sendgrid-django==4.0.4
 six==1.10.0
 urllib3==1.21.1
 whitenoise==3.3.0
+XlsxWriter==0.9.8
