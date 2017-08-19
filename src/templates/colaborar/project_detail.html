@@ -15,12 +15,10 @@
                 <span class="project_detail_project_heading">{{project.name|capfirst}}</span>
             </div>
         </div>
-        <div class="row"></div>
         <div class="col m12">
             <div>
                 <span class="project_detail_heading">Project Managers:</span>
             </div>
-            <br>
             <div class="col m3">
                 {%for manager in project.members.all|managers%}
                 <span class="chip member_name">
@@ -30,27 +28,31 @@
                 <span>No managers available</span> {% endfor %}
             </div>
         </div>
-        <div class="row"></div>
         <div class="col m12">
             <div>
                 <span class="project_detail_heading">Stats:</span>
             </div>
-            <br> {% bar_chart stats_data with min=0 max=50%}
+            {% bar_chart stats_data with min=0 max=max_limit%}
         </div>
-        <div class="row"></div>
         <div class="col m12">
             <span class="project_detail_heading">Members:</span>
         </div>
         {% for member in project.members.all%}
         <div class="col s12 m4">
             <div class="card colaborar-cards hoverable">
-                <div class="card-content">
-                    <span class="card-title">{{member.user.username}}
-                        <span class="right">{{member.role.name}}</span>
+                <div class="card-content" style="padding-top: 10px;">
+                    <span class="card-title">
+                        <span class="colaborar-card-title">{{member.user.username}}</span>
+                    <span class="right colaborar-card-role">{{member.role.name}}</span>
                     </span>
                     {% for task in member.assigned_to.all|tasks:project.name %}
-                    <div>
-                        <span>{{task.name}}</span> &nbsp; <span>{{task.percentage_complete}}%</span>
+                    <div class="member_task_detail">
+                        <span>{{task.name}}</span>
+                        <span>
+                            <span class="progress">
+                            <span class="determinate" style="width: {{task.percentage_complete}}%"></span>
+                            </span>
+                        </span>
                     </div>
                     {% endfor %}
                 </div>

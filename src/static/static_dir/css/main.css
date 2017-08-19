@@ -241,14 +241,24 @@ input[type=range]+.thumb {
 /*project detail pages starts*/
 
 .project_detail_heading {
-    font-size: 28px;
+    font-size: 18px;
     font-weight: 300;
 }
 .project_detail_project_heading {
     position: relative;
     left: 6px;
     font-weight: 300;
-    font-size: 38px;
+    font-size: 24px;
+}
+.colaborar-card-title{
+    font-size: 18px;
+    font-weight: 400;
+}
+.colaborar-card-role{
+    font-size: 12px;
+}
+.member_task_detail{
+    font-weight: 300;
 }
 /*project detail page ends*/
 /*milestone page and form starts*/

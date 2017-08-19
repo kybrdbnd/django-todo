@@ -153,7 +153,8 @@ def project_detail(request, id):
     ]
     context = {
         'project': project,
-        'stats_data': stats_data
+        'stats_data': stats_data,
+        'max_limit': total_tasks_count + 50
     }
     return render(request, 'colaborar/project_detail.html', context)
 
