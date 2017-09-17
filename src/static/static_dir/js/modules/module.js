@@ -1,1 +1,1 @@
-var angular_module = angular.module('TodoApp', ['ngCookies', 'ngDragDrop', '720kb.tooltips', 'angular.filter']);
+var angular_module = angular.module('TodoApp', ['ngResource','ngCookies', 'ngDragDrop', '720kb.tooltips', 'angular.filter']);

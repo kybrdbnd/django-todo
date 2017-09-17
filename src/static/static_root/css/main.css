@@ -5,7 +5,6 @@
     align-items: center;
     justify-content: center;
     background-color: #eee;
-
     position: fixed;
     z-index: 100;
     top: 0;
@@ -13,23 +12,45 @@
     right: 0;
     bottom: 0;
 }
-
-
-
-
-
-
-
-
-
-
 /*preloader ends*/
-
+#notification, #form_errors{
+    display: none;
+}
+.colaborar-navbar {
+    background-color: #1d96d6;
+}
+.colaborar-cards {
+    background-color: #eee;
+    color: black;
+}
+.colaborar_taskassign {
+    color: #d32f2f !important;
+}
+.colaborar_task_card {
+    background-color: #99e442;
+    color: black;
+}
 .home {
-    background-image: url('../img/home_background.jpg');
+    background-image: url('../images/home_background.jpg');
     height: 100vh;
 }
-
+.login_page {
+    background-image: url('../images/sign_in.jpg');
+    background-position: center;
+    height: 100vh;
+}
+.forgot_page {
+    background-image: url('../images/house-key.png');
+    background-position: center;
+    background-size: contain;
+    height: 100vh;
+}
+.forgot_page_success {
+    background-image: url('../images/success.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
 .image_overlay {
     background-color: black;
     opacity: .7;
@@ -40,59 +61,73 @@
     bottom: 0;
     right: 0;
 }
-
 .main_content {
     position: relative;
 }
-
 .project_heading {
     color: white;
-    /*opacity: .3;*/
 }
-
 .project_title {
     font-size: 100px;
     text-align: center;
     padding-top: 70px
 }
-
 .project_desc {
     font-size: 20px;
     text-align: center;
 }
-
 .project_demo {
     color: white;
     text-align: center;
     font-size: 16px;
 }
-
 #demo_mailid {
     color: #f4511e;
 }
-
+#role_name {
+    color: #db6161;
+}
 /*navbar*/
 
 nav ul a {
     padding: 0 20px;
 }
-
 /*navbar ends*/
-
+/*project page starts*/
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #db6161;
+}
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #F1F1F1;
+    left: 24px;
+}
+.project_members {
+    display: inline-block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.show_ongoing{
+    position: absolute;
+    top: 161px;
+}
 .summary_project_name {
     font-size: 20px;
 }
-
 .summary_task_heading {
     margin-top: -18px !important;
 }
-
+.height_tasks{
+    height: 65vh;
+    overflow-y: auto;
+}
+.task_cards{
+    margin-bottom: -19px;
+}
 .all_task_status {
     top: 5px;
     left: 9px;
     position: relative;
 }
-
 .task_percentage {
     display: inline-block;
     bottom: 5px;
@@ -100,286 +135,332 @@ nav ul a {
     font-weight: 600;
     position: relative;
 }
-
 .task_delete {
     top: 7px;
     position: relative;
     left: 20px;
 }
-
-.task_delete:hover {
-    cursor: pointer;
+.task_create_row{
+    position: relative;
+    top: 56px;
 }
-
 .assign_operation {
     font-size: 12px;
 }
-
-.assign_operation:hover {
-    cursor: pointer
-}
-
-.confirm_btn:hover {
-    cursor: pointer;
-}
-
-.task-panel {
-    height: 330px;
-    overflow-y: scroll;
-}
-
 .task_list {
     margin-top: 0px !important;
     margin-bottom: -20px !important;
 }
-
+.task-panel{
+    height: 52vh;
+    overflow-y: auto;
+}
 .form_list {
-    margin-top: 2em;
+    margin-top: -68px;
     margin-bottom: 0px !important;
 }
-
 #save_task {
     margin-top: 3em;
 }
-
 .project_names {
-    height: 100vh;
+    height: 84vh;
     overflow-y: auto;
 }
-
-
 .project_card {
     margin-top: -24px;
 }
-
 .project_name {
     font-size: 42px;
-    top: -35px;
-    position: relative;
+    top: 120px;
+    position: absolute;
+    z-index: 1;
 }
-
 input[type=range]+.thumb {
-    background-color: #ffab40 !important;
+    background-color: #db6161 !important;
 }
-
-
-.member_name{
-    background-color: #ffb300;
+.member_name {
+    background-color: #db6161;
     color: #fff;
 }
-
-.member_name:hover{
-    cursor: pointer
-}
-
+/*project page ends*/
 /*profile page*/
 
 .profile-page {
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.12);
     margin-top: 5em;
+    background-color: #fcfdfd;
 }
-
 .profile-pic {
     border-radius: 50%;
     width: 70px;
     height: 70px;
     border: 1px solid #546e7a;
 }
-
-
-
-
-/*navbar*/
-
-.nav-header {
-    background-color: #7f3f12 !important;
-}
-
 .browse-btn button {
     margin-top: 1em;
 }
+/*profile page ends*/
+/*manage page starts*/
+.height_employee{
+    height: 59vh;
+    overflow-y: auto;
+}
+.height_manage_project{
+    height: 71vh;
+    overflow-y: auto;
+}
+.manage_projects:first-child{
+    margin-top: -12px;
+}
+.manage_projects {
+    margin-bottom: -20px;
+}
+.manage_project_name {
+    font-size: 28px;
+}
+.project_delete {
+    top: 1px;
+    position: relative;
+    left: 20px;
+}
+.manage_project_tile {
+    padding-top: 10px !important;
+}
+.member_pic {
+    top: 2px;
+    position: relative;
+}
+.member_profile_pic {
+    border-radius: 100%;
+    width: 25px;
+}
+.add_project_modal,
+.send_invitation_modal {
+    top: 43% !important;
+}
+/*manage page ends*/
+/*project detail pages starts*/
 
+.project_detail_heading {
+    font-size: 18px;
+    font-weight: 300;
+}
+.project_detail_project_heading {
+    position: relative;
+    left: 6px;
+    font-weight: 300;
+    font-size: 24px;
+}
+.colaborar-card-title{
+    font-size: 18px;
+    font-weight: 400;
+}
+.colaborar-card-role{
+    font-size: 12px;
+}
+.member_task_detail{
+    font-weight: 300;
+}
+/*project detail page ends*/
+/*milestone page and form starts*/
 
+#add_milestone {
+    top: 6% !important;
+    width: 85%;
+    min-height: 89vh;
+}
+.milestone_form>option {
+    color: #db6161 !important;
+}
+.milestone_form.input-field label.active {
+    color: #db6161;
+}
+.milestone_form.input-field input:focus {
+    border-bottom: 1px solid #db6161;
+    box-shadow: 0 1px 0 0 #db6161;
+}
+.milestone_form.input-field .prefix.active {
+    color: #db6161;
+}
+.milestone_form.input-field textarea:focus+label {
+    color: #db6161;
+}
+.milestone_form.input-field textarea:focus {
+    border-bottom: 1px solid #db6161;
+    box-shadow: 0 1px 0 0 #db6161;
+}
+#start_date_root.picker--opened .picker__holder {
+    top: -48px !important;
+}
+#end_date_root.picker--opened .picker__holder {
+    top: -48px !important;
+}
+.milestone_details {
+    top: 9px;
+    position: relative;
+    margin-bottom: 55px;
+}
+.milestone_fields {
+    display: block;
+    line-height: 1.7;
+    font-size: 20px;
+    font-weight: 300;
+}
+.milestone_project_heading {
+    font-size: 45px;
+    font-weight: 300;
+}
+.milestones.tabs .tab a:hover,
+.milestones.tabs .tab a.active {
+    background-color: transparent;
+    color: #db6161;
+}
+.milestones.tabs .indicator {
+    background-color: #db6161;
+}
+/*milestone page and form ends*/
 
-
-
-/*navbar ends*/
-
-
+.task_delete:hover,
+.assign_operation:hover,
+.confirm_btn:hover,
+.member_name:hover,
+.project_delete:hover,
+.colaborar-cards:hover {
+    cursor: pointer;
+}
 /*home input forms starts*/
 
 .home_login {
     color: white;
 }
-
 .home_login.input-field input:focus {
     border-bottom: 1px solid #f4511e;
     box-shadow: 0 1px 0 0 #f4511e;
 }
-
 .home_login.input-field .prefix.active {
     color: #f4511e;
 }
-
 input:-webkit-autofill,
 textarea:-webkit-autofill {
     background-color: transparent;
     background-image: none;
     color: rgb(0, 0, 0);
 }
-
-
-
-
 /*home input form ends*/
-
-
 /*profile input forms starts*/
 
 .profile_page.input-field input:focus {
-    border-bottom: 1px solid #f4511e;
-    box-shadow: 0 1px 0 0 #f4511e;
+    border-bottom: 1px solid #db6161;
+    box-shadow: 0 1px 0 0 #db6161;
 }
-
 .profile_page.input-field .prefix.active {
-    color: #f4511e;
+    color: #db6161;
 }
-
-
-
-
 /*profile input forms ends*/
-
-.home_login {
-    color: white;
-}
-
-.home_login.input-field input:focus {
-    border-bottom: 1px solid #f4511e;
-    box-shadow: 0 1px 0 0 #f4511e;
-}
-
-.home_login.input-field .prefix.active {
-    color: #f4511e;
-}
-
-
-
-
-
 /*project input form starts*/
 
 .task_fields {
-    color: white;
+    color: black;
 }
-
 .task_fields.input-field input:focus {
-    border-bottom: 1px solid #ffab40;
-    box-shadow: 0 1px 0 0 #ffab40;
+    border-bottom: 1px solid #db6161;
+    box-shadow: 0 1px 0 0 #db6161;
 }
-
 .task_fields.input-field .prefix.active {
-    color: #ffab40;
+    color: #db6161;
 }
-
-
-
-
-
 /*project input form ends*/
-
-
 /*task creation form starts*/
-
 .task_create.input-field label {
-    color: #e65100;
+    color: #db6161;
 }
-
 .task_create.input-field textarea:focus+label {
-    color: #e65100;
+    color: #db6161;
 }
-
 .task_create.input-field textarea:focus {
-    border-bottom: 1px solid #e65100;
-    box-shadow: 0 1px 0 0 #e65100;
+    border-bottom: 1px solid #db6161;
+    box-shadow: 0 1px 0 0 #db6161;
 }
-
 .task_create.input-field .prefix.active {
-    color: #e65100;
+    color: #db6161;
 }
-
-
-
-
 /*task creation form ends*/
+/*manage project form starts*/
 
+.manage_project.input-field label {
+    color: #db6161;
+}
+.manage_project.input-field input:focus+label {
+    color: #db6161;
+}
+.manage_project.input-field input:focus {
+    border-bottom: 1px solid #db6161;
+    box-shadow: 0 1px 0 0 #db6161;
+}
+.manage_project.input-field .prefix.active {
+    color: #db6161;
+}
+/*manage project form ends*/
+/*assign task form starts*/
 
+.assign_task.input-field input:focus+label {
+    color: #db6161;
+}
+.assign_task.input-field input:focus {
+    border-bottom: 1px solid #db6161;
+    box-shadow: 0 1px 0 0 #db6161;
+}
+.assign_task.input-field .prefix.active {
+    color: #db6161;
+}
+/*assign task form ends*/
 /*calender css*/
 
 .picker {
     outline: none;
 }
-
-
 /* Optional feature */
-
-
 /* Header - Day of the week */
 
 .picker__weekday-display {
-    background-color: #f57f17;
+    background-color: #d32f2f;
     font-weight: 600;
 }
-
-
 /* Body - Today info */
 
 .picker__date-display {
-    background-color: #f9a825;
+    background-color: #e53935;
 }
-
-
 /* Buttons of actions */
 
 .picker__nav--prev:hover {
     background-color: #fff3e0;
 }
-
 .picker__nav--next:hover {
     background-color: #fff3e0;
 }
-
 .picker__nav--prev:before {
     border-left: 0;
-    border-right: 0.75em solid #ef6c00;
+    border-right: 0.75em solid #d32f2f;
 }
-
 .picker__nav--next:before {
     border-right: 0;
-    border-left: 0.75em solid #ef6c00;
+    border-left: 0.75em solid #d32f2f;
 }
-
 .picker__today {
-    color: #e65100;
+    color: #b71c1c;
 }
-
 .picker__close {
-    color: #e65100;
+    color: #b71c1c;
 }
-
 .btn-flat.picker__today:active {
     background-color: #fff3e0;
 }
-
 .btn-flat.picker__close:active {
     background-color: #fff3e0;
 }
-
 .btn-flat.picker__clear:active {
     background-color: #fff3e0;
 }
-
-
 /* Select months of the year */
 
 .picker__select--month.browser-default {
@@ -389,36 +470,27 @@ textarea:-webkit-autofill {
     border: none;
     outline: none;
 }
-
-
 /* Every month of the year except: today */
 
 .picker__day--infocus:hover {
-    color: #f57c00;
+    color: #c62828;
 }
-
 .picker__day--selected,
 .picker__day--selected:hover,
 .picker--focused .picker__day--selected {
     color: #F5F4F3;
     font-weight: 700;
 }
-
 .picker__day.picker__day--infocus.picker__day--selected.picker__day--highlighted {
-    background-color: #ff8f00;
+    background-color: #e53934;
 }
-
-
 /* Today */
 
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted {
-    background-color: #ff8f00;
+    background-color: #e53934;
 }
-
 .picker__day.picker__day--today {
-    color: #ff6f00;
+    color: #f44336;
     font-weight: 700;
 }
-
-
 /*calender css ends*/

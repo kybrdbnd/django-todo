@@ -1,7 +1,7 @@
-angular_module.controller('projectController', ['$scope', '$http', '$cookies', '$q', function($scope, $http, $cookies, $q) {
+angular_module.controller('projectController', ['$scope', 'Project', 'Task', '$cookies', function($scope, Project, Task, $cookies) {
 
-    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-    $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+    // $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    // $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
     $scope.selected_date = "";
     $scope.selected_project = 'all_projects';
     $scope.projects = "";
@@ -21,32 +21,30 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
             return (s < 10) ? '0' + s : s;
         }
         $scope.selected_date = [$scope.unformat_date.getFullYear(), pad($scope.unformat_date.getMonth() + 1), pad($scope.unformat_date.getDate())].join('-');
-        $scope.selected_project_request = $http.get('/api/');
-        $scope.today_tasks_request = $http.get('/api/tasks/');
-        $q.all([$scope.selected_project_request, $scope.today_tasks_request]).then(function(value) {
-            $scope.projects = value[0].data;
-            $scope.summary_project['project_count'] = value[0].data.length;
-            $scope.summary_project['tasks'] = value[1].data;
-            $scope.summary_project['task_count'] = value[1].data.length;
-        })
+        $scope.projects = Project.Summary.query(function(response){
+            $scope.summary_project['project_count'] = response.length;
+        });
+        $scope.summary_project['tasks'] = Task.query(function(response){
+            $scope.summary_project['task_count'] = response.length;
+        });
+
     }
     $scope.updateSummary = function() {
-        $http.get('/api/tasks/').then(function(response) {
-            $scope.summary_project['tasks'] = response.data;
-            $scope.summary_project['task_count'] = response.data.length;
+        $scope.summary_project['tasks'] = Task.query(function(response) {
+            $scope.summary_project['task_count'] = response.length;
         })
     }
     $scope.updateQueue = function() {
         temp_queue = [];
-        project_detail_url = "/api/project/" + $scope.project_id;
-        $http.get(project_detail_url).then(function(response) {
-            angular.forEach(response.data.tasks, function(task) {
+        Project.ProjectDetail.get({project_id:$scope.project_id},function(response) {
+            console.log(response)
+            angular.forEach(response.tasks, function(task) {
                 if (task.assigned_to == null) {
                     temp_queue.push(task);
                 }
             })
             $scope.queue = temp_queue;
-            $scope.members = response.data.members
+            $scope.members = response.members
         })
     }
     $scope.current_project = function(selected_project, selected_project_id) {
@@ -62,10 +60,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
                 $scope.updateQueue();
             }
             if ($scope.selected_date != "") {
-                project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
-                $http.get(project_date_url).then(function(response) {
-                    $scope.tasks = response.data
-                })
+                $scope.tasks = Project.CurrentProject.query({project_id:$scope.project_id,selected_date:$scope.selected_date})
             }
         }
     }
@@ -84,9 +79,9 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
     $scope.update_task_count = function() {
         var projects;
         // just for update
-        $http.get('/api/').then(function(response) {})
+        Project.Summary.query(function(response) {})
         //actual updation
-        $http.get('/api/').then(function(response) {
+        Project.Summary.query(function(response) {
             $scope.summary_project['task_count'] = 0
             projects = response.data
             angular.forEach(projects, function(project) {
@@ -101,11 +96,7 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
             return (s < 10) ? '0' + s : s;
         }
         $scope.selected_date = [x.getFullYear(), pad(x.getMonth() + 1), pad(x.getDate())].join('-');
-        console.log($scope.selected_date)
-        project_date_url = "/api/project/" + $scope.project_id + "/task/date/" + $scope.selected_date
-        $http.get(project_date_url).then(function(response) {
-            $scope.tasks = response.data
-        })
+        $scope.tasks = Project.CurrentProject.query({project_id:$scope.project_id,selected_date:$scope.selected_date})
 
     }
     $scope.assignYourself = function(task_id) {
@@ -273,12 +264,10 @@ angular_module.controller('projectController', ['$scope', '$http', '$cookies', '
         })
     }
     $scope.showOnGoing = function(event) {
-        // console.log(event.target.checked)
         temp_queue = []
         if (event.target.checked) {
-            project_detail_url = "/api/project/" + $scope.project_id;
-            $http.get(project_detail_url).then(function(response) {
-                angular.forEach(response.data.tasks, function(task) {
+            Project.ProjectDetail.get({project_id:$scope.project_id},function(response) {
+                angular.forEach(response.tasks, function(task) {
                     if (task.percentage_complete >= 0 && task.percentage_complete < 100 && task.assigned_to != null) {
                         temp_queue.push(task);
                     }
