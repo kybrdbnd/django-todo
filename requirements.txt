@@ -19,7 +19,7 @@ Markdown==2.6.8
 oauthlib==2.0.2
 olefile==0.44
 pilkit==2.0
-Pillow==4.1.1
+Pillow==8.1.1
 psycopg2==2.7.1
 pydotplus==2.0.2
 pyparsing==2.2.0
